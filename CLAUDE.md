@@ -162,3 +162,43 @@ Qt 6.11.1, MinGW 64-bit, CMake + Ninja.
 cmake -S . -B build -G Ninja -DCMAKE_PREFIX_PATH=C:/Qt/6.11.1/mingw_64
 cmake --build build
 ```
+
+---
+
+## 7. Current state
+
+Builds green on Qt 6.11.1 / MinGW / Ninja. `all_qmllint` passes with no import
+errors.
+
+Done: Core contract, Kit (10 controls), Minimalism pack, style registry,
+gallery shell scaffolding (`ShellTheme`, `StyleCard`, `GalleryView`).
+
+The shell keeps its own `ShellTheme` tokens rather than the active pack, so the
+lab chrome does not change while browsing styles. It still obeys rule 7 — no raw
+values outside a `Tokens` block.
+
+## 8. Next steps, in order
+
+1. `Workbench`, `StylePicker`, `RulesPanel`; wire `Main.qml` to route between
+   gallery and workbench. Root `Main.qml` is still the Qt template and breaks
+   rule 9.
+2. `apps/` Reference Dashboard, split into small files (`StatTile`,
+   `ActivityList`, `ControlsRow`, `BarChart`).
+3. Neo-Brutalism, Glassmorphism and Bento packs — one commit each.
+4. Silence the remaining `missing-property` qmllint warnings in `SlotRect` /
+   `SlotText` by casting through `(parent as StyleSlot)` instead of bare
+   `parent`, so lint can be a hard CI gate.
+5. UX laws layers 1–3 (section 4).
+6. CI/CD, designed but not yet written:
+   - `.github/actions/setup-qt/` composite action, no duplication between jobs
+   - `ci.yml`: qmlformat check + `all_qmllint` + desktop matrix
+   - `pages.yml`: WASM build to a live GitHub Pages demo — the single highest
+     value output for a style lab; use the prebuilt `wasm_singlethread` Qt from
+     `install-qt-action` rather than building Qt from source
+   - `release.yml`: tagged Windows zip, Linux AppImage, macOS dmg, WASM bundle
+   - `.pre-commit-config.yaml` with qmlformat, for local parity
+
+Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
+but duplicated Qt setup, leftovers from another project, a broken
+`${{matrix.BUILD_TYPE}}` reference, and no linting) and QField (pre-commit with
+qmlformat, static-check jobs).
