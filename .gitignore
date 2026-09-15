@@ -1,0 +1,16 @@
+build/
+.qtcreator/
+*.user
+*.user.*
+CMakeLists.txt.user*
+CMakeCache.txt
+CMakeFiles/
+.qt/
+.cache/
+compile_commands.json
+*.qmlc
+*.jsc
+*.exe
+*.pdb
+.DS_Store
+Thumbs.db
