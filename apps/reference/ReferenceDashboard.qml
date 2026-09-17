@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import UIverse.Kit
@@ -20,56 +21,61 @@ UvPage {
             width: flick.width
             spacing: page.t.gridGap * 1.5
 
-            DashboardHeader { Layout.fillWidth: true }
+            DashboardHeader {
+                Layout.fillWidth: true
+            }
 
             GridLayout {
-                id: grid
-
-                readonly property real gap: page.t.gridGap
-                readonly property real columnWidth: (column.width - gap * (columns - 1)) / columns
-                readonly property real rowHeight: page.t.unit * 23
-
                 Layout.fillWidth: true
                 columns: layout.columns
-                columnSpacing: gap
-                rowSpacing: gap
+                columnSpacing: layout.gap
+                rowSpacing: layout.gap
 
                 DashboardLayout {
                     id: layout
+
                     mode: page.t.layoutMode
-                    narrow: flick.width < page.t.unit * 90
+                    availableWidth: column.width
+                    gap: page.t.gridGap
+                    rowHeight: page.t.unit * 23
+                    narrowBelow: page.t.unit * 90
+                }
+
+                Repeater {
+                    model: DashboardData.stats
+
+                    GridCell {
+                        id: statCell
+
+                        required property var modelData
+                        required property int index
+
+                        layout: layout
+                        area: modelData.area
+
+                        StatTile {
+                            anchors.fill: parent
+                            spec: ({
+                                    "tile": statCell.index + 1
+                                })
+                            label: statCell.modelData.label
+                            value: statCell.modelData.value
+                            delta: statCell.modelData.delta
+                            positive: statCell.modelData.positive
+                            progress: statCell.modelData.progress
+                        }
+                    }
                 }
 
                 GridCell {
-                    place: layout.place("revenue")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; spec: ({ "tile": 1 }); label: "Revenue"; value: "$48.2k"; delta: "+12.4%"; progress: 0.72 }
-                }
+                    layout: layout
+                    area: "chart"
 
-                GridCell {
-                    place: layout.place("users")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; spec: ({ "tile": 2 }); label: "Active users"; value: "1,980"; delta: "+4.1%"; progress: 0.54 }
-                }
-
-                GridCell {
-                    place: layout.place("sessions")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; spec: ({ "tile": 3 }); label: "Avg. session"; value: "2m 47s"; delta: "−0.8%"; positive: false; progress: 0.38 }
-                }
-
-                GridCell {
-                    place: layout.place("churn")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; spec: ({ "tile": 4 }); label: "Churn"; value: "3.2%"; delta: "−1.1%"; progress: 0.18 }
-                }
-
-                GridCell {
-                    place: layout.place("chart")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
                     BarChart {
                         anchors.fill: parent
-                        spec: ({ "tile": 5 })
+                        spec: ({
+                                "tile": 5
+                            })
                         title: "Weekly engagement"
                         caption: "12 weeks"
                         values: DashboardData.engagement
@@ -77,20 +83,29 @@ UvPage {
                 }
 
                 GridCell {
-                    place: layout.place("activity")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
+                    layout: layout
+                    area: "activity"
+
                     ActivityList {
                         anchors.fill: parent
-                        spec: ({ "tile": 6 })
+                        spec: ({
+                                "tile": 6
+                            })
                         title: "Recent activity"
                         entries: DashboardData.activity
                     }
                 }
 
                 GridCell {
-                    place: layout.place("controls")
-                    columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    ControlsPanel { anchors.fill: parent; spec: ({ "tile": 0 }) }
+                    layout: layout
+                    area: "controls"
+
+                    ControlsPanel {
+                        anchors.fill: parent
+                        spec: ({
+                                "tile": 0
+                            })
+                    }
                 }
             }
         }

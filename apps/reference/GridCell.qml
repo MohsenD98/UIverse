@@ -4,10 +4,10 @@ import QtQuick.Layouts
 Item {
     id: cell
 
-    property var place: [0, 0, 1, 1]
-    property real columnWidth: 0
-    property real rowHeight: 0
-    property real gap: 0
+    required property DashboardLayout layout
+    required property string area
+
+    readonly property var place: layout.place(area)
 
     default property alias content: holder.data
 
@@ -15,8 +15,8 @@ Item {
     Layout.column: place[1]
     Layout.rowSpan: place[2]
     Layout.columnSpan: place[3]
-    Layout.preferredWidth: columnWidth * place[3] + gap * (place[3] - 1)
-    Layout.preferredHeight: rowHeight * place[2] + gap * (place[2] - 1)
+    Layout.preferredWidth: layout.columnWidth * place[3] + layout.gap * (place[3] - 1)
+    Layout.preferredHeight: layout.rowHeight * place[2] + layout.gap * (place[2] - 1)
 
     Item {
         id: holder
