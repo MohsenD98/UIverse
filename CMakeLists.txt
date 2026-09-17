@@ -13,6 +13,7 @@ set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
 add_subdirectory(core)
 add_subdirectory(kit)
 add_subdirectory(styles)
+add_subdirectory(apps)
 
 qt_add_executable(appUIverse
     main.cpp
@@ -38,6 +39,7 @@ target_link_libraries(appUIverse PRIVATE
     UIverseCoreplugin
     UIverseKitplugin
     UIverseStylesplugin
+    UIverseAppsplugin
 )
 
 install(TARGETS appUIverse
