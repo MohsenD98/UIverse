@@ -1,4 +1,4 @@
-name: CI
+name: 🧪 CI
 
 on:
   push:
@@ -14,34 +14,67 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  format:
+  hooks:
+    name: 🧹 Pre-commit
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: ./.github/actions/setup-qt
-      - name: qmlformat
-        run: QMLFORMAT="$QT_ROOT_DIR/bin/qmlformat" scripts/check-format.sh
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Run hooks
+        env:
+          QMLFORMAT: ${{ env.QT_ROOT_DIR }}/bin/qmlformat
+        run: pipx run pre-commit run --all-files --show-diff-on-failure
+
+      - name: Check commit messages
+        if: github.actor != 'dependabot[bot]'
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          case "$EVENT" in
+            pull_request) range="$BASE..$HEAD" ;;
+            push) [[ "$BEFORE" =~ ^0+$ ]] && range="$HEAD^!" || range="$BEFORE..$HEAD" ;;
+            *) range="$HEAD^!" ;;
+          esac
+          scripts/check-commit-range.sh "$range"
 
   lint:
+    name: 🔎 qmllint
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-qt
       - name: Configure
         run: cmake -S . -B build -G Ninja
-      - name: qmllint
+      - name: Lint
         run: scripts/lint.sh build
 
   build:
-    needs: [format, lint]
+    name: 🖥️ Desktop
+    needs: [hooks, lint]
     uses: ./.github/workflows/build.yml
+    with:
+      package: true
 
   wasm:
-    needs: [format, lint]
+    name: 🌐 WebAssembly
+    needs: [hooks, lint]
     uses: ./.github/workflows/wasm.yml
 
   snapshots:
-    needs: [format, lint]
+    name: 📸 Snapshots
+    needs: [hooks, lint]
     runs-on: windows-2025
     defaults:
       run:
@@ -62,6 +95,7 @@ jobs:
           if-no-files-found: error
 
   demo:
+    name: 🚀 Live demo
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: wasm
     runs-on: ubuntu-24.04
