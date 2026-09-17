@@ -15,18 +15,20 @@ Item {
         if (!source)
             return
         const p = sample.mapToItem(source, 0, 0)
-        originX = p.x
-        originY = p.y
+        if (p.x !== originX)
+            originX = p.x
+        if (p.y !== originY)
+            originY = p.y
     }
 
     clip: true
 
-    onXChanged: resync()
-    onYChanged: resync()
-    onWidthChanged: resync()
-    onHeightChanged: resync()
-    onSourceChanged: resync()
     Component.onCompleted: resync()
+
+    FrameAnimation {
+        running: sample.source !== null && sample.width > 0
+        onTriggered: sample.resync()
+    }
 
     ShaderEffectSource {
         id: grab
@@ -46,6 +48,7 @@ Item {
         anchors.fill: grab
         visible: sample.source !== null
         source: grab
+        autoPaddingEnabled: false
         blurEnabled: sample.blurRadius > 0
         blurMax: 64
         blur: Math.min(1.0, sample.blurRadius / 64)
