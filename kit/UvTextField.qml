@@ -27,7 +27,7 @@ T.TextField {
 
     UvLabel {
         x: control.leftPadding
-        width: control.availableWidth
+        width: control.width - control.leftPadding - control.rightPadding
         height: control.height
         muted: true
         text: control.placeholderText

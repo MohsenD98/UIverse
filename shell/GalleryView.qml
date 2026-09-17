@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import UIverse.Core
 import UIverse.Styles
@@ -47,7 +48,9 @@ Rectangle {
         keyNavigationWraps: true
 
         delegate: Item {
-            required property var modelData
+            id: cell
+
+            required property StylePack modelData
 
             width: grid.cellWidth
             height: grid.cellHeight
@@ -56,8 +59,8 @@ Rectangle {
                 anchors.fill: parent
                 anchors.rightMargin: gallery.s.gridGap
                 anchors.bottomMargin: gallery.s.gridGap
-                pack: parent.modelData
-                onActivated: gallery.opened(pack.key)
+                pack: cell.modelData
+                onActivated: gallery.opened(cell.modelData.key)
             }
         }
     }

@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import UIverse.Core
 import UIverse.Styles
@@ -18,7 +19,7 @@ Rectangle {
         focus: true
         sourceComponent: root.route === "gallery" ? galleryView : workbenchView
         onLoaded: {
-            item.forceActiveFocus()
+            (view.item as Item)?.forceActiveFocus()
             fade.restart()
         }
     }

@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import UIverse.Core
 
@@ -59,12 +60,14 @@ Rectangle {
                     model: card.p.palette
 
                     Rectangle {
-                        required property var modelData
+                        id: swatch
+
+                        required property color modelData
 
                         width: card.s.unit * 3
                         height: card.s.unit
                         radius: Math.min(height / 2, card.p.radiusSm)
-                        color: modelData
+                        color: swatch.modelData
                     }
                 }
             }

@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import UIverse.Core
 import UIverse.Kit
 
 UvPage {

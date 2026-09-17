@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import UIverse.Core
 
@@ -77,16 +78,18 @@ Rectangle {
                     model: panel.pack ? panel.pack.reading : []
 
                     ShellText {
+                        id: reference
+
                         required property var modelData
 
                         width: parent.width
-                        text: modelData.label
+                        text: reference.modelData.label
                         color: panel.s.accent
                         wrapMode: Text.WordWrap
                         font.underline: link.hovered
 
                         HoverHandler { id: link; cursorShape: Qt.PointingHandCursor }
-                        TapHandler { onTapped: Qt.openUrlExternally(parent.modelData.url) }
+                        TapHandler { onTapped: Qt.openUrlExternally(reference.modelData.url) }
                     }
                 }
             }

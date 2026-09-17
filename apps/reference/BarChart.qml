@@ -1,6 +1,6 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import UIverse.Core
 import UIverse.Kit
 
 UvSurface {

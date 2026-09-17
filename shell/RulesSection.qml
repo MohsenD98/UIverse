@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import UIverse.Core
 
@@ -24,7 +25,9 @@ Column {
         model: section.items
 
         Row {
-            required property var modelData
+            id: row
+
+            required property string modelData
 
             width: section.width
             spacing: section.s.unit
@@ -37,8 +40,8 @@ Column {
             }
 
             ShellText {
-                width: parent.width - bullet.width - parent.spacing
-                text: parent.modelData
+                width: row.width - bullet.width - row.spacing
+                text: row.modelData
                 wrapMode: Text.WordWrap
                 lineHeight: section.s.lineHeight
             }
