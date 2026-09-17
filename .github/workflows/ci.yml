@@ -17,7 +17,7 @@ jobs:
   format:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-qt
       - name: qmlformat
         run: QMLFORMAT="$QT_ROOT_DIR/bin/qmlformat" scripts/check-format.sh
@@ -25,7 +25,7 @@ jobs:
   lint:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-qt
       - name: Configure
         run: cmake -S . -B build -G Ninja
@@ -47,7 +47,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-qt
       - name: Build snapshot tool
         run: |
@@ -55,7 +55,7 @@ jobs:
           cmake --build build --target uiverse-snapshot --parallel
       - name: Render every style
         run: scripts/snapshots.sh build snapshots
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: snapshots
           path: snapshots
@@ -75,12 +75,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: uiverse-wasm
           path: site
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
