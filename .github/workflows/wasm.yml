@@ -1,4 +1,4 @@
-name: 🌐 WebAssembly build
+name: Web
 
 on:
   workflow_call:
@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   wasm:
-    name: 🌐 wasm-singlethread
+    name: 🌐 WASM
     runs-on: ubuntu-24.04
 
     steps:

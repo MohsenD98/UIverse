@@ -1,4 +1,4 @@
-name: 🧪 CI
+name: CI
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   hooks:
-    name: 🧹 Pre-commit
+    name: 🧹 Hooks
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
           scripts/check-commit-range.sh "$range"
 
   lint:
-    name: 🔎 qmllint
+    name: 🔎 Lint
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -61,19 +61,19 @@ jobs:
         run: scripts/lint.sh build
 
   build:
-    name: 🖥️ Desktop
+    name: Build
     needs: [hooks, lint]
     uses: ./.github/workflows/build.yml
     with:
       package: true
 
   wasm:
-    name: 🌐 WebAssembly
+    name: Web
     needs: [hooks, lint]
     uses: ./.github/workflows/wasm.yml
 
   snapshots:
-    name: 📸 Snapshots
+    name: 📸 Screenshots
     needs: [hooks, lint]
     runs-on: windows-2025
     defaults:
@@ -90,12 +90,12 @@ jobs:
         run: scripts/snapshots.sh build snapshots
       - uses: actions/upload-artifact@v4
         with:
-          name: snapshots
+          name: screenshots
           path: snapshots
           if-no-files-found: error
 
   demo:
-    name: 🚀 Live demo
+    name: 🚀 Deploy demo
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: wasm
     runs-on: ubuntu-24.04
