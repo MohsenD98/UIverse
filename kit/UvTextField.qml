@@ -11,7 +11,7 @@ T.TextField {
     readonly property Tokens t: Style.t
 
     implicitHeight: t.controlHeight
-    implicitWidth: 220
+    implicitWidth: t.unit * 28
     leftPadding: t.unit * 1.5
     rightPadding: t.unit * 1.5
 
@@ -24,6 +24,21 @@ T.TextField {
 
     font.family: t.fontFamily
     font.pixelSize: t.fontSizeSm
+
+    UvLabel {
+        x: control.leftPadding
+        width: control.availableWidth
+        height: control.height
+        role: "label"
+        muted: true
+        text: control.placeholderText
+        font.pixelSize: control.font.pixelSize
+        font.weight: control.t.weightBody
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        elide: Text.ElideRight
+        visible: !control.length && !control.preeditText
+    }
 
     background: StyleSlot {
         ctl: control
