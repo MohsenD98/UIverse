@@ -1,0 +1,48 @@
+name: Setup Qt
+description: Install Qt, CMake, Ninja and the native compiler environment for UIverse.
+
+inputs:
+  version:
+    description: Qt version.
+    default: "6.11.1"
+  target:
+    description: desktop or wasm.
+    default: desktop
+  arch:
+    description: Qt architecture. Derived from the runner when empty.
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - uses: lukka/get-cmake@latest
+
+    - if: runner.os == 'Windows' && inputs.target == 'desktop'
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - id: platform
+      shell: bash
+      env:
+        TARGET: ${{ inputs.target }}
+        ARCH: ${{ inputs.arch }}
+        RUNNER: ${{ runner.os }}
+      run: |
+        case "$TARGET/$RUNNER" in
+          wasm/*)          host=all_os;  default=wasm_singlethread ;;
+          desktop/Linux)   host=linux;   default=linux_gcc_64 ;;
+          desktop/Windows) host=windows; default=win64_msvc2022_64 ;;
+          desktop/macOS)   host=mac;     default=clang_64 ;;
+          *) echo "Unsupported $TARGET on $RUNNER" >&2; exit 1 ;;
+        esac
+        echo "host=$host" >> "$GITHUB_OUTPUT"
+        echo "arch=${ARCH:-$default}" >> "$GITHUB_OUTPUT"
+
+    - uses: jurplel/install-qt-action@v4
+      with:
+        aqtversion: ">=3.1"
+        version: ${{ inputs.version }}
+        host: ${{ steps.platform.outputs.host }}
+        target: ${{ inputs.target }}
+        arch: ${{ steps.platform.outputs.arch }}
+        install-deps: ${{ runner.os == 'Linux' && 'true' || 'false' }}
+        cache: true
