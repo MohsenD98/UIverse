@@ -8,30 +8,21 @@ StylePack {
     era: "Bento boxes → Windows Metro tiles → Apple keynote grids 2020s"
     swatch: "#0071e3"
 
-    summary: "Bento layouts pack a screen into a grid of rounded tiles of different " +
-             "sizes. Each tile holds one idea, and its size is the hierarchy: the most " +
-             "important thing gets the biggest box. The style lives almost entirely in " +
-             "layout, which is why it is in the first phase of this lab: the same " +
-             "components, rearranged, are what make it bento."
+    summary: "Bento layouts pack a screen into a grid of rounded tiles of different " + "sizes. Each tile holds one idea, and its size is the hierarchy: the most " + "important thing gets the biggest box. The style lives almost entirely in " + "layout, which is why it is in the first phase of this lab: the same " + "components, rearranged, are what make it bento."
 
-    rules: [
-        "One idea per tile. A tile that needs a scrollbar is two tiles.",
-        "Size encodes importance; the hero tile must be visibly larger.",
-        "Gaps are tight and identical everywhere. The grid is the ornament.",
-        "One generous corner radius for tiles; nested elements use a smaller one.",
-        "Lead each tile with one large number or visual, then a quiet label."
-    ]
+    rules: ["One idea per tile. A tile that needs a scrollbar is two tiles.", "Size encodes importance; the hero tile must be visibly larger.", "Gaps are tight and identical everywhere. The grid is the ornament.", "One generous corner radius for tiles; nested elements use a smaller one.", "Lead each tile with one large number or visual, then a quiet label."]
 
-    antiRules: [
-        "Do not make every tile the same size. That is a card grid, not bento.",
-        "No borders. Tiles separate by fill and gap.",
-        "Never mix tile radii.",
-        "Do not let tile order fight reading order; the eye still starts top-left."
-    ]
+    antiRules: ["Do not make every tile the same size. That is a card grid, not bento.", "No borders. Tiles separate by fill and gap.", "Never mix tile radii.", "Do not let tile order fight reading order; the eye still starts top-left."]
 
     reading: [
-        { "label": "Bento Grids — a curated gallery", "url": "https://bentogrids.com/" },
-        { "label": "Metro design language", "url": "https://en.wikipedia.org/wiki/Metro_(design_language)" }
+        {
+            "label": "Bento Grids — a curated gallery",
+            "url": "https://bentogrids.com/"
+        },
+        {
+            "label": "Metro design language",
+            "url": "https://en.wikipedia.org/wiki/Metro_(design_language)"
+        }
     ]
 
     tokens: Tokens {
@@ -84,14 +75,36 @@ StylePack {
     }
 
     pageBackground: null
-    surface: Component { Surface {} }
-    buttonBackground: Component { ButtonBackground {} }
-    buttonContent: Component { ButtonContent {} }
-    fieldBackground: Component { Field {} }
-    switchIndicator: Component { SwitchIndicator {} }
-    sliderGroove: Component { SliderGroove {} }
-    sliderHandle: Component { SliderHandle {} }
-    progressTrack: Component { ProgressTrack {} }
-    tagBackground: Component { TagBackground {} }
-    divider: Component { SlotRect { color: t.border } }
+    surface: Component {
+        Surface {}
+    }
+    buttonBackground: Component {
+        ButtonBackground {}
+    }
+    buttonContent: Component {
+        ButtonContent {}
+    }
+    fieldBackground: Component {
+        Field {}
+    }
+    switchIndicator: Component {
+        SwitchIndicator {}
+    }
+    sliderGroove: Component {
+        SliderGroove {}
+    }
+    sliderHandle: Component {
+        SliderHandle {}
+    }
+    progressTrack: Component {
+        ProgressTrack {}
+    }
+    tagBackground: Component {
+        TagBackground {}
+    }
+    divider: Component {
+        SlotRect {
+            color: t.border
+        }
+    }
 }

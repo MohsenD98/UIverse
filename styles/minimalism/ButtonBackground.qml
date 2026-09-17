@@ -9,14 +9,16 @@ SlotRect {
 
     implicitHeight: t.controlHeight
     radius: t.radiusMd
-    color: solid ? (isDown ? Qt.lighter(base, 1.35)
-                           : isHovered ? Qt.lighter(base, 1.18) : base)
-                 : (isDown ? t.bgAlt : "transparent")
+    color: solid ? (isDown ? Qt.lighter(base, 1.35) : isHovered ? Qt.lighter(base, 1.18) : base) : (isDown ? t.bgAlt : "transparent")
     border.width: variant === "secondary" ? t.borderWidth : 0
     border.color: isHovered ? t.textMuted : t.border
     opacity: isEnabled ? 1 : 0.4
 
-    Behavior on color { ColorAnimation { duration: button.t.durationFast } }
+    Behavior on color {
+        ColorAnimation {
+            duration: button.t.durationFast
+        }
+    }
 
     Rectangle {
         anchors.fill: parent

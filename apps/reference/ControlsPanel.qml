@@ -55,13 +55,17 @@ UvSurface {
             value: 64
         }
 
-        Item { Layout.fillHeight: true }
+        Item {
+            Layout.fillHeight: true
+        }
 
         RowLayout {
             Layout.fillWidth: true
             spacing: panel.t.unit
 
-            Item { Layout.fillWidth: true }
+            Item {
+                Layout.fillWidth: true
+            }
 
             UvButton {
                 text: "Discard"

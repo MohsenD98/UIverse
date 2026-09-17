@@ -30,7 +30,9 @@ UvSurface {
             text: tile.value
         }
 
-        Item { Layout.fillHeight: true }
+        Item {
+            Layout.fillHeight: true
+        }
 
         UvTag {
             text: tile.delta

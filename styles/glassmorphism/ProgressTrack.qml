@@ -14,10 +14,20 @@ SlotRect {
         radius: track.radius
         gradient: Gradient {
             orientation: Gradient.Horizontal
-            GradientStop { position: 0; color: track.t.palette[3] }
-            GradientStop { position: 1; color: track.t.accent }
+            GradientStop {
+                position: 0
+                color: track.t.palette[3]
+            }
+            GradientStop {
+                position: 1
+                color: track.t.accent
+            }
         }
 
-        Behavior on width { NumberAnimation { duration: track.t.durationBase } }
+        Behavior on width {
+            NumberAnimation {
+                duration: track.t.durationBase
+            }
+        }
     }
 }

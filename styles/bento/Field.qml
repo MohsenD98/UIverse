@@ -10,5 +10,9 @@ SlotRect {
     border.width: hasActiveFocus ? 2 : 0
     border.color: t.accent
 
-    Behavior on color { ColorAnimation { duration: field.t.durationFast } }
+    Behavior on color {
+        ColorAnimation {
+            duration: field.t.durationFast
+        }
+    }
 }

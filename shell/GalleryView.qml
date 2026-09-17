@@ -14,18 +14,24 @@ Rectangle {
 
     Column {
         id: header
-        anchors { left: parent.left; right: parent.right; top: parent.top }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
         anchors.margins: gallery.s.pagePadding
         spacing: gallery.s.unit
 
-        ShellText { role: "display"; text: "UIverse" }
+        ShellText {
+            role: "display"
+            text: "UIverse"
+        }
 
         ShellText {
             width: Math.min(gallery.s.unit * 70, parent.width)
             muted: true
             wrapMode: Text.WordWrap
-            text: "One contract, many design languages. Each style is a complete " +
-                  "pack: tokens, components and the rules it plays by."
+            text: "One contract, many design languages. Each style is a complete " + "pack: tokens, components and the rules it plays by."
         }
     }
 

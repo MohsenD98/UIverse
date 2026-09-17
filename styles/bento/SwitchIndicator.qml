@@ -10,7 +10,11 @@ SlotRect {
     radius: height / 2
     color: isChecked ? t.success : Qt.alpha(t.text, 0.12)
 
-    Behavior on color { ColorAnimation { duration: track.t.durationBase } }
+    Behavior on color {
+        ColorAnimation {
+            duration: track.t.durationBase
+        }
+    }
 
     RectangularShadow {
         anchors.fill: knob
@@ -30,6 +34,11 @@ SlotRect {
         x: track.isChecked ? track.width - width - 2 : 2
         color: track.t.surface
 
-        Behavior on x { NumberAnimation { duration: track.t.durationBase; easing.type: track.t.easingType } }
+        Behavior on x {
+            NumberAnimation {
+                duration: track.t.durationBase
+                easing.type: track.t.easingType
+            }
+        }
     }
 }

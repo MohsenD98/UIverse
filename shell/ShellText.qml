@@ -14,13 +14,20 @@ Text {
     font.family: isDisplay ? s.displayFamily : s.fontFamily
     font.pixelSize: {
         switch (role) {
-        case "display": return s.displaySize
-        case "title": return s.fontSizeXl
-        case "heading": return s.fontSizeLg
-        case "label": return s.fontSizeXs
-        case "caption": return s.fontSizeXs
-        case "small": return s.fontSizeSm
-        default: return s.fontSizeMd
+        case "display":
+            return s.displaySize
+        case "title":
+            return s.fontSizeXl
+        case "heading":
+            return s.fontSizeLg
+        case "label":
+            return s.fontSizeXs
+        case "caption":
+            return s.fontSizeXs
+        case "small":
+            return s.fontSizeSm
+        default:
+            return s.fontSizeMd
         }
     }
     font.weight: isDisplay ? s.weightDisplay : role === "heading" || role === "label" ? s.weightMedium : s.weightBody

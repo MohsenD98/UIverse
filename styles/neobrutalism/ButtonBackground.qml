@@ -11,10 +11,7 @@ HardBox {
     sunk: isDown && !ghost
     lift: ghost ? 0 : t.shadowOffsetX
     opacity: isEnabled ? 1 : 0.45
-    faceColor: variant === "primary" ? (isHovered ? Qt.darker(t.accent, 1.08) : t.accent)
-             : variant === "danger" ? t.danger
-             : ghost ? (isHovered ? t.surfaceAlt : "transparent")
-             : (isHovered ? t.surfaceAlt : t.surface)
+    faceColor: variant === "primary" ? (isHovered ? Qt.darker(t.accent, 1.08) : t.accent) : variant === "danger" ? t.danger : ghost ? (isHovered ? t.surfaceAlt : "transparent") : (isHovered ? t.surfaceAlt : t.surface)
 
     Rectangle {
         x: -6

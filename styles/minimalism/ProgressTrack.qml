@@ -14,6 +14,10 @@ SlotRect {
         radius: parent.radius
         color: track.t.accent
 
-        Behavior on width { NumberAnimation { duration: track.t.durationBase } }
+        Behavior on width {
+            NumberAnimation {
+                duration: track.t.durationBase
+            }
+        }
     }
 }

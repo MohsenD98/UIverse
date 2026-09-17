@@ -14,6 +14,11 @@ SlotRect {
         radius: track.radius
         color: track.t.accent
 
-        Behavior on width { NumberAnimation { duration: track.t.durationBase; easing.type: track.t.easingType } }
+        Behavior on width {
+            NumberAnimation {
+                duration: track.t.durationBase
+                easing.type: track.t.easingType
+            }
+        }
     }
 }

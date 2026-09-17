@@ -17,7 +17,11 @@ Item {
         Rectangle {
             anchors.fill: parent
             color: page.t.bg
-            Behavior on color { ColorAnimation { duration: page.t.durationBase } }
+            Behavior on color {
+                ColorAnimation {
+                    duration: page.t.durationBase
+                }
+            }
         }
 
         StyleSlot {

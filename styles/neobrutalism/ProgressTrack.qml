@@ -14,6 +14,10 @@ HardBox {
         height: track.height - track.edge * 2
         color: track.t.palette[1]
 
-        Behavior on width { NumberAnimation { duration: track.t.durationBase } }
+        Behavior on width {
+            NumberAnimation {
+                duration: track.t.durationBase
+            }
+        }
     }
 }

@@ -19,6 +19,11 @@ HardBox {
         border.width: track.edge
         border.color: track.t.border
 
-        Behavior on x { NumberAnimation { duration: track.t.durationBase; easing.type: track.t.easingType } }
+        Behavior on x {
+            NumberAnimation {
+                duration: track.t.durationBase
+                easing.type: track.t.easingType
+            }
+        }
     }
 }

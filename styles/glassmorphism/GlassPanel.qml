@@ -62,8 +62,14 @@ SlotRect {
         border.width: panel.t.borderWidth
         border.color: panel.rim
         gradient: Gradient {
-            GradientStop { position: 0; color: Qt.tint(panel.tint, Qt.alpha(panel.t.text, 0.06)) }
-            GradientStop { position: 1; color: panel.tint }
+            GradientStop {
+                position: 0
+                color: Qt.tint(panel.tint, Qt.alpha(panel.t.text, 0.06))
+            }
+            GradientStop {
+                position: 1
+                color: panel.tint
+            }
         }
     }
 }

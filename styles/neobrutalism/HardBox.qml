@@ -36,8 +36,22 @@ SlotRect {
         border.width: box.flat ? 0 : box.edge
         border.color: box.edgeColor
 
-        Behavior on x { NumberAnimation { duration: box.t.durationFast; easing.type: box.t.easingType } }
-        Behavior on y { NumberAnimation { duration: box.t.durationFast; easing.type: box.t.easingType } }
-        Behavior on color { ColorAnimation { duration: box.t.durationFast } }
+        Behavior on x {
+            NumberAnimation {
+                duration: box.t.durationFast
+                easing.type: box.t.easingType
+            }
+        }
+        Behavior on y {
+            NumberAnimation {
+                duration: box.t.durationFast
+                easing.type: box.t.easingType
+            }
+        }
+        Behavior on color {
+            ColorAnimation {
+                duration: box.t.durationFast
+            }
+        }
     }
 }

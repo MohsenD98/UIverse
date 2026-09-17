@@ -22,7 +22,11 @@ T.Button {
         border.width: control.s.borderWidth
         border.color: control.visualFocus ? control.s.accent : control.lit ? control.s.accent : control.s.border
 
-        Behavior on color { ColorAnimation { duration: control.s.durationFast } }
+        Behavior on color {
+            ColorAnimation {
+                duration: control.s.durationFast
+            }
+        }
     }
 
     contentItem: ShellText {

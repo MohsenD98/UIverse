@@ -9,5 +9,9 @@ SlotRect {
     border.width: variant === "quiet" || variant === "accent" ? 0 : t.borderWidth
     border.color: t.border
 
-    Behavior on color { ColorAnimation { duration: surface.t.durationBase } }
+    Behavior on color {
+        ColorAnimation {
+            duration: surface.t.durationBase
+        }
+    }
 }

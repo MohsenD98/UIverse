@@ -9,7 +9,11 @@ SlotRect {
     radius: height / 2
     color: isChecked ? t.accent : t.border
 
-    Behavior on color { ColorAnimation { duration: track.t.durationBase } }
+    Behavior on color {
+        ColorAnimation {
+            duration: track.t.durationBase
+        }
+    }
 
     Rectangle {
         width: parent.height - 4
@@ -20,7 +24,10 @@ SlotRect {
         color: track.t.surface
 
         Behavior on x {
-            NumberAnimation { duration: track.t.durationBase; easing.type: track.t.easingType }
+            NumberAnimation {
+                duration: track.t.durationBase
+                easing.type: track.t.easingType
+            }
         }
     }
 }

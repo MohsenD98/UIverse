@@ -9,8 +9,7 @@ T.Switch {
     readonly property Tokens t: Style.t
 
     implicitHeight: Math.max(t.controlHeight, indicator ? indicator.implicitHeight : 0)
-    implicitWidth: (indicator ? indicator.implicitWidth : 0)
-                   + (text ? contentItem.implicitWidth + spacing : 0)
+    implicitWidth: (indicator ? indicator.implicitWidth : 0) + (text ? contentItem.implicitWidth + spacing : 0)
     spacing: t.unit
     hoverEnabled: true
 

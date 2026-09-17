@@ -12,5 +12,8 @@ SlotText {
     font.weight: Font.Black
     font.letterSpacing: t.letterSpacingLabel
     font.capitalization: Font.AllUppercase
-    transform: Translate { x: label.press; y: label.press }
+    transform: Translate {
+        x: label.press
+        y: label.press
+    }
 }

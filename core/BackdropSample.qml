@@ -38,8 +38,7 @@ Item {
         width: Math.max(1, sample.width + sample.pad * 2)
         height: Math.max(1, sample.height + sample.pad * 2)
         sourceItem: sample.source
-        sourceRect: Qt.rect(sample.originX - sample.pad, sample.originY - sample.pad,
-                            width, height)
+        sourceRect: Qt.rect(sample.originX - sample.pad, sample.originY - sample.pad, width, height)
         live: true
         recursive: false
     }

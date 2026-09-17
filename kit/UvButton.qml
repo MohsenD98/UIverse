@@ -11,8 +11,7 @@ T.Button {
     readonly property Tokens t: Style.t
 
     implicitHeight: Math.max(t.controlHeight, background ? background.implicitHeight : 0)
-    implicitWidth: Math.max(t.controlHeight * 2,
-                            contentItem.implicitWidth + leftPadding + rightPadding)
+    implicitWidth: Math.max(t.controlHeight * 2, contentItem.implicitWidth + leftPadding + rightPadding)
     leftPadding: t.unit * 2
     rightPadding: t.unit * 2
 

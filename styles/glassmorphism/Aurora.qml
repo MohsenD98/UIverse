@@ -22,8 +22,14 @@ Item {
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0; color: aurora.t.bg }
-            GradientStop { position: 1; color: aurora.t.bgAlt }
+            GradientStop {
+                position: 0
+                color: aurora.t.bg
+            }
+            GradientStop {
+                position: 1
+                color: aurora.t.bgAlt
+            }
         }
     }
 

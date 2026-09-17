@@ -24,6 +24,11 @@ SlotRect {
         color: handle.t.surface
         scale: handle.isPressed ? 1.1 : 1
 
-        Behavior on scale { NumberAnimation { duration: handle.t.durationFast; easing.type: handle.t.easingType } }
+        Behavior on scale {
+            NumberAnimation {
+                duration: handle.t.durationFast
+                easing.type: handle.t.easingType
+            }
+        }
     }
 }

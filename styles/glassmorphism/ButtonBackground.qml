@@ -10,21 +10,30 @@ SlotRect {
     implicitHeight: t.controlHeight
     radius: height / 2
     opacity: isEnabled ? 1 : 0.4
-    color: solid ? base
-         : variant === "ghost" ? Qt.alpha(t.text, isHovered ? 0.08 : 0)
-         : Qt.alpha(t.text, isDown ? 0.2 : isHovered ? 0.16 : 0.1)
+    color: solid ? base : variant === "ghost" ? Qt.alpha(t.text, isHovered ? 0.08 : 0) : Qt.alpha(t.text, isDown ? 0.2 : isHovered ? 0.16 : 0.1)
     border.width: variant === "secondary" ? t.borderWidth : 0
     border.color: t.border
     gradient: solid ? sheen : null
     scale: isDown ? 0.97 : 1
 
-    Behavior on scale { NumberAnimation { duration: button.t.durationFast; easing.type: button.t.easingType } }
+    Behavior on scale {
+        NumberAnimation {
+            duration: button.t.durationFast
+            easing.type: button.t.easingType
+        }
+    }
 
     Gradient {
         id: sheen
         orientation: Gradient.Horizontal
-        GradientStop { position: 0; color: Qt.lighter(button.base, button.isHovered ? 1.2 : 1.1) }
-        GradientStop { position: 1; color: button.base }
+        GradientStop {
+            position: 0
+            color: Qt.lighter(button.base, button.isHovered ? 1.2 : 1.1)
+        }
+        GradientStop {
+            position: 1
+            color: button.base
+        }
     }
 
     Rectangle {

@@ -15,10 +15,19 @@ Rectangle {
     visible: x < (parent ? parent.width : 0)
     color: s.bgAlt
 
-    Behavior on x { NumberAnimation { duration: panel.s.durationBase; easing.type: panel.s.easingType } }
+    Behavior on x {
+        NumberAnimation {
+            duration: panel.s.durationBase
+            easing.type: panel.s.easingType
+        }
+    }
 
     Rectangle {
-        anchors { left: parent.left; top: parent.top; bottom: parent.bottom }
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+        }
         width: panel.s.borderWidth
         color: panel.s.border
     }
@@ -40,8 +49,15 @@ Rectangle {
                 width: parent.width
                 spacing: panel.s.unit
 
-                ShellText { role: "label"; muted: true; text: panel.pack ? panel.pack.era : "" }
-                ShellText { role: "title"; text: panel.pack ? panel.pack.name : "" }
+                ShellText {
+                    role: "label"
+                    muted: true
+                    text: panel.pack ? panel.pack.era : ""
+                }
+                ShellText {
+                    role: "title"
+                    text: panel.pack ? panel.pack.name : ""
+                }
                 ShellText {
                     width: parent.width
                     text: panel.pack ? panel.pack.summary : ""
@@ -72,7 +88,11 @@ Rectangle {
                 spacing: panel.s.unit
                 visible: panel.pack && panel.pack.reading.length > 0
 
-                ShellText { role: "label"; muted: true; text: "Further reading" }
+                ShellText {
+                    role: "label"
+                    muted: true
+                    text: "Further reading"
+                }
 
                 Repeater {
                     model: panel.pack ? panel.pack.reading : []
@@ -88,8 +108,13 @@ Rectangle {
                         wrapMode: Text.WordWrap
                         font.underline: link.hovered
 
-                        HoverHandler { id: link; cursorShape: Qt.PointingHandCursor }
-                        TapHandler { onTapped: Qt.openUrlExternally(reference.modelData.url) }
+                        HoverHandler {
+                            id: link
+                            cursorShape: Qt.PointingHandCursor
+                        }
+                        TapHandler {
+                            onTapped: Qt.openUrlExternally(reference.modelData.url)
+                        }
                     }
                 }
             }

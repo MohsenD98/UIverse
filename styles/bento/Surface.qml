@@ -9,12 +9,13 @@ SlotRect {
     readonly property bool isHero: variant === "accent"
 
     radius: isTile ? t.radiusLg : t.radiusSm
-    color: isHero ? t.accent
-         : variant === "quiet" ? t.surfaceAlt
-         : isTile ? t.palette[spec.tile % t.palette.length]
-         : t.surface
+    color: isHero ? t.accent : variant === "quiet" ? t.surfaceAlt : isTile ? t.palette[spec.tile % t.palette.length] : t.surface
 
-    Behavior on color { ColorAnimation { duration: tile.t.durationBase } }
+    Behavior on color {
+        ColorAnimation {
+            duration: tile.t.durationBase
+        }
+    }
 
     RectangularShadow {
         z: -1

@@ -19,24 +19,31 @@ Text {
     font.family: role === "mono" ? t.monoFamily : isDisplay ? t.displayFamily : t.fontFamily
     font.pixelSize: {
         switch (role) {
-        case "display": return t.displaySize
-        case "title": return t.fontSizeXl
-        case "heading": return t.fontSizeLg
-        case "label": return t.fontSizeSm
-        case "caption": return t.fontSizeXs
-        case "mono": return t.fontSizeSm
-        default: return t.fontSizeMd
+        case "display":
+            return t.displaySize
+        case "title":
+            return t.fontSizeXl
+        case "heading":
+            return t.fontSizeLg
+        case "label":
+            return t.fontSizeSm
+        case "caption":
+            return t.fontSizeXs
+        case "mono":
+            return t.fontSizeSm
+        default:
+            return t.fontSizeMd
         }
     }
-    font.weight: isDisplay ? t.weightDisplay
-                           : (role === "heading" || role === "label") ? t.weightMedium
-                                                                      : t.weightBody
-    font.letterSpacing: isDisplay ? t.letterSpacingDisplay
-                                  : isMinor ? t.letterSpacingLabel
-                                            : t.letterSpacingBody
+    font.weight: isDisplay ? t.weightDisplay : (role === "heading" || role === "label") ? t.weightMedium : t.weightBody
+    font.letterSpacing: isDisplay ? t.letterSpacingDisplay : isMinor ? t.letterSpacingLabel : t.letterSpacingBody
     font.capitalization: t.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
     lineHeight: t.lineHeight
     lineHeightMode: Text.ProportionalHeight
 
-    Behavior on color { ColorAnimation { duration: label.t.durationFast } }
+    Behavior on color {
+        ColorAnimation {
+            duration: label.t.durationFast
+        }
+    }
 }

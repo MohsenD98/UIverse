@@ -7,7 +7,7 @@ import UIverse.Apps
 Rectangle {
     id: bench
 
-    signal back()
+    signal back
 
     readonly property Tokens s: ShellTheme.t
 
@@ -27,7 +27,11 @@ Rectangle {
     Rectangle {
         id: bar
 
-        anchors { left: parent.left; right: parent.right; top: parent.top }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
         height: bench.s.controlHeight + bench.s.unit * 3
         color: bench.s.bgAlt
 
@@ -60,7 +64,11 @@ Rectangle {
         }
 
         Rectangle {
-            anchors { left: parent.left; right: parent.right; bottom: parent.bottom }
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
             height: bench.s.borderWidth
             color: bench.s.border
         }
@@ -69,14 +77,24 @@ Rectangle {
     Item {
         id: stage
 
-        anchors { left: parent.left; right: parent.right; top: bar.bottom; bottom: parent.bottom }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: bar.bottom
+            bottom: parent.bottom
+        }
         clip: true
 
-        ReferenceDashboard { anchors.fill: parent }
+        ReferenceDashboard {
+            anchors.fill: parent
+        }
 
         RulesPanel {
             id: rules
-            anchors { top: parent.top; bottom: parent.bottom }
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
             pack: StyleRegistry.current
         }
     }

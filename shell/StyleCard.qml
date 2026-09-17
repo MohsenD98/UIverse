@@ -6,7 +6,7 @@ Rectangle {
     id: card
 
     required property StylePack pack
-    signal activated()
+    signal activated
 
     readonly property Tokens s: ShellTheme.t
     readonly property Tokens p: pack.tokens
@@ -19,18 +19,35 @@ Rectangle {
     border.color: hover.hovered || activeFocus ? pack.swatch : s.border
     activeFocusOnTab: true
 
-    Behavior on color { ColorAnimation { duration: card.s.durationFast } }
-    Behavior on border.color { ColorAnimation { duration: card.s.durationFast } }
+    Behavior on color {
+        ColorAnimation {
+            duration: card.s.durationFast
+        }
+    }
+    Behavior on border.color {
+        ColorAnimation {
+            duration: card.s.durationFast
+        }
+    }
 
     Keys.onReturnPressed: activated()
     Keys.onSpacePressed: activated()
 
-    HoverHandler { id: hover; cursorShape: Qt.PointingHandCursor }
-    TapHandler { onTapped: card.activated() }
+    HoverHandler {
+        id: hover
+        cursorShape: Qt.PointingHandCursor
+    }
+    TapHandler {
+        onTapped: card.activated()
+    }
 
     Rectangle {
         id: preview
-        anchors { left: parent.left; right: parent.right; top: parent.top }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
         anchors.margins: card.s.borderWidth
         height: card.s.unit * 15
         topLeftRadius: card.radius
@@ -75,11 +92,18 @@ Rectangle {
     }
 
     Column {
-        anchors { left: parent.left; right: parent.right; top: preview.bottom }
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: preview.bottom
+        }
         anchors.margins: card.s.unit * 2
         spacing: card.s.unit * 0.5
 
-        ShellText { role: "heading"; text: card.pack.name }
+        ShellText {
+            role: "heading"
+            text: card.pack.name
+        }
 
         ShellText {
             width: parent.width

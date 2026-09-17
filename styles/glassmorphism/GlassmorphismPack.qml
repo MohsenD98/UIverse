@@ -8,33 +8,21 @@ StylePack {
     era: "Vista Aero → iOS 7 → Big Sur & Fluent Acrylic 2020+"
     swatch: "#8b9dff"
 
-    summary: "Glassmorphism builds hierarchy out of translucency: panels are frosted " +
-             "sheets floating over a colourful backdrop, and the blur is what separates " +
-             "them from it. It only works when there is something worth blurring and the " +
-             "text on top stays readable. It is the most fragile style in the lab, and the " +
-             "most expensive to render: every pane samples and blurs the page behind it " +
-             "on every frame."
+    summary: "Glassmorphism builds hierarchy out of translucency: panels are frosted " + "sheets floating over a colourful backdrop, and the blur is what separates " + "them from it. It only works when there is something worth blurring and the " + "text on top stays readable. It is the most fragile style in the lab, and the " + "most expensive to render: every pane samples and blurs the page behind it " + "on every frame."
 
-    rules: [
-        "Blur the real backdrop. A flat translucent fill is not glass.",
-        "Give the backdrop colour and movement; glass over a flat colour is just grey.",
-        "A thin light rim defines each pane, where light would catch the edge.",
-        "Keep panes few and large. Many small panes turn to mud.",
-        "Check text contrast against the brightest part of the backdrop, not the average."
-    ]
+    rules: ["Blur the real backdrop. A flat translucent fill is not glass.", "Give the backdrop colour and movement; glass over a flat colour is just grey.", "A thin light rim defines each pane, where light would catch the edge.", "Keep panes few and large. Many small panes turn to mud.", "Check text contrast against the brightest part of the backdrop, not the average."]
 
-    antiRules: [
-        "No glass on glass on glass. Two layers at most.",
-        "No small text or thin weights on translucent surfaces.",
-        "Do not rely on blur alone for grouping; reduced-transparency users lose it.",
-        "Do not animate the backdrop so much that it pulls focus from content."
-    ]
+    antiRules: ["No glass on glass on glass. Two layers at most.", "No small text or thin weights on translucent surfaces.", "Do not rely on blur alone for grouping; reduced-transparency users lose it.", "Do not animate the backdrop so much that it pulls focus from content."]
 
     reading: [
-        { "label": "Michal Malewicz — Glassmorphism in user interfaces",
-          "url": "https://uxdesign.cc/glassmorphism-in-user-interfaces-1f39bb1308c9" },
-        { "label": "Microsoft Fluent — Acrylic material",
-          "url": "https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic" }
+        {
+            "label": "Michal Malewicz — Glassmorphism in user interfaces",
+            "url": "https://uxdesign.cc/glassmorphism-in-user-interfaces-1f39bb1308c9"
+        },
+        {
+            "label": "Microsoft Fluent — Acrylic material",
+            "url": "https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic"
+        }
     ]
 
     tokens: Tokens {
@@ -87,15 +75,39 @@ StylePack {
         decorative: true
     }
 
-    pageBackground: Component { Aurora {} }
-    surface: Component { Surface {} }
-    buttonBackground: Component { ButtonBackground {} }
-    buttonContent: Component { ButtonContent {} }
-    fieldBackground: Component { Field {} }
-    switchIndicator: Component { SwitchIndicator {} }
-    sliderGroove: Component { SliderGroove {} }
-    sliderHandle: Component { SliderHandle {} }
-    progressTrack: Component { ProgressTrack {} }
-    tagBackground: Component { TagBackground {} }
-    divider: Component { SlotRect { color: t.border } }
+    pageBackground: Component {
+        Aurora {}
+    }
+    surface: Component {
+        Surface {}
+    }
+    buttonBackground: Component {
+        ButtonBackground {}
+    }
+    buttonContent: Component {
+        ButtonContent {}
+    }
+    fieldBackground: Component {
+        Field {}
+    }
+    switchIndicator: Component {
+        SwitchIndicator {}
+    }
+    sliderGroove: Component {
+        SliderGroove {}
+    }
+    sliderHandle: Component {
+        SliderHandle {}
+    }
+    progressTrack: Component {
+        ProgressTrack {}
+    }
+    tagBackground: Component {
+        TagBackground {}
+    }
+    divider: Component {
+        SlotRect {
+            color: t.border
+        }
+    }
 }

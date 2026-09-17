@@ -10,7 +10,11 @@ SlotRect {
     border.width: t.borderWidth
     border.color: hasActiveFocus ? t.accent : t.border
 
-    Behavior on color { ColorAnimation { duration: field.t.durationFast } }
+    Behavior on color {
+        ColorAnimation {
+            duration: field.t.durationFast
+        }
+    }
 
     Rectangle {
         anchors.fill: parent

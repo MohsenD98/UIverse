@@ -12,5 +12,9 @@ SlotRect {
     border.color: isPressed ? t.accent : t.textMuted
     scale: isPressed ? 1.15 : 1
 
-    Behavior on scale { NumberAnimation { duration: handle.t.durationFast } }
+    Behavior on scale {
+        NumberAnimation {
+            duration: handle.t.durationFast
+        }
+    }
 }

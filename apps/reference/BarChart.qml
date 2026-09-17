@@ -27,7 +27,9 @@ UvSurface {
                 text: chart.title
             }
 
-            UvTag { text: chart.caption }
+            UvTag {
+                text: chart.caption
+            }
         }
 
         RowLayout {
@@ -55,7 +57,10 @@ UvSurface {
                         variant: bar.index === chart.values.length - 1 ? "accent" : "default"
 
                         Behavior on height {
-                            NumberAnimation { duration: chart.t.durationBase; easing.type: chart.t.easingType }
+                            NumberAnimation {
+                                duration: chart.t.durationBase
+                                easing.type: chart.t.easingType
+                            }
                         }
                     }
                 }

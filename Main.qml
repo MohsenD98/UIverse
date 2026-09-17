@@ -10,5 +10,7 @@ Window {
     title: "UIverse"
     color: ShellTheme.t.bg
 
-    LabRoot { anchors.fill: parent }
+    LabRoot {
+        anchors.fill: parent
+    }
 }
