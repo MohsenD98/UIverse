@@ -41,8 +41,9 @@ These are not preferences. Code that breaks them gets fixed, not merged.
 ### Repository
 1. **No AI attribution anywhere.** No `Co-Authored-By` trailers, no generated-with
    footers, no mention of AI in commits, PRs, code or docs.
-2. **Commit titles are short summaries.** Imperative mood, under ~50 characters,
-   no body unless it genuinely adds something. Example: `Add bento style pack`.
+2. **Commit titles are short summaries.** Imperative mood, capitalised, no
+   trailing period, aim for 50 characters, hard limit 60. No body unless it
+   genuinely adds something. Example: `Add bento style pack`.
 3. **One commit = one meaningful unit.** One style, one component, one fix.
    Never `update files`.
 4. **Code, comments, commits and docs are English.** Conversation is Persian.
@@ -173,6 +174,38 @@ cmake --install build --prefix dist   # self-contained, Qt deployed
 ```
 
 Formatting is `qmlformat` with `.qmlformat.ini`; it is not a matter of taste.
+
+### Hooks (mandatory)
+
+```
+pip install pre-commit
+pre-commit install          # installs pre-commit and commit-msg hooks
+pre-commit run --all-files
+```
+
+- `qmlformat` — formats staged QML; finds Qt via `QMLFORMAT`, `PATH`,
+  `QT_ROOT_DIR` or `C:/Qt`.
+- `architecture` — `scripts/check-architecture.sh`: rules 5, 6 (800-line
+  ceiling), 7 (hex colours in `kit/`, `apps/`, `shell/` outside `ShellTheme`),
+  9 and 10.
+- `commit-message` — `scripts/check-commit-msg.sh`: rules 1 and 2.
+
+CI runs the same hooks and checks every pushed commit message, so skipping them
+locally only moves the failure to CI.
+
+### Releasing
+
+Bump `project(... VERSION x.y.z)` in `CMakeLists.txt`, commit, wait for green
+CI on `main`, then:
+
+```
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+`release.yml` builds and publishes the Windows zip, macOS dmg, Linux tar.gz
+and WASM zip to the GitHub release. CI packages on every push, so a tag only
+repeats a path that is already green.
 
 ---
 
