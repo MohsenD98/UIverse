@@ -1,3 +1,4 @@
 add_subdirectory(minimalism)
 add_subdirectory(neobrutalism)
+add_subdirectory(glassmorphism)
 add_subdirectory(registry)

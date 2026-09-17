@@ -3,13 +3,15 @@ import QtQuick
 import UIverse.Core
 import UIverse.Styles.Minimalism as Minimalism
 import UIverse.Styles.NeoBrutalism as NeoBrutalism
+import UIverse.Styles.Glassmorphism as Glassmorphism
 
 QtObject {
     id: registry
 
     readonly property list<StylePack> packs: [
         Minimalism.MinimalismPack {},
-        NeoBrutalism.NeoBrutalismPack {}
+        NeoBrutalism.NeoBrutalismPack {},
+        Glassmorphism.GlassmorphismPack {}
     ]
 
     property int currentIndex: 0

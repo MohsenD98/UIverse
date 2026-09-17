@@ -13,4 +13,5 @@ target_link_libraries(UIverseStyles PRIVATE
     UIverseCoreplugin
     UIverseStyleMinimalismplugin
     UIverseStyleNeoBrutalismplugin
+    UIverseStyleGlassmorphismplugin
 )
