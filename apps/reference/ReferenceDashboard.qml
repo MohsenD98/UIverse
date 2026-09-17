@@ -44,25 +44,25 @@ UvPage {
                 GridCell {
                     place: layout.place("revenue")
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; label: "Revenue"; value: "$48.2k"; delta: "+12.4%"; progress: 0.72 }
+                    StatTile { anchors.fill: parent; spec: ({ "tile": 1 }); label: "Revenue"; value: "$48.2k"; delta: "+12.4%"; progress: 0.72 }
                 }
 
                 GridCell {
                     place: layout.place("users")
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; label: "Active users"; value: "1,980"; delta: "+4.1%"; progress: 0.54 }
+                    StatTile { anchors.fill: parent; spec: ({ "tile": 2 }); label: "Active users"; value: "1,980"; delta: "+4.1%"; progress: 0.54 }
                 }
 
                 GridCell {
                     place: layout.place("sessions")
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; label: "Avg. session"; value: "2m 47s"; delta: "−0.8%"; positive: false; progress: 0.38 }
+                    StatTile { anchors.fill: parent; spec: ({ "tile": 3 }); label: "Avg. session"; value: "2m 47s"; delta: "−0.8%"; positive: false; progress: 0.38 }
                 }
 
                 GridCell {
                     place: layout.place("churn")
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    StatTile { anchors.fill: parent; label: "Churn"; value: "3.2%"; delta: "−1.1%"; progress: 0.18 }
+                    StatTile { anchors.fill: parent; spec: ({ "tile": 4 }); label: "Churn"; value: "3.2%"; delta: "−1.1%"; progress: 0.18 }
                 }
 
                 GridCell {
@@ -70,6 +70,7 @@ UvPage {
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
                     BarChart {
                         anchors.fill: parent
+                        spec: ({ "tile": 5 })
                         title: "Weekly engagement"
                         caption: "12 weeks"
                         values: DashboardData.engagement
@@ -81,6 +82,7 @@ UvPage {
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
                     ActivityList {
                         anchors.fill: parent
+                        spec: ({ "tile": 6 })
                         title: "Recent activity"
                         entries: DashboardData.activity
                     }
@@ -89,7 +91,7 @@ UvPage {
                 GridCell {
                     place: layout.place("controls")
                     columnWidth: grid.columnWidth; rowHeight: grid.rowHeight; gap: grid.gap
-                    ControlsPanel { anchors.fill: parent }
+                    ControlsPanel { anchors.fill: parent; spec: ({ "tile": 0 }) }
                 }
             }
         }
