@@ -1,4 +1,4 @@
-name: Release
+name: 📦 Release
 
 on:
   push:
@@ -9,14 +9,17 @@ permissions:
 
 jobs:
   desktop:
+    name: 🖥️ Desktop
     uses: ./.github/workflows/build.yml
     with:
       package: true
 
   wasm:
+    name: 🌐 WebAssembly
     uses: ./.github/workflows/wasm.yml
 
   publish:
+    name: 🏷️ Publish release
     needs: [desktop, wasm]
     runs-on: ubuntu-24.04
     permissions:
