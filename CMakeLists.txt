@@ -4,7 +4,7 @@ project(UIverse VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick QuickControls2)
+find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -14,6 +14,7 @@ add_subdirectory(core)
 add_subdirectory(kit)
 add_subdirectory(styles)
 add_subdirectory(apps)
+add_subdirectory(shell)
 
 qt_add_executable(appUIverse
     main.cpp
@@ -35,11 +36,11 @@ set_target_properties(appUIverse PROPERTIES
 
 target_link_libraries(appUIverse PRIVATE
     Qt6::Quick
-    Qt6::QuickControls2
     UIverseCoreplugin
     UIverseKitplugin
     UIverseStylesplugin
     UIverseAppsplugin
+    UIverseShellplugin
 )
 
 install(TARGETS appUIverse
