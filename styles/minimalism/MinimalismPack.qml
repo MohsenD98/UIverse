@@ -44,7 +44,7 @@ StylePack {
         text: "#18181b"
         textMuted: "#a1a1aa"
         accent: "#18181b"
-        onAccent: "#ffffff"
+        textOnAccent: "#ffffff"
         border: "#ebebed"
         success: "#16a34a"
         warning: "#ca8a04"

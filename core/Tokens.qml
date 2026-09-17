@@ -8,7 +8,7 @@ QtObject {
     property color text: "#111113"
     property color textMuted: "#71717a"
     property color accent: "#2563eb"
-    property color onAccent: "#ffffff"
+    property color textOnAccent: "#ffffff"
     property color border: "#e4e4e7"
     property color success: "#16a34a"
     property color warning: "#d97706"

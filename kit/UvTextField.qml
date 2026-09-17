@@ -18,7 +18,7 @@ T.TextField {
     color: t.text
     placeholderTextColor: t.textMuted
     selectionColor: t.accent
-    selectedTextColor: t.onAccent
+    selectedTextColor: t.textOnAccent
     verticalAlignment: TextInput.AlignVCenter
     hoverEnabled: true
 

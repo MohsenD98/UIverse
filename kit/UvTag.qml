@@ -28,7 +28,7 @@ Item {
         text: tag.text
         color: {
             switch (tag.variant) {
-            case "accent": return tag.t.onAccent
+            case "accent": return tag.t.textOnAccent
             case "success": return tag.t.success
             case "warning": return tag.t.warning
             case "danger": return tag.t.danger

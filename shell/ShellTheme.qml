@@ -11,7 +11,7 @@ QtObject {
         text: "#f4f4f5"
         textMuted: "#8b8b96"
         accent: "#6d8bff"
-        onAccent: "#0b0b0e"
+        textOnAccent: "#0b0b0e"
         border: "#26262f"
 
         radiusMd: 10
