@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  desktop:
+    uses: ./.github/workflows/build.yml
+    with:
+      package: true
+
+  wasm:
+    uses: ./.github/workflows/wasm.yml
+
+  publish:
+    needs: [desktop, wasm]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Bundle web build
+        run: |
+          (cd artifacts/uiverse-wasm && zip -r "../../UIverse-${{ github.ref_name }}-wasm.zip" .)
+          find artifacts -type f \( -name '*.zip' -o -name '*.dmg' -o -name '*.tar.gz' \) -not -path '*/uiverse-wasm/*' -exec mv {} . \;
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            UIverse-*.zip
+            UIverse-*.dmg
+            UIverse-*.tar.gz
