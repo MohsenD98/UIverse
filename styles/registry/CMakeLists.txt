@@ -12,4 +12,5 @@ qt_add_qml_module(UIverseStyles
 target_link_libraries(UIverseStyles PRIVATE
     UIverseCoreplugin
     UIverseStyleMinimalismplugin
+    UIverseStyleNeoBrutalismplugin
 )

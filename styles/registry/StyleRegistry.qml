@@ -2,12 +2,14 @@ pragma Singleton
 import QtQuick
 import UIverse.Core
 import UIverse.Styles.Minimalism as Minimalism
+import UIverse.Styles.NeoBrutalism as NeoBrutalism
 
 QtObject {
     id: registry
 
     readonly property list<StylePack> packs: [
-        Minimalism.MinimalismPack {}
+        Minimalism.MinimalismPack {},
+        NeoBrutalism.NeoBrutalismPack {}
     ]
 
     property int currentIndex: 0
