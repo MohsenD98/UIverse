@@ -169,36 +169,56 @@ cmake --build build
 
 ## 7. Current state
 
-Builds green on Qt 6.11.1 / MinGW / Ninja. `all_qmllint` passes with no import
-errors.
+Phase 1 is complete and verified visually. Builds green on Qt 6.11.1 / MinGW /
+Ninja; the app runs with no QML warnings.
 
-Done: Core contract, Kit (10 controls), Minimalism pack, style registry,
-gallery shell scaffolding (`ShellTheme`, `StyleCard`, `GalleryView`).
+- Core contract, Kit (10 controls), shell (gallery, workbench, style picker,
+  rules drawer with keyboard: ←/→ switch style, R rules, Esc back).
+- Reference dashboard in `apps/reference/`, laid out per `layoutMode`
+  (`stack`, `bento`, and a two-column compact fallback).
+- Packs: Minimalism, Neo-Brutalism, Glassmorphism (real backdrop blur),
+  Bento UI.
+- `uiverse-snapshot` renders any pack to PNG without showing a window.
 
-The shell keeps its own `ShellTheme` tokens rather than the active pack, so the
-lab chrome does not change while browsing styles. It still obeys rule 7 — no raw
-values outside a `Tokens` block.
+The shell keeps its own `ShellTheme` tokens, so the lab chrome does not change
+while browsing styles.
+
+Dashboard areas pass a neutral `spec.tile` index. Packs may colour tiles by it
+(Bento does) or ignore it. Apps never name a style.
+
+### Hard-won notes
+- Token names must not start with `on` + capital (`onAccent`): QML parses them as
+  signal handlers. Use `textOnAccent`.
+- An `Item` with `visible: false` is not rendered into a texture. Effect sources
+  must be wrapped in `ShaderEffectSource { hideSource: true }`; only `Image` works
+  hidden on its own.
+- `-platform offscreen` on Windows falls back to the software scene graph, which
+  silently drops every shader effect. The snapshot tool therefore uses the real
+  platform with an off-screen, input-transparent tool window.
+- `QGuiApplication` consumes `-style`, so tool options must not be named `style`.
+- `MultiEffect` blur caps at 64px; large soft backdrops are blurred at reduced
+  size and scaled up.
+- Snapshots on Windows need no extra setup; under `offscreen` elsewhere, set
+  `QT_QPA_FONTDIR`.
 
 ## 8. Next steps, in order
 
-1. `Workbench`, `StylePicker`, `RulesPanel`; wire `Main.qml` to route between
-   gallery and workbench. Root `Main.qml` is still the Qt template and breaks
-   rule 9.
-2. `apps/` Reference Dashboard, split into small files (`StatTile`,
-   `ActivityList`, `ControlsRow`, `BarChart`).
-3. Neo-Brutalism, Glassmorphism and Bento packs — one commit each.
-4. Silence the remaining `missing-property` qmllint warnings in `SlotRect` /
-   `SlotText` by casting through `(parent as StyleSlot)` instead of bare
-   `parent`, so lint can be a hard CI gate.
-5. UX laws layers 1–3 (section 4).
-6. CI/CD, designed but not yet written:
+1. Clear the remaining qmllint warnings (`unqualified` access in shell and apps,
+   `missing-property` in `SlotRect` / `SlotText` via `(parent as StyleSlot)`) so
+   lint can be a hard CI gate.
+2. CI/CD:
    - `.github/actions/setup-qt/` composite action, no duplication between jobs
    - `ci.yml`: qmlformat check + `all_qmllint` + desktop matrix
-   - `pages.yml`: WASM build to a live GitHub Pages demo — the single highest
-     value output for a style lab; use the prebuilt `wasm_singlethread` Qt from
-     `install-qt-action` rather than building Qt from source
+   - `pages.yml`: WASM build to a live GitHub Pages demo; prebuilt
+     `wasm_singlethread` Qt from `install-qt-action`, not Qt built from source.
+     Glassmorphism must be checked on WebGL.
+   - snapshot job: render every pack with `uiverse-snapshot` and publish the
+     images as artifacts and in the README
    - `release.yml`: tagged Windows zip, Linux AppImage, macOS dmg, WASM bundle
    - `.pre-commit-config.yaml` with qmlformat, for local parity
+3. UX laws layers 1–3 (section 4).
+4. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+5. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken
