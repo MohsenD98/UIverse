@@ -10,11 +10,17 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
 
+option(UIVERSE_BUILD_TOOLS "Build developer tools such as uiverse-snapshot" ON)
+
 add_subdirectory(core)
 add_subdirectory(kit)
 add_subdirectory(styles)
 add_subdirectory(apps)
 add_subdirectory(shell)
+
+if(UIVERSE_BUILD_TOOLS)
+    add_subdirectory(tools/snapshot)
+endif()
 
 qt_add_executable(appUIverse
     main.cpp
