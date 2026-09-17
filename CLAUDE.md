@@ -245,7 +245,8 @@ Dashboard areas pass a neutral `spec.tile` index. Packs may colour tiles by it
 
 ## 8. CI/CD
 
-Green on GitHub for every job. Default branch is `main`; Pages source is
+Green on GitHub for every job. First release: v0.0.1
+(https://github.com/MohsenD98/UIverse/releases/tag/v0.0.1). Default branch is `main`; Pages source is
 GitHub Actions. Live demo: https://mohsend98.github.io/UIverse/
 
 - `.github/actions/setup-qt` — the only place Qt, CMake, Ninja and MSVC are set
@@ -277,11 +278,13 @@ Qt-from-source WASM build, no dead commented-out steps.
    so Neo-Brutalism loses its display face there.
 2. README with the CI snapshots and the live demo link.
 3. UX laws layers 1–3 (section 4).
-4. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
+4. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
+   zip. v0.0.1 runs only where the Visual C++ Redistributable is installed.
+5. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
    VirtualKeyboard pulled in transitively; about 120 MB).
-5. Per-style mini-apps (section 1), starting with the glassmorphism music player.
-6. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
-7. Backlog styles.
+6. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+7. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
+8. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken
