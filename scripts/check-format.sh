@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(git rev-parse --show-toplevel)"
 
-qmlformat="${QMLFORMAT:-qmlformat}"
+qmlformat="$(scripts/find-qmlformat.sh)"
 status=0
 
 while IFS= read -r file; do
