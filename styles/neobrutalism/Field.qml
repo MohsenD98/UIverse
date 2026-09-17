@@ -1,11 +1,8 @@
 import QtQuick
-import UIverse.Core
 
 HardBox {
-    readonly property bool focused: ctl && ctl.activeFocus
-
     implicitHeight: t.controlHeight
     corner: t.radiusSm
-    faceColor: focused ? t.surfaceAlt : t.surface
-    lift: focused ? t.shadowOffsetX : t.shadowOffsetX / 2
+    faceColor: hasActiveFocus ? t.surfaceAlt : t.surface
+    lift: hasActiveFocus ? t.shadowOffsetX : t.shadowOffsetX / 2
 }

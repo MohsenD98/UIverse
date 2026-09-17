@@ -1,15 +1,16 @@
 import QtQuick
 
 Text {
-    readonly property Item ctl: parent && parent.ctl ? parent.ctl : null
-    readonly property string variant: parent && parent.variant ? parent.variant : "default"
-    readonly property var spec: parent && parent.spec ? parent.spec : ({})
+    readonly property StyleSlot slot: parent as StyleSlot
+    readonly property var ctl: slot ? slot.ctl : null
+    readonly property string variant: slot ? slot.variant : "default"
+    readonly property var spec: slot ? slot.spec : ({})
     readonly property Tokens t: Style.t
 
-    readonly property bool isDown: ctl && ctl.down !== undefined ? ctl.down : false
-    readonly property bool isHovered: ctl && ctl.hovered !== undefined ? ctl.hovered : false
+    readonly property bool isDown: ctl?.down ?? false
+    readonly property bool isHovered: ctl?.hovered ?? false
 
-    text: ctl && ctl.text !== undefined ? ctl.text : ""
+    text: ctl?.text ?? ""
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     elide: Text.ElideRight

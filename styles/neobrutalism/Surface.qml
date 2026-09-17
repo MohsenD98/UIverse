@@ -1,5 +1,4 @@
 import QtQuick
-import UIverse.Core
 
 HardBox {
     readonly property bool tinted: spec && spec.tint !== undefined

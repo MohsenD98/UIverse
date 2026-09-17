@@ -2,6 +2,8 @@ import QtQuick
 import UIverse.Core
 
 SlotRect {
+    id: button
+
     readonly property bool solid: variant === "primary" || variant === "danger"
     readonly property color base: variant === "danger" ? t.danger : t.accent
 
@@ -14,7 +16,7 @@ SlotRect {
     border.color: isHovered ? t.textMuted : t.border
     opacity: isEnabled ? 1 : 0.4
 
-    Behavior on color { ColorAnimation { duration: t.durationFast } }
+    Behavior on color { ColorAnimation { duration: button.t.durationFast } }
 
     Rectangle {
         anchors.fill: parent
@@ -22,7 +24,7 @@ SlotRect {
         radius: parent.radius + 3
         color: "transparent"
         border.width: 1
-        border.color: t.accent
-        visible: isFocused
+        border.color: button.t.accent
+        visible: button.isFocused
     }
 }

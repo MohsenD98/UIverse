@@ -1,5 +1,4 @@
 import QtQuick
-import UIverse.Core
 
 HardBox {
     id: track
@@ -11,7 +10,7 @@ HardBox {
     Rectangle {
         x: track.edge
         y: track.edge
-        width: Math.max(0, (track.width - track.edge * 2) * (track.ctl ? track.ctl.position : 0))
+        width: Math.max(0, (track.width - track.edge * 2) * track.position)
         height: track.height - track.edge * 2
         color: track.t.palette[1]
 

@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Effects
 import UIverse.Core
@@ -9,7 +10,7 @@ Item {
     readonly property real downscale: 4
     readonly property var anchorsX: [0.12, 0.78, 0.42, 0.9]
     readonly property var anchorsY: [0.15, 0.2, 0.85, 0.7]
-    property real phase: 0
+    property real phase
 
     NumberAnimation on phase {
         from: 0
@@ -36,6 +37,8 @@ Item {
             model: aurora.t.palette
 
             Rectangle {
+                id: blob
+
                 required property var modelData
                 required property int index
 
@@ -46,8 +49,8 @@ Item {
                 radius: size / 2
                 color: modelData
                 opacity: 0.75
-                x: blobs.width * aurora.anchorsX[index % 4] - size / 2 + Math.cos(aurora.phase + index * 1.7) * size * 0.18
-                y: blobs.height * aurora.anchorsY[index % 4] - size / 2 + Math.sin(aurora.phase + index * 2.3) * size * 0.14
+                x: blobs.width * aurora.anchorsX[blob.index % 4] - blob.size / 2 + Math.cos(aurora.phase + blob.index * 1.7) * blob.size * 0.18
+                y: blobs.height * aurora.anchorsY[blob.index % 4] - blob.size / 2 + Math.sin(aurora.phase + blob.index * 2.3) * blob.size * 0.14
             }
         }
     }

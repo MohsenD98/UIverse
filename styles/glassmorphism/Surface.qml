@@ -1,5 +1,4 @@
 import QtQuick
-import UIverse.Core
 
 GlassPanel {
     corner: variant === "accent" ? t.radiusSm : t.radiusLg

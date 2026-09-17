@@ -5,8 +5,6 @@ import UIverse.Core
 SlotRect {
     id: handle
 
-    readonly property bool pressed: ctl && ctl.pressed
-
     implicitWidth: 22
     implicitHeight: 22
 
@@ -15,8 +13,8 @@ SlotRect {
         width: parent.width + 10
         height: width
         radius: width / 2
-        color: Qt.alpha(handle.t.accent, handle.pressed ? 0.35 : 0.18)
-        scale: handle.pressed ? 1.15 : 1
+        color: Qt.alpha(handle.t.accent, handle.isPressed ? 0.35 : 0.18)
+        scale: handle.isPressed ? 1.15 : 1
 
         Behavior on scale { NumberAnimation { duration: handle.t.durationFast } }
     }

@@ -1,5 +1,4 @@
 import QtQuick
-import UIverse.Core
 
 HardBox {
     id: groove
@@ -11,7 +10,7 @@ HardBox {
     Rectangle {
         x: groove.edge
         y: groove.edge
-        width: Math.max(0, (groove.width - groove.edge * 2) * (groove.ctl ? groove.ctl.position : 0))
+        width: Math.max(0, (groove.width - groove.edge * 2) * groove.position)
         height: groove.height - groove.edge * 2
         color: groove.t.accent
     }

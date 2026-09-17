@@ -9,7 +9,7 @@ SlotRect {
     color: t.border
 
     Rectangle {
-        width: parent.width * (track.ctl ? track.ctl.position : 0)
+        width: parent.width * track.position
         height: parent.height
         radius: parent.radius
         color: track.t.accent

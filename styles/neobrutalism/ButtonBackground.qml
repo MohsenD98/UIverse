@@ -1,5 +1,4 @@
 import QtQuick
-import UIverse.Core
 
 HardBox {
     id: button

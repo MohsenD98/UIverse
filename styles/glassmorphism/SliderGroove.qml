@@ -9,7 +9,7 @@ SlotRect {
     color: Qt.alpha(t.text, 0.14)
 
     Rectangle {
-        width: groove.width * (groove.ctl ? groove.ctl.position : 0)
+        width: groove.width * groove.position
         height: groove.height
         radius: groove.radius
         gradient: Gradient {
