@@ -102,8 +102,11 @@ a core requirement here, so the pack/slot layer replaces it.
 
 ### Slot authoring convention
 A pack `Component` carries the scope of the file it was written in, so the
-control it styles is not visible by name. `SlotRect` / `SlotText` resolve it via
-`parent.ctl`. Always extend those bases rather than reaching for `parent`.
+control it styles is not visible by name. `SlotRect` / `SlotText` reach it via
+`parent as StyleSlot` and expose typed flags (`isDown`, `isPressed`,
+`isHovered`, `isFocused`, `hasActiveFocus`, `isChecked`, `isEnabled`,
+`position`). Slot files read those flags, never `ctl` directly, and qualify
+every reference from a child element with the root `id`.
 
 ---
 
@@ -158,19 +161,25 @@ through qualified imports, so names never collide across styles.
 
 ## 6. Build
 
-Qt 6.11.1, MinGW 64-bit, CMake + Ninja.
+Qt 6.11.1, MinGW 64-bit locally; MSVC, GCC and Clang in CI. CMake + Ninja.
 
 ```
 cmake -S . -B build -G Ninja -DCMAKE_PREFIX_PATH=C:/Qt/6.11.1/mingw_64
 cmake --build build
+scripts/check-format.sh [--fix]   # QMLFORMAT=<path> if not on PATH
+scripts/lint.sh build             # fails on any qmllint finding
+scripts/snapshots.sh build        # PNG per style into snapshots/
+cmake --install build --prefix dist   # self-contained, Qt deployed
 ```
+
+Formatting is `qmlformat` with `.qmlformat.ini`; it is not a matter of taste.
 
 ---
 
 ## 7. Current state
 
 Phase 1 is complete and verified visually. Builds green on Qt 6.11.1 / MinGW /
-Ninja; the app runs with no QML warnings.
+Ninja; the app runs with no QML warnings; `qmllint` and `qmlformat` are clean.
 
 - Core contract, Kit (10 controls), shell (gallery, workbench, style picker,
   rules drawer with keyboard: ←/→ switch style, R rules, Esc back).
@@ -201,24 +210,37 @@ Dashboard areas pass a neutral `spec.tile` index. Packs may colour tiles by it
 - Snapshots on Windows need no extra setup; under `offscreen` elsewhere, set
   `QT_QPA_FONTDIR`.
 
-## 8. Next steps, in order
+## 8. CI/CD
 
-1. Clear the remaining qmllint warnings (`unqualified` access in shell and apps,
-   `missing-property` in `SlotRect` / `SlotText` via `(parent as StyleSlot)`) so
-   lint can be a hard CI gate.
-2. CI/CD:
-   - `.github/actions/setup-qt/` composite action, no duplication between jobs
-   - `ci.yml`: qmlformat check + `all_qmllint` + desktop matrix
-   - `pages.yml`: WASM build to a live GitHub Pages demo; prebuilt
-     `wasm_singlethread` Qt from `install-qt-action`, not Qt built from source.
-     Glassmorphism must be checked on WebGL.
-   - snapshot job: render every pack with `uiverse-snapshot` and publish the
-     images as artifacts and in the README
-   - `release.yml`: tagged Windows zip, Linux AppImage, macOS dmg, WASM bundle
-   - `.pre-commit-config.yaml` with qmlformat, for local parity
-3. UX laws layers 1–3 (section 4).
-4. Per-style mini-apps (section 1), starting with the glassmorphism music player.
-5. Backlog styles.
+Written and checked with `actionlint`, **not yet run on GitHub** (no remote).
+Expect a first-run fix-up pass, most likely around `install-qt-action` and the
+Qt 6.11 WASM package.
+
+- `.github/actions/setup-qt` — the only place Qt, CMake, Ninja and MSVC are set
+  up. Qt version lives here once.
+- `ci.yml` — `format` and `lint` gate everything; then desktop matrix
+  (`build.yml`), WASM (`wasm.yml`), snapshots on Windows (real Segoe UI and
+  D3D11), and on `main` the WASM build is deployed to GitHub Pages.
+- `release.yml` — on `v*` tags: Windows zip, macOS dmg, Linux tar.gz, WASM zip.
+  Linux ships as tar.gz, not AppImage, until someone needs AppImage.
+- The emsdk version is read from the installed Qt, never hardcoded.
+
+Improvements over MMaterial-Tester: no duplicated Qt setup, reusable workflows
+shared by CI and release, lint and format gates, emsdk derived from Qt, no
+Qt-from-source WASM build, no dead commented-out steps.
+
+## 9. Next steps, in order
+
+1. Push to GitHub, enable Pages (source: GitHub Actions), fix whatever the first
+   CI run reveals.
+2. Bundle fonts as resources. WASM and Linux have no Segoe UI or Arial Black,
+   so Neo-Brutalism loses its display face there.
+3. README with the CI snapshots and the live demo link.
+4. UX laws layers 1–3 (section 4).
+5. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
+   VirtualKeyboard pulled in transitively; about 120 MB).
+6. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+7. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken
