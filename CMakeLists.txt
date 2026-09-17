@@ -54,3 +54,12 @@ install(TARGETS appUIverse
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+if(NOT EMSCRIPTEN)
+    qt_generate_deploy_qml_app_script(
+        TARGET appUIverse
+        OUTPUT_SCRIPT deploy_script
+        NO_UNSUPPORTED_PLATFORM_ERROR
+    )
+    install(SCRIPT ${deploy_script})
+endif()
