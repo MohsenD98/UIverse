@@ -54,8 +54,10 @@ These are not preferences. Code that breaks them gets fixed, not merged.
 6. **No file over ~150 lines.** Hard ceiling 800. If a style pack grows, split it
    into one file per slot.
 7. **No hardcoded colours or magic numbers outside `Tokens`.** A literal `#ff0000`
-   or `radius: 12` in the Kit, the shell or an app is a bug. Only a pack's own
-   `Tokens { }` block may carry raw values.
+   or `radius: 12` in the Kit, the shell or an app is a bug. Colours always come
+   from a `Tokens` block. Inside a style pack, slot files may carry that style's
+   own local geometry (a knob size, a focus-ring offset) — values no other style
+   would ever need to answer for. Anything shared across styles is a token.
 8. **The Kit never paints.** Every pixel comes from the active pack through a
    `StyleSlot`. A Kit component that sets its own colour has broken the
    abstraction. The only exception is a neutral fallback shown when a pack leaves
