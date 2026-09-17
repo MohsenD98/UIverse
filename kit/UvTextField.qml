@@ -29,7 +29,6 @@ T.TextField {
         x: control.leftPadding
         width: control.availableWidth
         height: control.height
-        role: "label"
         muted: true
         text: control.placeholderText
         font.pixelSize: control.font.pixelSize

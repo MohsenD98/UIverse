@@ -34,7 +34,7 @@ Text {
     font.letterSpacing: isDisplay ? t.letterSpacingDisplay
                                   : isMinor ? t.letterSpacingLabel
                                             : t.letterSpacingBody
-    font.capitalization: t.uppercaseLabels && isMinor ? Font.AllUppercase : Font.MixedCase
+    font.capitalization: t.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
     lineHeight: t.lineHeight
     lineHeightMode: Text.ProportionalHeight
 
