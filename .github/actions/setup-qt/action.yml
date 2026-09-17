@@ -46,3 +46,7 @@ runs:
         arch: ${{ steps.platform.outputs.arch }}
         install-deps: ${{ runner.os == 'Linux' && 'true' || 'false' }}
         cache: true
+
+    - if: inputs.target == 'wasm'
+      shell: bash
+      run: chmod +x "$QT_ROOT_DIR"/bin/*
