@@ -14,3 +14,4 @@ compile_commands.json
 *.pdb
 .DS_Store
 Thumbs.db
+snapshots/
