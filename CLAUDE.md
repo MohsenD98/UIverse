@@ -170,7 +170,7 @@ cmake --build build
 scripts/check-format.sh [--fix]   # QMLFORMAT=<path> if not on PATH
 scripts/lint.sh build             # fails on any qmllint finding
 scripts/snapshots.sh build        # PNG per style into snapshots/
-cmake --install build --prefix dist   # self-contained, Qt deployed
+cmake --install build --prefix "$PWD/dist"   # absolute prefix required by Qt deploy
 ```
 
 Formatting is `qmlformat` with `.qmlformat.ini`; it is not a matter of taste.

@@ -46,7 +46,7 @@ jobs:
       - name: Install
         if: inputs.package
         run: |
-          if ! cmake --install build --prefix dist > install.log 2>&1; then
+          if ! cmake --install build --prefix "$GITHUB_WORKSPACE/dist" > install.log 2>&1; then
             cat install.log
             summary=$(tail -n 30 install.log | tr -d '\r' | sed -e 's/%/%25/g' | awk 'BEGIN { ORS = "%0A" } { print }')
             echo "::error title=Install failed::$summary"
