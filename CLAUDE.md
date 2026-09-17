@@ -212,9 +212,8 @@ Dashboard areas pass a neutral `spec.tile` index. Packs may colour tiles by it
 
 ## 8. CI/CD
 
-Written and checked with `actionlint`, **not yet run on GitHub** (no remote).
-Expect a first-run fix-up pass, most likely around `install-qt-action` and the
-Qt 6.11 WASM package.
+Green on GitHub for every job. Default branch is `main`; Pages source is
+GitHub Actions. Live demo: https://mohsend98.github.io/UIverse/
 
 - `.github/actions/setup-qt` — the only place Qt, CMake, Ninja and MSVC are set
   up. Qt version lives here once.
@@ -224,6 +223,16 @@ Qt 6.11 WASM package.
 - `release.yml` — on `v*` tags: Windows zip, macOS dmg, Linux tar.gz, WASM zip.
   Linux ships as tar.gz, not AppImage, until someone needs AppImage.
 - The emsdk version is read from the installed Qt, never hardcoded.
+- **aqt is pinned to a development commit.** Qt 6.11 split its Windows online
+  repository into one folder per compiler (`qt6_6111/qt6_6111_msvc2022_64/`),
+  and aqtinstall 3.3.0 cannot read it. Move `aqtsource` back to a released
+  `aqtversion` as soon as aqtinstall ships a release that lists
+  `aqt list-qt windows desktop --arch 6.11.1` correctly.
+- Qt's WebAssembly archives unpack their tools without the executable bit;
+  `setup-qt` restores it.
+- Job logs need authentication; check-run annotations
+  (`/repos/<owner>/<repo>/check-runs/<job id>/annotations`) are public and
+  usually enough to diagnose a failure.
 
 Improvements over MMaterial-Tester: no duplicated Qt setup, reusable workflows
 shared by CI and release, lint and format gates, emsdk derived from Qt, no
@@ -231,15 +240,14 @@ Qt-from-source WASM build, no dead commented-out steps.
 
 ## 9. Next steps, in order
 
-1. Push to GitHub, enable Pages (source: GitHub Actions), fix whatever the first
-   CI run reveals.
-2. Bundle fonts as resources. WASM and Linux have no Segoe UI or Arial Black,
+1. Bundle fonts as resources. WASM and Linux have no Segoe UI or Arial Black,
    so Neo-Brutalism loses its display face there.
-3. README with the CI snapshots and the live demo link.
-4. UX laws layers 1–3 (section 4).
-5. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
+2. README with the CI snapshots and the live demo link.
+3. UX laws layers 1–3 (section 4).
+4. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
    VirtualKeyboard pulled in transitively; about 120 MB).
-6. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+5. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+6. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
 7. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
