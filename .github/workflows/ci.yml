@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-qt
+      - name: qmlformat
+        run: QMLFORMAT="$QT_ROOT_DIR/bin/qmlformat" scripts/check-format.sh
+
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-qt
+      - name: Configure
+        run: cmake -S . -B build -G Ninja
+      - name: qmllint
+        run: scripts/lint.sh build
+
+  build:
+    needs: [format, lint]
+    uses: ./.github/workflows/build.yml
+
+  wasm:
+    needs: [format, lint]
+    uses: ./.github/workflows/wasm.yml
+
+  snapshots:
+    needs: [format, lint]
+    runs-on: windows-2025
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-qt
+      - name: Build snapshot tool
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --target uiverse-snapshot --parallel
+      - name: Render every style
+        run: scripts/snapshots.sh build snapshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: snapshots
+          if-no-files-found: error
+
+  demo:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: wasm
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: uiverse-wasm
+          path: site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,58 @@
+name: WebAssembly build
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  wasm:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-qt
+
+      - name: Remember host Qt
+        run: echo "QT_HOST_PATH=$QT_ROOT_DIR" >> "$GITHUB_ENV"
+
+      - uses: ./.github/actions/setup-qt
+        with:
+          target: wasm
+
+      - name: Read the emsdk version Qt was built with
+        id: emsdk
+        run: |
+          version=$(grep -rhoE 'QT_EMCC_RECOMMENDED_VERSION "[0-9.]+"' "$QT_ROOT_DIR/lib/cmake/Qt6" | head -1 | grep -oE '[0-9.]+')
+          test -n "$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{ steps.emsdk.outputs.version }}
+
+      - name: Configure
+        run: >
+          "$QT_ROOT_DIR/bin/qt-cmake" -S . -B build -G Ninja
+          -DCMAKE_BUILD_TYPE=MinSizeRel
+          -DQT_HOST_PATH="$QT_HOST_PATH"
+          -DUIVERSE_BUILD_TOOLS=OFF
+
+      - name: Build
+        run: cmake --build build --target appUIverse --parallel
+
+      - name: Collect site
+        run: |
+          mkdir -p site
+          cp build/appUIverse.js build/appUIverse.wasm build/qtloader.js site/
+          cp build/appUIverse.html site/index.html
+          cp build/qtlogo.svg site/ 2>/dev/null || true
+          touch site/.nojekyll
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uiverse-wasm
+          path: site
+          if-no-files-found: error
