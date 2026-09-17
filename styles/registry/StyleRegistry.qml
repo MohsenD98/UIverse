@@ -4,6 +4,7 @@ import UIverse.Core
 import UIverse.Styles.Minimalism as Minimalism
 import UIverse.Styles.NeoBrutalism as NeoBrutalism
 import UIverse.Styles.Glassmorphism as Glassmorphism
+import UIverse.Styles.Bento as Bento
 
 QtObject {
     id: registry
@@ -11,7 +12,8 @@ QtObject {
     readonly property list<StylePack> packs: [
         Minimalism.MinimalismPack {},
         NeoBrutalism.NeoBrutalismPack {},
-        Glassmorphism.GlassmorphismPack {}
+        Glassmorphism.GlassmorphismPack {},
+        Bento.BentoPack {}
     ]
 
     property int currentIndex: 0
