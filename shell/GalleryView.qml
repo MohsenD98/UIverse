@@ -2,17 +2,14 @@ import QtQuick
 import UIverse.Core
 import UIverse.Styles
 
-Item {
+Rectangle {
     id: gallery
 
     signal opened(string key)
 
     readonly property Tokens s: ShellTheme.t
 
-    Rectangle {
-        anchors.fill: parent
-        color: gallery.s.bg
-    }
+    color: s.bg
 
     Column {
         id: header
@@ -20,28 +17,21 @@ Item {
         anchors.margins: gallery.s.pagePadding
         spacing: gallery.s.unit
 
-        Text {
-            text: "UIverse"
-            color: gallery.s.text
-            font.family: gallery.s.displayFamily
-            font.pixelSize: gallery.s.displaySize
-            font.weight: Font.Bold
-            font.letterSpacing: -0.5
-        }
+        ShellText { role: "display"; text: "UIverse" }
 
-        Text {
-            width: Math.min(560, parent.width)
-            text: "One contract, many design languages. Each style is a complete " +
-                  "pack — tokens, components and the rules it plays by."
-            color: gallery.s.textMuted
-            font.family: gallery.s.fontFamily
-            font.pixelSize: gallery.s.fontSizeMd
+        ShellText {
+            width: Math.min(gallery.s.unit * 70, parent.width)
+            muted: true
             wrapMode: Text.WordWrap
+            text: "One contract, many design languages. Each style is a complete " +
+                  "pack: tokens, components and the rules it plays by."
         }
     }
 
     GridView {
         id: grid
+
+        readonly property int columns: Math.max(1, Math.floor(width / (gallery.s.unit * 40)))
 
         anchors {
             left: parent.left
@@ -50,14 +40,11 @@ Item {
             bottom: parent.bottom
             margins: gallery.s.pagePadding
         }
-        anchors.topMargin: gallery.s.pagePadding
-
-        readonly property int columns: Math.max(1, Math.floor(width / 320))
-
         cellWidth: width / columns
-        cellHeight: 244
-        clip: true
+        cellHeight: gallery.s.unit * 28 + gallery.s.gridGap
         model: StyleRegistry.packs
+        clip: true
+        keyNavigationWraps: true
 
         delegate: Item {
             required property var modelData

@@ -8,27 +8,33 @@ Rectangle {
     signal activated()
 
     readonly property Tokens s: ShellTheme.t
+    readonly property Tokens p: pack.tokens
 
-    implicitWidth: 300
-    implicitHeight: 220
+    implicitWidth: s.unit * 38
+    implicitHeight: s.unit * 28
     radius: s.radiusLg
     color: hover.hovered ? s.surfaceAlt : s.surface
-    border.width: 1
-    border.color: hover.hovered ? pack.swatch : s.border
+    border.width: s.borderWidth
+    border.color: hover.hovered || activeFocus ? pack.swatch : s.border
+    activeFocusOnTab: true
 
-    Behavior on color { ColorAnimation { duration: s.durationFast } }
-    Behavior on border.color { ColorAnimation { duration: s.durationFast } }
+    Behavior on color { ColorAnimation { duration: card.s.durationFast } }
+    Behavior on border.color { ColorAnimation { duration: card.s.durationFast } }
 
-    HoverHandler { id: hover }
+    Keys.onReturnPressed: activated()
+    Keys.onSpacePressed: activated()
+
+    HoverHandler { id: hover; cursorShape: Qt.PointingHandCursor }
     TapHandler { onTapped: card.activated() }
 
     Rectangle {
         id: preview
         anchors { left: parent.left; right: parent.right; top: parent.top }
-        height: parent.height * 0.52
+        anchors.margins: card.s.borderWidth
+        height: card.s.unit * 15
         topLeftRadius: card.radius
         topRightRadius: card.radius
-        color: card.pack.tokens.bg
+        color: card.p.bg
         clip: true
 
         Column {
@@ -36,26 +42,28 @@ Rectangle {
             spacing: card.s.unit
 
             Text {
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: "Aa"
-                color: card.pack.tokens.text
-                font.family: card.pack.tokens.displayFamily
-                font.pixelSize: card.pack.tokens.displaySize
-                font.weight: card.pack.tokens.weightDisplay
-                font.letterSpacing: card.pack.tokens.letterSpacingDisplay
+                color: card.p.text
+                font.family: card.p.displayFamily
+                font.pixelSize: card.p.displaySize
+                font.weight: card.p.weightDisplay
+                font.letterSpacing: card.p.letterSpacingDisplay
             }
 
             Row {
-                spacing: 6
                 anchors.horizontalCenter: parent.horizontalCenter
+                spacing: card.s.unit * 0.75
 
                 Repeater {
-                    model: card.pack.tokens.palette
+                    model: card.p.palette
 
                     Rectangle {
                         required property var modelData
-                        width: 22
-                        height: 8
-                        radius: Math.min(4, card.pack.tokens.radiusSm)
+
+                        width: card.s.unit * 3
+                        height: card.s.unit
+                        radius: Math.min(height / 2, card.p.radiusSm)
                         color: modelData
                     }
                 }
@@ -68,20 +76,13 @@ Rectangle {
         anchors.margins: card.s.unit * 2
         spacing: card.s.unit * 0.5
 
-        Text {
-            text: card.pack.name
-            color: card.s.text
-            font.family: card.s.fontFamily
-            font.pixelSize: card.s.fontSizeLg
-            font.weight: Font.DemiBold
-        }
+        ShellText { role: "heading"; text: card.pack.name }
 
-        Text {
+        ShellText {
             width: parent.width
+            role: "small"
+            muted: true
             text: card.pack.tagline
-            color: card.s.textMuted
-            font.family: card.s.fontFamily
-            font.pixelSize: card.s.fontSizeSm
             wrapMode: Text.WordWrap
             maximumLineCount: 2
             elide: Text.ElideRight

@@ -26,6 +26,7 @@ QtObject {
         fontSizeLg: 18
         fontSizeXl: 24
         displaySize: 32
+        letterSpacingDisplay: -0.5
         letterSpacingLabel: 0.6
         uppercaseLabels: true
     }
