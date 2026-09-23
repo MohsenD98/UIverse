@@ -50,8 +50,10 @@ Rectangle {
                 spacing: panel.theme.unit
 
                 ShellText {
+                    width: parent.width
                     role: "label"
                     muted: true
+                    wrapMode: Text.WordWrap
                     text: panel.pack ? panel.pack.era : ""
                 }
                 ShellText {
