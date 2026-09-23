@@ -23,5 +23,29 @@ export const about = {
             label: "Brutalist Websites",
             url: "https://brutalistwebsites.com/"
         }
+    ],
+    worksWith: [
+        {
+            law: "vonRestorff",
+            note: "Loud color makes the important thing obvious."
+        },
+        {
+            law: "commonRegion",
+            note: "Every group sits in its own outlined box."
+        },
+        {
+            law: "fitts",
+            note: "Buttons are big and chunky, so they're easy to hit."
+        }
+    ],
+    worksAgainst: [
+        {
+            law: "jakob",
+            note: "It looks unlike most apps on purpose, so people need a moment to adjust."
+        },
+        {
+            law: "aestheticUsability",
+            note: "People who dislike the look tend to find it harder to use."
+        }
     ]
 };

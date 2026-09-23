@@ -77,6 +77,10 @@ Item {
             verify(Style.pack.summary.length > 0, "summary")
             verify(Style.pack.dos.length > 0, "dos")
             verify(Style.pack.donts.length > 0, "donts")
+            verify(Style.pack.worksWith.length > 0, "worksWith")
+            verify(Style.pack.worksAgainst.length > 0, "worksAgainst")
+            for (const relation of Style.pack.worksWith.concat(Style.pack.worksAgainst))
+                verify(UxLaws.find(relation.law) !== null, `unknown law "${relation.law}"`)
         }
     }
 }

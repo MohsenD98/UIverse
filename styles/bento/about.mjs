@@ -24,5 +24,29 @@ export const about = {
             label: "Metro design language",
             url: "https://en.wikipedia.org/wiki/Metro_(design_language)"
         }
+    ],
+    worksWith: [
+        {
+            law: "commonRegion",
+            note: "Each tile is one group, no question about it."
+        },
+        {
+            law: "miller",
+            note: "A screen of a few tiles is easy to take in."
+        },
+        {
+            law: "vonRestorff",
+            note: "The big tile is the one people notice first."
+        }
+    ],
+    worksAgainst: [
+        {
+            law: "serialPosition",
+            note: "Tiles have no fixed order, so nothing is reliably first or last."
+        },
+        {
+            law: "hick",
+            note: "Many tiles of similar weight give the eye more to choose from."
+        }
     ]
 };

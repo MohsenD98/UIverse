@@ -14,6 +14,8 @@ QtObject {
     readonly property var dos: about.dos ?? []
     readonly property var donts: about.donts ?? []
     readonly property var reading: about.reading ?? []
+    readonly property var worksWith: about.worksWith ?? []
+    readonly property var worksAgainst: about.worksAgainst ?? []
 
     property Tokens tokens: Tokens {}
     readonly property ContrastAudit contrast: ContrastAudit {

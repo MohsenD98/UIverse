@@ -24,5 +24,29 @@ export const about = {
             label: "Josef Müller-Brockmann: Grid Systems in Graphic Design",
             url: "https://en.wikipedia.org/wiki/Grid_Systems_in_Graphic_Design"
         }
+    ],
+    worksWith: [
+        {
+            law: "proximity",
+            note: "Space does the grouping, so spacing carries the whole layout."
+        },
+        {
+            law: "pragnanz",
+            note: "Plain shapes and few of them are read at a glance."
+        },
+        {
+            law: "occam",
+            note: "Nothing stays on screen unless it has a job."
+        }
+    ],
+    worksAgainst: [
+        {
+            law: "vonRestorff",
+            note: "With one accent and no decoration, little can stand out."
+        },
+        {
+            law: "commonRegion",
+            note: "Without boxes, groups depend on spacing alone. One uneven gap breaks them."
+        }
     ]
 };

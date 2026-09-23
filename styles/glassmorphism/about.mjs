@@ -24,5 +24,25 @@ export const about = {
             label: "Microsoft Fluent: Acrylic material",
             url: "https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic"
         }
+    ],
+    worksWith: [
+        {
+            law: "aestheticUsability",
+            note: "It looks polished, and people forgive polished things."
+        },
+        {
+            law: "commonRegion",
+            note: "Each frosted panel is a clear region."
+        }
+    ],
+    worksAgainst: [
+        {
+            law: "pragnanz",
+            note: "Blurred edges and moving color make shapes harder to read."
+        },
+        {
+            law: "doherty",
+            note: "Blurring every panel on every frame can make weak hardware lag."
+        }
     ]
 };
