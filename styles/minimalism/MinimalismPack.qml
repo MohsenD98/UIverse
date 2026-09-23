@@ -45,12 +45,10 @@ StylePack {
         letterSpacingLabel: 0.2
         lineHeight: 1.55
 
-        surfaceMode: "flat"
         shadowOpacity: 0
         durationFast: 110
         durationBase: 200
         layoutMode: "stack"
-        decorative: false
     }
 
     pageBackground: null

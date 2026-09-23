@@ -45,7 +45,6 @@ StylePack {
         letterSpacingLabel: 0
         lineHeight: 1.35
 
-        surfaceMode: "soft"
         shadowColor: "#000000"
         shadowOpacity: 0.07
         shadowBlur: 28
@@ -54,7 +53,6 @@ StylePack {
         durationBase: 300
         easingType: Easing.OutQuint
         layoutMode: "bento"
-        decorative: false
     }
 
     pageBackground: null

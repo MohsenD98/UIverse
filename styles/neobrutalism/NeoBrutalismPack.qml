@@ -49,7 +49,6 @@ StylePack {
         lineHeight: 1.35
         uppercaseLabels: true
 
-        surfaceMode: "hard"
         shadowColor: "#0a0a0a"
         shadowOpacity: 1
         shadowOffsetX: 5
@@ -58,7 +57,6 @@ StylePack {
         durationBase: 160
         easingType: Easing.OutQuad
         layoutMode: "dense"
-        decorative: true
     }
 
     pageBackground: Component {

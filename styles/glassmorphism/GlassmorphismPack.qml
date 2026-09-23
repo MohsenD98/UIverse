@@ -45,7 +45,6 @@ StylePack {
         letterSpacingLabel: 0.3
         lineHeight: 1.45
 
-        surfaceMode: "glass"
         blurAmount: 48
         shadowColor: "#05061a"
         shadowOpacity: 0.45
@@ -55,7 +54,6 @@ StylePack {
         durationBase: 280
         easingType: Easing.OutCubic
         layoutMode: "stack"
-        decorative: true
     }
 
     pageBackground: Component {

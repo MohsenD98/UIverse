@@ -19,7 +19,6 @@ QtObject {
     property real radiusSm: 4
     property real radiusMd: 8
     property real radiusLg: 14
-    property real radiusPill: 999
     property real borderWidth: 1
     property real unit: 8
     property real controlHeight: 38
@@ -44,8 +43,6 @@ QtObject {
     property real lineHeight: 1.45
     property bool uppercaseLabels: false
 
-    property string surfaceMode: "flat"
-    property real surfaceOpacity: 1.0
     property real blurAmount: 0
     property color shadowColor: "#000000"
     property real shadowOpacity: 0
@@ -58,5 +55,4 @@ QtObject {
     property int easingType: Easing.OutCubic
 
     property string layoutMode: "stack"
-    property bool decorative: false
 }
