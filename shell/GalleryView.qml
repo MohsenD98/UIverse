@@ -39,6 +39,7 @@ Rectangle {
         id: grid
 
         readonly property int columns: Math.max(1, Math.floor(width / (gallery.theme.unit * 40)))
+        readonly property real cardHeight: gallery.theme.unit * 28
 
         anchors {
             left: parent.left
@@ -48,7 +49,7 @@ Rectangle {
             margins: gallery.theme.pagePadding
         }
         cellWidth: width / columns
-        cellHeight: gallery.theme.unit * 28 + gallery.theme.gridGap
+        cellHeight: cardHeight + gallery.theme.gridGap
         model: StyleRegistry.packs
         clip: true
         keyNavigationWraps: true

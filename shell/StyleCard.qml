@@ -9,10 +9,8 @@ Rectangle {
     signal activated
 
     readonly property Tokens theme: ShellTheme.tokens
-    readonly property Tokens p: pack.tokens
+    readonly property Tokens packTokens: pack.tokens
 
-    implicitWidth: theme.unit * 38
-    implicitHeight: theme.unit * 28
     radius: theme.radiusLg
     color: hover.hovered ? theme.surfaceAlt : theme.surface
     border.width: theme.borderWidth
@@ -52,7 +50,7 @@ Rectangle {
         height: card.theme.unit * 15
         topLeftRadius: card.radius
         topRightRadius: card.radius
-        color: card.p.background
+        color: card.packTokens.background
         clip: true
 
         Column {
@@ -62,11 +60,11 @@ Rectangle {
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Aa"
-                color: card.p.text
-                font.family: card.p.displayFamily
-                font.pixelSize: card.p.displaySize
-                font.weight: card.p.weightDisplay
-                font.letterSpacing: card.p.letterSpacingDisplay
+                color: card.packTokens.text
+                font.family: card.packTokens.displayFamily
+                font.pixelSize: card.packTokens.displaySize
+                font.weight: card.packTokens.weightDisplay
+                font.letterSpacing: card.packTokens.letterSpacingDisplay
             }
 
             Row {
@@ -74,7 +72,7 @@ Rectangle {
                 spacing: card.theme.unit * 0.75
 
                 Repeater {
-                    model: card.p.palette
+                    model: card.packTokens.palette
 
                     Rectangle {
                         id: swatch
@@ -83,7 +81,7 @@ Rectangle {
 
                         width: card.theme.unit * 3
                         height: card.theme.unit
-                        radius: Math.min(height / 2, card.p.radiusSm)
+                        radius: Math.min(height / 2, card.packTokens.radiusSm)
                         color: swatch.modelData
                     }
                 }

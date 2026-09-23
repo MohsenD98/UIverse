@@ -3,37 +3,38 @@ import QtQuick.Templates as T
 import UIverse.Core
 
 T.Button {
-    id: control
+    id: button
 
-    property bool accent: false
     readonly property Tokens theme: ShellTheme.tokens
-    readonly property bool lit: accent || checked
 
-    implicitHeight: theme.controlHeight
     implicitWidth: Math.max(implicitHeight, contentItem.implicitWidth + leftPadding + rightPadding)
-    leftPadding: theme.unit * 1.5
-    rightPadding: theme.unit * 1.5
+    implicitHeight: theme.controlHeight
+    horizontalPadding: theme.unit * 1.5
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
 
     background: Rectangle {
-        radius: control.theme.radiusMd
-        color: control.lit ? control.theme.accent : control.hovered ? control.theme.surfaceAlt : control.theme.surface
-        border.width: control.theme.borderWidth
-        border.color: control.visualFocus ? control.theme.accent : control.lit ? control.theme.accent : control.theme.border
+        radius: button.theme.radiusMd
+        color: {
+            if (button.checked)
+                return button.theme.accent
+            return button.hovered ? button.theme.surfaceAlt : button.theme.surface
+        }
+        border.width: button.theme.borderWidth
+        border.color: button.checked || button.visualFocus ? button.theme.accent : button.theme.border
 
         Behavior on color {
             ColorAnimation {
-                duration: control.theme.durationFast
+                duration: button.theme.durationFast
             }
         }
     }
 
     contentItem: ShellText {
         role: "small"
-        text: control.text
-        color: control.lit ? control.theme.textOnAccent : control.theme.text
-        font.weight: control.theme.weightMedium
+        text: button.text
+        color: button.checked ? button.theme.textOnAccent : button.theme.text
+        font.weight: button.theme.weightMedium
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
