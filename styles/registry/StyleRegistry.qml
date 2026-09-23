@@ -21,17 +21,17 @@ QtObject {
     readonly property StylePack current: packs[currentIndex]
 
     function indexOfKey(key: string): int {
-        for (let i = 0; i < packs.length; ++i) {
-            if (packs[i].key === key)
-                return i
+        for (let index = 0; index < packs.length; ++index) {
+            if (packs[index].key === key)
+                return index
         }
         return -1
     }
 
     function select(key: string): void {
-        const i = indexOfKey(key)
-        if (i >= 0)
-            currentIndex = i
+        const index = indexOfKey(key)
+        if (index >= 0)
+            currentIndex = index
     }
 
     function step(delta: int): void {

@@ -5,7 +5,7 @@ import UIverse.Styles
 Window {
     id: window
 
-    required property string styleKey
+    required property string packKey
     required property string route
 
     x: -width - Screen.desktopAvailableWidth
@@ -19,5 +19,5 @@ Window {
         route: window.route
     }
 
-    Component.onCompleted: StyleRegistry.select(styleKey)
+    Component.onCompleted: StyleRegistry.select(packKey)
 }

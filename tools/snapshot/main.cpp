@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.setInitialProperties({
-        {"styleKey", parser.value("pack")},
+        {"packKey", parser.value("pack")},
         {"route", parser.value("route")},
         {"width", size.at(0).toInt()},
         {"height", size.at(1).toInt()},
