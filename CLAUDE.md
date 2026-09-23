@@ -221,6 +221,12 @@ Ninja; the app runs with no QML warnings; `qmllint` and `qmlformat` are clean.
 - Packs: Minimalism, Neo-Brutalism, Glassmorphism (real backdrop blur),
   Bento UI.
 - `uiverse-snapshot` renders any pack to PNG without showing a window.
+- Fonts are bundled in `UIverse.Fonts` (OFL: Inter, Archivo Black, Space
+  Grotesk, JetBrains Mono), so every platform and the web render identically.
+  Packs name fonts only through `Fonts.*`, never by family string. Licence
+  texts in `fonts/` are kept verbatim and excluded from whitespace hooks.
+- README screenshots in `docs/images/` come from `scripts/docs-images.sh`;
+  re-run it whenever a pack changes visibly.
 
 The shell keeps its own `ShellTheme` tokens, so the lab chrome does not change
 while browsing styles.
@@ -274,17 +280,16 @@ Qt-from-source WASM build, no dead commented-out steps.
 
 ## 9. Next steps, in order
 
-1. Bundle fonts as resources. WASM and Linux have no Segoe UI or Arial Black,
-   so Neo-Brutalism loses its display face there.
-2. README with the CI snapshots and the live demo link.
-3. UX laws layers 1–3 (section 4).
-4. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
+1. Choose and add a LICENSE (the repository has none, so no one may legally
+   reuse the code yet).
+2. UX laws layers 1–3 (section 4).
+3. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
    zip. v0.0.1 runs only where the Visual C++ Redistributable is installed.
-5. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
+4. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
    VirtualKeyboard pulled in transitively; about 120 MB).
-6. Per-style mini-apps (section 1), starting with the glassmorphism music player.
-7. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
-8. Backlog styles.
+5. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+6. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
+7. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken
