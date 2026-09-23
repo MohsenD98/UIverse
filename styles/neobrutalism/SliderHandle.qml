@@ -3,8 +3,8 @@ import QtQuick
 HardBox {
     implicitWidth: 26
     implicitHeight: 26
-    corner: tokens.radiusSm
-    lift: 3
-    sunk: isPressed
+    cornerRadius: tokens.radiusSm
+    shadowOffset: 3
+    sunken: isPressed
     faceColor: isPressed ? tokens.palette[1] : tokens.surface
 }

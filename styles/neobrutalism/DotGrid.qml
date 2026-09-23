@@ -5,20 +5,22 @@ Canvas {
     id: grid
 
     readonly property Tokens tokens: Style.tokens
-    readonly property real step: tokens.unit * 3
+    readonly property real spacing: tokens.unit * 3
+    readonly property real dotSize: 2
+    readonly property real dotOpacity: 0.18
 
     onWidthChanged: requestPaint()
     onHeightChanged: requestPaint()
-    onStepChanged: requestPaint()
+    onSpacingChanged: requestPaint()
 
     onPaint: {
-        const ctx = getContext("2d")
-        ctx.reset()
-        ctx.globalAlpha = 0.18
-        ctx.fillStyle = tokens.text
-        for (let x = step / 2; x < width; x += step) {
-            for (let y = step / 2; y < height; y += step)
-                ctx.fillRect(x, y, 2, 2)
+        const context = getContext("2d")
+        context.reset()
+        context.globalAlpha = dotOpacity
+        context.fillStyle = tokens.text
+        for (let x = spacing / 2; x < width; x += spacing) {
+            for (let y = spacing / 2; y < height; y += spacing)
+                context.fillRect(x, y, dotSize, dotSize)
         }
     }
 }

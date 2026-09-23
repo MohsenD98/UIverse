@@ -6,7 +6,11 @@ SlotRect {
 
     implicitHeight: tokens.controlHeight
     radius: tokens.radiusMd
-    color: Qt.alpha(tokens.text, hasActiveFocus ? 0.12 : isHovered ? 0.09 : 0.06)
+    color: {
+        if (hasActiveFocus)
+            return Qt.alpha(tokens.text, 0.12)
+        return Qt.alpha(tokens.text, isHovered ? 0.09 : 0.06)
+    }
     border.width: tokens.borderWidth
     border.color: hasActiveFocus ? tokens.accent : tokens.border
 

@@ -9,7 +9,15 @@ SlotRect {
     readonly property bool isHero: variant === "accent"
 
     radius: isTile ? tokens.radiusLg : tokens.radiusSm
-    color: isHero ? tokens.accent : variant === "quiet" ? tokens.surfaceAlt : isTile ? tokens.palette[hints.tile % tokens.palette.length] : tokens.surface
+    color: {
+        if (isHero)
+            return tokens.accent
+        if (variant === "quiet")
+            return tokens.surfaceAlt
+        if (isTile)
+            return tokens.palette[hints.tile % tokens.palette.length]
+        return tokens.surface
+    }
 
     Behavior on color {
         ColorAnimation {

@@ -6,19 +6,30 @@ HardBox {
     readonly property bool ghost: variant === "ghost"
 
     implicitHeight: tokens.controlHeight
-    corner: tokens.radiusSm
+    cornerRadius: tokens.radiusSm
     flat: ghost
-    sunk: isDown && !ghost
-    lift: ghost ? 0 : tokens.shadowOffsetX
+    sunken: isDown && !ghost
+    shadowOffset: ghost ? 0 : tokens.shadowOffsetX
     opacity: isEnabled ? 1 : 0.45
-    faceColor: variant === "primary" ? (isHovered ? Qt.darker(tokens.accent, 1.08) : tokens.accent) : variant === "danger" ? tokens.danger : ghost ? (isHovered ? tokens.surfaceAlt : "transparent") : (isHovered ? tokens.surfaceAlt : tokens.surface)
+    faceColor: {
+        switch (variant) {
+        case "primary":
+            return isHovered ? Qt.darker(tokens.accent, 1.08) : tokens.accent
+        case "danger":
+            return tokens.danger
+        case "ghost":
+            return isHovered ? tokens.surfaceAlt : "transparent"
+        default:
+            return isHovered ? tokens.surfaceAlt : tokens.surface
+        }
+    }
 
     Rectangle {
         x: -6
         y: -6
-        width: button.width + button.lift + 12
-        height: button.height + button.lift + 12
-        radius: button.corner + 4
+        width: button.width + button.shadowOffset + 12
+        height: button.height + button.shadowOffset + 12
+        radius: button.cornerRadius + 4
         color: "transparent"
         border.width: 2
         border.color: button.tokens.text

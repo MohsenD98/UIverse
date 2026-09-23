@@ -4,14 +4,14 @@ HardBox {
     id: track
 
     implicitHeight: 14
-    corner: tokens.radiusSm
-    lift: 3
+    cornerRadius: tokens.radiusSm
+    shadowOffset: 3
 
     Rectangle {
-        x: track.edge
-        y: track.edge
-        width: Math.max(0, (track.width - track.edge * 2) * track.position)
-        height: track.height - track.edge * 2
+        x: track.edgeWidth
+        y: track.edgeWidth
+        width: Math.max(0, (track.width - track.edgeWidth * 2) * track.position)
+        height: track.height - track.edgeWidth * 2
         color: track.tokens.palette[1]
 
         Behavior on width {

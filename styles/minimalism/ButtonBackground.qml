@@ -9,7 +9,13 @@ SlotRect {
 
     implicitHeight: tokens.controlHeight
     radius: tokens.radiusMd
-    color: solid ? (isDown ? Qt.lighter(base, 1.35) : isHovered ? Qt.lighter(base, 1.18) : base) : (isDown ? tokens.backgroundAlt : "transparent")
+    color: {
+        if (!solid)
+            return isDown ? tokens.backgroundAlt : "transparent"
+        if (isDown)
+            return Qt.lighter(base, 1.35)
+        return isHovered ? Qt.lighter(base, 1.18) : base
+    }
     border.width: variant === "secondary" ? tokens.borderWidth : 0
     border.color: isHovered ? tokens.textMuted : tokens.border
     opacity: isEnabled ? 1 : 0.4

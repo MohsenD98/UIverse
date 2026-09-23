@@ -6,34 +6,30 @@ SlotRect {
 
     property color faceColor: tokens.surface
     property color edgeColor: tokens.border
-    property real lift: tokens.shadowOffsetX
-    property real edge: tokens.borderWidth
-    property real corner: tokens.radiusMd
-    property bool sunk: false
+    property real edgeWidth: tokens.borderWidth
+    property real cornerRadius: tokens.radiusMd
+    property real shadowOffset: tokens.shadowOffsetX
+    property bool sunken: false
     property bool flat: false
 
-    readonly property alias face: faceRect
-
     Rectangle {
-        visible: !box.flat && box.lift > 0
-        x: box.lift
-        y: box.lift
+        visible: !box.flat && box.shadowOffset > 0
+        x: box.shadowOffset
+        y: box.shadowOffset
         width: box.width
         height: box.height
-        radius: box.corner
+        radius: box.cornerRadius
         color: box.tokens.shadowColor
     }
 
     Rectangle {
-        id: faceRect
-
-        x: box.sunk ? box.lift : 0
-        y: box.sunk ? box.lift : 0
+        x: box.sunken ? box.shadowOffset : 0
+        y: box.sunken ? box.shadowOffset : 0
         width: box.width
         height: box.height
-        radius: box.corner
+        radius: box.cornerRadius
         color: box.faceColor
-        border.width: box.flat ? 0 : box.edge
+        border.width: box.flat ? 0 : box.edgeWidth
         border.color: box.edgeColor
 
         Behavior on x {

@@ -11,7 +11,13 @@ SlotRect {
     radius: height / 2
     opacity: isEnabled ? 1 : 0.4
     scale: isDown ? 0.96 : 1
-    color: solid ? (isHovered ? Qt.darker(base, 1.08) : base) : variant === "ghost" ? (isHovered ? Qt.alpha(tokens.text, 0.06) : "transparent") : (isHovered ? Qt.darker(tokens.surfaceAlt, 1.04) : tokens.surfaceAlt)
+    color: {
+        if (solid)
+            return isHovered ? Qt.darker(base, 1.08) : base
+        if (variant === "ghost")
+            return isHovered ? Qt.alpha(tokens.text, 0.06) : "transparent"
+        return isHovered ? Qt.darker(tokens.surfaceAlt, 1.04) : tokens.surfaceAlt
+    }
 
     Behavior on scale {
         NumberAnimation {
