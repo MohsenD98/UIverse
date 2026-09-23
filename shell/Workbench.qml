@@ -5,7 +5,7 @@ import UIverse.Styles
 import UIverse.Apps
 
 Rectangle {
-    id: bench
+    id: workbench
 
     signal back
 
@@ -16,7 +16,12 @@ Rectangle {
 
     Keys.onLeftPressed: StyleRegistry.step(-1)
     Keys.onRightPressed: StyleRegistry.step(1)
-    Keys.onEscapePressed: rules.open ? rules.open = false : bench.back()
+    Keys.onEscapePressed: {
+        if (rules.open)
+            rules.open = false
+        else
+            workbench.back()
+    }
     Keys.onPressed: event => {
         if (event.key === Qt.Key_R) {
             rules.open = !rules.open
@@ -25,25 +30,25 @@ Rectangle {
     }
 
     Rectangle {
-        id: bar
+        id: toolbar
 
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
         }
-        height: bench.theme.controlHeight + bench.theme.unit * 3
-        color: bench.theme.backgroundAlt
+        height: workbench.theme.controlHeight + workbench.theme.unit * 3
+        color: workbench.theme.backgroundAlt
 
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: bench.theme.unit * 2
-            anchors.rightMargin: bench.theme.unit * 2
-            spacing: bench.theme.unit * 2
+            anchors.leftMargin: workbench.theme.unit * 2
+            anchors.rightMargin: workbench.theme.unit * 2
+            spacing: workbench.theme.unit * 2
 
             ShellButton {
                 text: "← Gallery"
-                onClicked: bench.back()
+                onClicked: workbench.back()
             }
 
             ShellText {
@@ -69,8 +74,8 @@ Rectangle {
                 right: parent.right
                 bottom: parent.bottom
             }
-            height: bench.theme.borderWidth
-            color: bench.theme.border
+            height: workbench.theme.borderWidth
+            color: workbench.theme.border
         }
     }
 
@@ -80,7 +85,7 @@ Rectangle {
         anchors {
             left: parent.left
             right: parent.right
-            top: bar.bottom
+            top: toolbar.bottom
             bottom: parent.bottom
         }
         clip: true

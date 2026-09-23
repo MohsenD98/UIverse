@@ -4,7 +4,7 @@ import UIverse.Core
 import UIverse.Styles
 
 Rectangle {
-    id: root
+    id: lab
 
     property string route: "gallery"
 
@@ -13,25 +13,25 @@ Rectangle {
     color: theme.background
 
     Loader {
-        id: view
+        id: screen
 
         anchors.fill: parent
         focus: true
-        sourceComponent: root.route === "gallery" ? galleryView : workbenchView
+        sourceComponent: lab.route === "gallery" ? galleryView : workbenchView
         onLoaded: {
-            (view.item as Item)?.forceActiveFocus()
+            (screen.item as Item)?.forceActiveFocus()
             fade.restart()
         }
     }
 
     NumberAnimation {
         id: fade
-        target: view
+        target: screen
         property: "opacity"
         from: 0
         to: 1
-        duration: root.theme.durationBase
-        easing.type: root.theme.easingType
+        duration: lab.theme.durationBase
+        easing.type: lab.theme.easingType
     }
 
     Component {
@@ -40,7 +40,7 @@ Rectangle {
         GalleryView {
             onOpened: key => {
                 StyleRegistry.select(key)
-                root.route = "workbench"
+                lab.route = "workbench"
             }
         }
     }
@@ -49,7 +49,7 @@ Rectangle {
         id: workbenchView
 
         Workbench {
-            onBack: root.route = "gallery"
+            onBack: lab.route = "gallery"
         }
     }
 }

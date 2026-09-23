@@ -33,7 +33,7 @@ Rectangle {
     }
 
     Flickable {
-        id: flick
+        id: scroller
         anchors.fill: parent
         anchors.margins: panel.theme.unit * 3
         contentHeight: content.implicitHeight
@@ -42,7 +42,7 @@ Rectangle {
 
         Column {
             id: content
-            width: flick.width
+            width: scroller.width
             spacing: panel.theme.unit * 3
 
             Column {
