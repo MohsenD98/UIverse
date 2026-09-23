@@ -22,6 +22,7 @@ QtObject {
     property real borderWidth: 1
     property real unit: 8
     property real controlHeight: 38
+    property real controlWidth: unit * 28
     property real pagePadding: 32
     property real gridGap: 16
 
@@ -55,4 +56,19 @@ QtObject {
     property int easingType: Easing.OutCubic
 
     property string layoutMode: "stack"
+
+    function statusColor(status: string, fallback: color): color {
+        switch (status) {
+        case "accent":
+            return accent
+        case "success":
+            return success
+        case "warning":
+            return warning
+        case "danger":
+            return danger
+        default:
+            return fallback
+        }
+    }
 }
