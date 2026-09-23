@@ -7,18 +7,18 @@ UvPage {
     id: page
 
     Flickable {
-        id: flick
+        id: scroller
 
         anchors.fill: parent
         contentWidth: width
-        contentHeight: column.implicitHeight
+        contentHeight: content.implicitHeight
         boundsBehavior: Flickable.StopAtBounds
         clip: true
 
         ColumnLayout {
-            id: column
+            id: content
 
-            width: flick.width
+            width: scroller.width
             spacing: page.tokens.gridGap * 1.5
 
             DashboardHeader {
@@ -35,7 +35,7 @@ UvPage {
                     id: layout
 
                     mode: page.tokens.layoutMode
-                    availableWidth: column.width
+                    availableWidth: content.width
                     gap: page.tokens.gridGap
                     rowHeight: page.tokens.unit * 23
                     narrowBelow: page.tokens.unit * 90
