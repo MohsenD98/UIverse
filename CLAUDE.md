@@ -117,10 +117,12 @@ The twenty classic UX laws sit **beneath** style and are invariant across it. A
 style may change everything about how something looks; it may not break how it
 works. Three layers:
 
-**Layer 1 — enforced by the Kit.** Packs cannot opt out.
-- *Fitts's law* → `minTargetSize` token; the Kit floors every interactive hit
-  area at it, however small a pack draws the control.
-- *Doherty threshold* → animation durations clamped below 400 ms.
+**Layer 1 — enforced, packs cannot opt out.** Done.
+- *Fitts's law* → `Style.minimumTargetSize` (44 px). Every interactive Kit
+  control is at least that tall; its background is drawn at the pack's own
+  size inside it through insets. Covered by `tests/tst_targets.qml`.
+- *Doherty threshold* → the architecture hook rejects any `durationFast` or
+  `durationBase` above 400 ms.
 - *Law of proximity* → all spacing derives from `unit`.
 
 **Layer 2 — data.** A laws module carries the twenty laws; each pack declares
@@ -250,6 +252,13 @@ Dashboard areas pass a neutral `hints.tile` index. Packs may colour tiles by it
   size and scaled up.
 - Snapshots on Windows need no extra setup; under `offscreen` elsewhere, set
   `QT_QPA_FONTDIR`.
+- `containmentMask` can only shrink an item's hit area. Qt delivers pointer
+  events by bounding rect first, so a mask reaching outside the item is never
+  asked. Enlarge a touch target by making the control bigger and drawing its
+  background smaller with insets.
+- `TextField` is a `TextInput`, not a `Control`: it has `leftPadding` and
+  `rightPadding` but no `horizontalPadding`. Such mistakes only surface when the
+  object is created, which is what `tests/tst_packs.qml` does for every pack.
 
 ## 8. CI/CD
 
@@ -321,6 +330,24 @@ Learned while reviewing the code file by file. Follow them in new code.
 - Prose is data. Style descriptions live in `styles/<name>/about.mjs`, because
   `qmlformat` squeezes string arrays in QML onto one unreadable line and
   `XMLHttpRequest` can't read local files by default.
+
+- A default belongs in the contract, not in every consumer. When several
+  implementations write the same thing, the base type should provide it and
+  only the exceptions override it.
+- One mapping, one place. A lookup written in several files (status → colour)
+  becomes a function on the type that owns the data.
+- A property nobody sets, or a setting nobody reads, is deleted.
+
+### Testing
+- Anything that can only fail at runtime needs a test that creates it. Build,
+  lint and review all missed a property that did not exist.
+- Test behaviour through real input, not through the code path you expect.
+  A mouse click proved the first touch-target design did nothing, while a
+  direct call to `contains()` said it worked.
+- Data-driven test rows get readable tags (`button`, `minimalism`), not object
+  addresses.
+- Every pack is instantiated by the tests, so a new pack is covered the day it
+  is registered.
 
 ### Refactoring safely
 - A refactor must not change a pixel. Before and after:
