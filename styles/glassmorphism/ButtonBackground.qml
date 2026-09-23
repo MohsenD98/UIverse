@@ -5,21 +5,21 @@ SlotRect {
     id: button
 
     readonly property bool solid: variant === "primary" || variant === "danger"
-    readonly property color base: variant === "danger" ? t.danger : t.accent
+    readonly property color base: variant === "danger" ? tokens.danger : tokens.accent
 
-    implicitHeight: t.controlHeight
+    implicitHeight: tokens.controlHeight
     radius: height / 2
     opacity: isEnabled ? 1 : 0.4
-    color: solid ? base : variant === "ghost" ? Qt.alpha(t.text, isHovered ? 0.08 : 0) : Qt.alpha(t.text, isDown ? 0.2 : isHovered ? 0.16 : 0.1)
-    border.width: variant === "secondary" ? t.borderWidth : 0
-    border.color: t.border
+    color: solid ? base : variant === "ghost" ? Qt.alpha(tokens.text, isHovered ? 0.08 : 0) : Qt.alpha(tokens.text, isDown ? 0.2 : isHovered ? 0.16 : 0.1)
+    border.width: variant === "secondary" ? tokens.borderWidth : 0
+    border.color: tokens.border
     gradient: solid ? sheen : null
     scale: isDown ? 0.97 : 1
 
     Behavior on scale {
         NumberAnimation {
-            duration: button.t.durationFast
-            easing.type: button.t.easingType
+            duration: button.tokens.durationFast
+            easing.type: button.tokens.easingType
         }
     }
 
@@ -42,7 +42,7 @@ SlotRect {
         radius: height / 2
         color: "transparent"
         border.width: 2
-        border.color: Qt.alpha(button.t.accent, 0.6)
+        border.color: Qt.alpha(button.tokens.accent, 0.6)
         visible: button.isFocused
     }
 }

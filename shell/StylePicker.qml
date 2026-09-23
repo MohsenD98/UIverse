@@ -5,9 +5,9 @@ import UIverse.Styles
 Row {
     id: picker
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
 
-    spacing: s.unit * 0.75
+    spacing: theme.unit * 0.75
 
     ShellButton {
         text: "‹"

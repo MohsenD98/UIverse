@@ -8,7 +8,7 @@ Window {
     minimumHeight: 560
     visible: true
     title: "UIverse"
-    color: ShellTheme.t.bg
+    color: ShellTheme.tokens.background
 
     LabRoot {
         anchors.fill: parent

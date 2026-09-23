@@ -13,7 +13,7 @@ SlotRect {
         radius: dot.radius
         blur: 8
         offset.y: 2
-        color: Qt.alpha(handle.t.shadowColor, 0.22)
+        color: Qt.alpha(handle.tokens.shadowColor, 0.22)
     }
 
     Rectangle {
@@ -21,13 +21,13 @@ SlotRect {
 
         anchors.fill: parent
         radius: width / 2
-        color: handle.t.surface
+        color: handle.tokens.surface
         scale: handle.isPressed ? 1.1 : 1
 
         Behavior on scale {
             NumberAnimation {
-                duration: handle.t.durationFast
-                easing.type: handle.t.easingType
+                duration: handle.tokens.durationFast
+                easing.type: handle.tokens.easingType
             }
         }
     }

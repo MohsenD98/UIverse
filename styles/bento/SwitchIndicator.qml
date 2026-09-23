@@ -8,11 +8,11 @@ SlotRect {
     implicitWidth: 50
     implicitHeight: 30
     radius: height / 2
-    color: isChecked ? t.success : Qt.alpha(t.text, 0.12)
+    color: isChecked ? tokens.success : Qt.alpha(tokens.text, 0.12)
 
     Behavior on color {
         ColorAnimation {
-            duration: track.t.durationBase
+            duration: track.tokens.durationBase
         }
     }
 
@@ -21,7 +21,7 @@ SlotRect {
         radius: knob.radius
         blur: 6
         offset.y: 2
-        color: Qt.alpha(track.t.shadowColor, 0.2)
+        color: Qt.alpha(track.tokens.shadowColor, 0.2)
     }
 
     Rectangle {
@@ -32,12 +32,12 @@ SlotRect {
         radius: width / 2
         y: 2
         x: track.isChecked ? track.width - width - 2 : 2
-        color: track.t.surface
+        color: track.tokens.surface
 
         Behavior on x {
             NumberAnimation {
-                duration: track.t.durationBase
-                easing.type: track.t.easingType
+                duration: track.tokens.durationBase
+                easing.type: track.tokens.easingType
             }
         }
     }

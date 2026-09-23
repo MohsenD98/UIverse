@@ -4,11 +4,11 @@ import UIverse.Core
 SlotRect {
     id: box
 
-    property color faceColor: t.surface
-    property color edgeColor: t.border
-    property real lift: t.shadowOffsetX
-    property real edge: t.borderWidth
-    property real corner: t.radiusMd
+    property color faceColor: tokens.surface
+    property color edgeColor: tokens.border
+    property real lift: tokens.shadowOffsetX
+    property real edge: tokens.borderWidth
+    property real corner: tokens.radiusMd
     property bool sunk: false
     property bool flat: false
 
@@ -21,7 +21,7 @@ SlotRect {
         width: box.width
         height: box.height
         radius: box.corner
-        color: box.t.shadowColor
+        color: box.tokens.shadowColor
     }
 
     Rectangle {
@@ -38,19 +38,19 @@ SlotRect {
 
         Behavior on x {
             NumberAnimation {
-                duration: box.t.durationFast
-                easing.type: box.t.easingType
+                duration: box.tokens.durationFast
+                easing.type: box.tokens.easingType
             }
         }
         Behavior on y {
             NumberAnimation {
-                duration: box.t.durationFast
-                easing.type: box.t.easingType
+                duration: box.tokens.durationFast
+                easing.type: box.tokens.easingType
             }
         }
         Behavior on color {
             ColorAnimation {
-                duration: box.t.durationFast
+                duration: box.tokens.durationFast
             }
         }
     }

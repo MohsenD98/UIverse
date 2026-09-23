@@ -7,11 +7,11 @@ SlotRect {
     implicitWidth: 40
     implicitHeight: 22
     radius: height / 2
-    color: isChecked ? t.accent : t.border
+    color: isChecked ? tokens.accent : tokens.border
 
     Behavior on color {
         ColorAnimation {
-            duration: track.t.durationBase
+            duration: track.tokens.durationBase
         }
     }
 
@@ -21,12 +21,12 @@ SlotRect {
         radius: width / 2
         y: 2
         x: track.isChecked ? parent.width - width - 2 : 2
-        color: track.t.surface
+        color: track.tokens.surface
 
         Behavior on x {
             NumberAnimation {
-                duration: track.t.durationBase
-                easing.type: track.t.easingType
+                duration: track.tokens.durationBase
+                easing.type: track.tokens.easingType
             }
         }
     }

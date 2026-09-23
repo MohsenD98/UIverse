@@ -4,13 +4,13 @@ import UIverse.Core
 SlotText {
     id: label
 
-    readonly property real press: isDown && variant !== "ghost" ? t.shadowOffsetX : 0
+    readonly property real press: isDown && variant !== "ghost" ? tokens.shadowOffsetX : 0
 
-    color: t.text
-    font.family: t.displayFamily
-    font.pixelSize: t.fontSizeSm
+    color: tokens.text
+    font.family: tokens.displayFamily
+    font.pixelSize: tokens.fontSizeSm
     font.weight: Font.Normal
-    font.letterSpacing: t.letterSpacingLabel
+    font.letterSpacing: tokens.letterSpacingLabel
     font.capitalization: Font.AllUppercase
     transform: Translate {
         x: label.press

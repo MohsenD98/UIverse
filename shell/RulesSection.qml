@@ -7,12 +7,12 @@ Column {
 
     property string title
     property string marker
-    property color markerColor: s.accent
+    property color markerColor: theme.accent
     property var items: []
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
 
-    spacing: s.unit
+    spacing: theme.unit
     visible: items.length > 0
 
     ShellText {
@@ -30,20 +30,20 @@ Column {
             required property string modelData
 
             width: section.width
-            spacing: section.s.unit
+            spacing: section.theme.unit
 
             ShellText {
                 id: bullet
                 text: section.marker
                 color: section.markerColor
-                font.weight: section.s.weightDisplay
+                font.weight: section.theme.weightDisplay
             }
 
             ShellText {
                 width: row.width - bullet.width - row.spacing
                 text: row.modelData
                 wrapMode: Text.WordWrap
-                lineHeight: section.s.lineHeight
+                lineHeight: section.theme.lineHeight
             }
         }
     }

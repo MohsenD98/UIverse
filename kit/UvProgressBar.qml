@@ -3,17 +3,17 @@ import QtQuick.Templates as T
 import UIverse.Core
 
 T.ProgressBar {
-    id: control
+    id: bar
 
-    property var spec: ({})
-    readonly property Tokens t: Style.t
+    property var hints: ({})
+    readonly property Tokens tokens: Style.tokens
 
     implicitWidth: 180
-    implicitHeight: contentItem ? contentItem.implicitHeight : t.unit
+    implicitHeight: contentItem ? contentItem.implicitHeight : tokens.unit
 
     contentItem: StyleSlot {
-        ctl: control
-        spec: control.spec
+        control: bar
+        hints: bar.hints
         sourceComponent: Style.pack ? Style.pack.progressTrack : null
     }
 }

@@ -4,15 +4,15 @@ import UIverse.Core
 SlotRect {
     id: field
 
-    implicitHeight: t.controlHeight
-    radius: t.radiusMd
-    color: Qt.alpha(t.text, hasActiveFocus ? 0.12 : isHovered ? 0.09 : 0.06)
-    border.width: t.borderWidth
-    border.color: hasActiveFocus ? t.accent : t.border
+    implicitHeight: tokens.controlHeight
+    radius: tokens.radiusMd
+    color: Qt.alpha(tokens.text, hasActiveFocus ? 0.12 : isHovered ? 0.09 : 0.06)
+    border.width: tokens.borderWidth
+    border.color: hasActiveFocus ? tokens.accent : tokens.border
 
     Behavior on color {
         ColorAnimation {
-            duration: field.t.durationFast
+            duration: field.tokens.durationFast
         }
     }
 
@@ -22,7 +22,7 @@ SlotRect {
         radius: parent.radius + 3
         color: "transparent"
         border.width: 3
-        border.color: Qt.alpha(field.t.accent, 0.25)
+        border.color: Qt.alpha(field.tokens.accent, 0.25)
         visible: field.hasActiveFocus
     }
 }

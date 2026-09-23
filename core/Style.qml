@@ -6,5 +6,5 @@ QtObject {
     property Item backdrop
 
     readonly property Tokens fallback: Tokens {}
-    readonly property Tokens t: pack ? pack.tokens : fallback
+    readonly property Tokens tokens: pack ? pack.tokens : fallback
 }

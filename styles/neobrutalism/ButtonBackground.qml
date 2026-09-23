@@ -5,13 +5,13 @@ HardBox {
 
     readonly property bool ghost: variant === "ghost"
 
-    implicitHeight: t.controlHeight
-    corner: t.radiusSm
+    implicitHeight: tokens.controlHeight
+    corner: tokens.radiusSm
     flat: ghost
     sunk: isDown && !ghost
-    lift: ghost ? 0 : t.shadowOffsetX
+    lift: ghost ? 0 : tokens.shadowOffsetX
     opacity: isEnabled ? 1 : 0.45
-    faceColor: variant === "primary" ? (isHovered ? Qt.darker(t.accent, 1.08) : t.accent) : variant === "danger" ? t.danger : ghost ? (isHovered ? t.surfaceAlt : "transparent") : (isHovered ? t.surfaceAlt : t.surface)
+    faceColor: variant === "primary" ? (isHovered ? Qt.darker(tokens.accent, 1.08) : tokens.accent) : variant === "danger" ? tokens.danger : ghost ? (isHovered ? tokens.surfaceAlt : "transparent") : (isHovered ? tokens.surfaceAlt : tokens.surface)
 
     Rectangle {
         x: -6
@@ -21,7 +21,7 @@ HardBox {
         radius: button.corner + 4
         color: "transparent"
         border.width: 2
-        border.color: button.t.text
+        border.color: button.tokens.text
         visible: button.isFocused
     }
 }

@@ -5,11 +5,11 @@ import UIverse.Kit
 UvSurface {
     id: panel
 
-    padding: t.unit * 2.5
+    padding: tokens.unit * 2.5
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: panel.t.unit * 1.5
+        spacing: panel.tokens.unit * 1.5
 
         UvLabel {
             Layout.fillWidth: true
@@ -61,7 +61,7 @@ UvSurface {
 
         RowLayout {
             Layout.fillWidth: true
-            spacing: panel.t.unit
+            spacing: panel.tokens.unit
 
             Item {
                 Layout.fillWidth: true

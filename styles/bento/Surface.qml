@@ -5,15 +5,15 @@ import UIverse.Core
 SlotRect {
     id: tile
 
-    readonly property bool isTile: spec && spec.tile !== undefined
+    readonly property bool isTile: hints && hints.tile !== undefined
     readonly property bool isHero: variant === "accent"
 
-    radius: isTile ? t.radiusLg : t.radiusSm
-    color: isHero ? t.accent : variant === "quiet" ? t.surfaceAlt : isTile ? t.palette[spec.tile % t.palette.length] : t.surface
+    radius: isTile ? tokens.radiusLg : tokens.radiusSm
+    color: isHero ? tokens.accent : variant === "quiet" ? tokens.surfaceAlt : isTile ? tokens.palette[hints.tile % tokens.palette.length] : tokens.surface
 
     Behavior on color {
         ColorAnimation {
-            duration: tile.t.durationBase
+            duration: tile.tokens.durationBase
         }
     }
 
@@ -22,9 +22,9 @@ SlotRect {
         anchors.fill: parent
         visible: tile.isTile
         radius: tile.radius
-        offset.y: tile.t.shadowOffsetY
-        blur: tile.t.shadowBlur
-        spread: -tile.t.unit
-        color: Qt.alpha(tile.t.shadowColor, tile.t.shadowOpacity)
+        offset.y: tile.tokens.shadowOffsetY
+        blur: tile.tokens.shadowBlur
+        spread: -tile.tokens.unit
+        color: Qt.alpha(tile.tokens.shadowColor, tile.tokens.shadowOpacity)
     }
 }

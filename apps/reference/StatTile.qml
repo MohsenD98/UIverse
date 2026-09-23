@@ -11,11 +11,11 @@ UvSurface {
     property bool positive: true
     property real progress: 0
 
-    padding: t.unit * 2.5
+    padding: tokens.unit * 2.5
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: tile.t.unit
+        spacing: tile.tokens.unit
 
         UvLabel {
             Layout.fillWidth: true

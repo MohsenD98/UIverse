@@ -4,9 +4,9 @@ import UIverse.Core
 SlotText {
     readonly property bool solid: variant === "primary" || variant === "danger"
 
-    color: solid ? t.textOnAccent : t.text
-    font.family: t.fontFamily
-    font.pixelSize: t.fontSizeSm
-    font.weight: t.weightMedium
-    font.letterSpacing: t.letterSpacingLabel
+    color: solid ? tokens.textOnAccent : tokens.text
+    font.family: tokens.fontFamily
+    font.pixelSize: tokens.fontSizeSm
+    font.weight: tokens.weightMedium
+    font.letterSpacing: tokens.letterSpacingLabel
 }

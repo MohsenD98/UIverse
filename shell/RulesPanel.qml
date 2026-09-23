@@ -8,17 +8,17 @@ Rectangle {
     property bool open: false
     property StylePack pack
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
 
-    width: Math.min(parent ? parent.width : s.unit * 50, s.unit * 50)
+    width: Math.min(parent ? parent.width : theme.unit * 50, theme.unit * 50)
     x: parent ? (open ? parent.width - width : parent.width) : 0
     visible: x < (parent ? parent.width : 0)
-    color: s.bgAlt
+    color: theme.backgroundAlt
 
     Behavior on x {
         NumberAnimation {
-            duration: panel.s.durationBase
-            easing.type: panel.s.easingType
+            duration: panel.theme.durationBase
+            easing.type: panel.theme.easingType
         }
     }
 
@@ -28,14 +28,14 @@ Rectangle {
             top: parent.top
             bottom: parent.bottom
         }
-        width: panel.s.borderWidth
-        color: panel.s.border
+        width: panel.theme.borderWidth
+        color: panel.theme.border
     }
 
     Flickable {
         id: flick
         anchors.fill: parent
-        anchors.margins: panel.s.unit * 3
+        anchors.margins: panel.theme.unit * 3
         contentHeight: content.implicitHeight
         boundsBehavior: Flickable.StopAtBounds
         clip: true
@@ -43,11 +43,11 @@ Rectangle {
         Column {
             id: content
             width: flick.width
-            spacing: panel.s.unit * 3
+            spacing: panel.theme.unit * 3
 
             Column {
                 width: parent.width
-                spacing: panel.s.unit
+                spacing: panel.theme.unit
 
                 ShellText {
                     role: "label"
@@ -63,7 +63,7 @@ Rectangle {
                     text: panel.pack ? panel.pack.summary : ""
                     muted: true
                     wrapMode: Text.WordWrap
-                    lineHeight: panel.s.lineHeight
+                    lineHeight: panel.theme.lineHeight
                 }
             }
 
@@ -71,7 +71,7 @@ Rectangle {
                 width: parent.width
                 title: "Do"
                 marker: "+"
-                markerColor: panel.s.success
+                markerColor: panel.theme.success
                 items: panel.pack ? panel.pack.dos : []
             }
 
@@ -79,13 +79,13 @@ Rectangle {
                 width: parent.width
                 title: "Avoid"
                 marker: "−"
-                markerColor: panel.s.danger
+                markerColor: panel.theme.danger
                 items: panel.pack ? panel.pack.donts : []
             }
 
             Column {
                 width: parent.width
-                spacing: panel.s.unit
+                spacing: panel.theme.unit
                 visible: panel.pack && panel.pack.reading.length > 0
 
                 ShellText {
@@ -104,7 +104,7 @@ Rectangle {
 
                         width: parent.width
                         text: reference.modelData.label
-                        color: panel.s.accent
+                        color: panel.theme.accent
                         wrapMode: Text.WordWrap
                         font.underline: link.hovered
 

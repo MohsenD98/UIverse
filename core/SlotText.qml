@@ -2,15 +2,15 @@ import QtQuick
 
 Text {
     readonly property StyleSlot slot: parent as StyleSlot
-    readonly property var ctl: slot ? slot.ctl : null
+    readonly property var control: slot ? slot.control : null
     readonly property string variant: slot ? slot.variant : "default"
-    readonly property var spec: slot ? slot.spec : ({})
-    readonly property Tokens t: Style.t
+    readonly property var hints: slot ? slot.hints : ({})
+    readonly property Tokens tokens: Style.tokens
 
-    readonly property bool isDown: ctl?.down ?? false
-    readonly property bool isHovered: ctl?.hovered ?? false
+    readonly property bool isDown: control?.down ?? false
+    readonly property bool isHovered: control?.hovered ?? false
 
-    text: ctl?.text ?? ""
+    text: control?.text ?? ""
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     elide: Text.ElideRight

@@ -4,7 +4,7 @@ HardBox {
     id: groove
 
     implicitHeight: 14
-    corner: t.radiusSm
+    corner: tokens.radiusSm
     lift: 3
 
     Rectangle {
@@ -12,6 +12,6 @@ HardBox {
         y: groove.edge
         width: Math.max(0, (groove.width - groove.edge * 2) * groove.position)
         height: groove.height - groove.edge * 2
-        color: groove.t.accent
+        color: groove.tokens.accent
     }
 }

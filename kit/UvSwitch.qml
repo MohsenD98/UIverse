@@ -3,27 +3,27 @@ import QtQuick.Templates as T
 import UIverse.Core
 
 T.Switch {
-    id: control
+    id: toggle
 
-    property var spec: ({})
-    readonly property Tokens t: Style.t
+    property var hints: ({})
+    readonly property Tokens tokens: Style.tokens
 
-    implicitHeight: Math.max(t.controlHeight, indicator ? indicator.implicitHeight : 0)
+    implicitHeight: Math.max(tokens.controlHeight, indicator ? indicator.implicitHeight : 0)
     implicitWidth: (indicator ? indicator.implicitWidth : 0) + (text ? contentItem.implicitWidth + spacing : 0)
-    spacing: t.unit
+    spacing: tokens.unit
     hoverEnabled: true
 
     indicator: StyleSlot {
-        ctl: control
-        spec: control.spec
-        y: (control.height - height) / 2
+        control: toggle
+        hints: toggle.hints
+        y: (toggle.height - height) / 2
         sourceComponent: Style.pack ? Style.pack.switchIndicator : null
     }
 
     contentItem: UvLabel {
         role: "body"
-        text: control.text
+        text: toggle.text
         verticalAlignment: Text.AlignVCenter
-        leftPadding: control.indicator ? control.indicator.width + control.spacing : 0
+        leftPadding: toggle.indicator ? toggle.indicator.width + toggle.spacing : 0
     }
 }

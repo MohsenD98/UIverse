@@ -6,18 +6,18 @@ SlotRect {
 
     implicitHeight: 6
     radius: height / 2
-    color: Qt.alpha(t.text, 0.08)
+    color: Qt.alpha(tokens.text, 0.08)
 
     Rectangle {
         width: track.width * track.position
         height: track.height
         radius: track.radius
-        color: track.t.accent
+        color: track.tokens.accent
 
         Behavior on width {
             NumberAnimation {
-                duration: track.t.durationBase
-                easing.type: track.t.easingType
+                duration: track.tokens.durationBase
+                easing.type: track.tokens.easingType
             }
         }
     }

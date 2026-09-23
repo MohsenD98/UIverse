@@ -3,32 +3,32 @@ import QtQuick.Templates as T
 import UIverse.Core
 
 T.Button {
-    id: control
+    id: button
 
     property string variant: "primary"
-    property var spec: ({})
+    property var hints: ({})
 
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
 
-    implicitHeight: Math.max(t.controlHeight, background ? background.implicitHeight : 0)
-    implicitWidth: Math.max(t.controlHeight * 2, contentItem.implicitWidth + leftPadding + rightPadding)
-    leftPadding: t.unit * 2
-    rightPadding: t.unit * 2
+    implicitHeight: Math.max(tokens.controlHeight, background ? background.implicitHeight : 0)
+    implicitWidth: Math.max(tokens.controlHeight * 2, contentItem.implicitWidth + leftPadding + rightPadding)
+    leftPadding: tokens.unit * 2
+    rightPadding: tokens.unit * 2
 
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
 
     background: StyleSlot {
-        ctl: control
-        variant: control.variant
-        spec: control.spec
+        control: button
+        variant: button.variant
+        hints: button.hints
         sourceComponent: Style.pack ? Style.pack.buttonBackground : null
     }
 
     contentItem: StyleSlot {
-        ctl: control
-        variant: control.variant
-        spec: control.spec
+        control: button
+        variant: button.variant
+        hints: button.hints
         sourceComponent: Style.pack ? Style.pack.buttonContent : null
     }
 }

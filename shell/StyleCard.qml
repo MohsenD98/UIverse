@@ -8,25 +8,25 @@ Rectangle {
     required property StylePack pack
     signal activated
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
     readonly property Tokens p: pack.tokens
 
-    implicitWidth: s.unit * 38
-    implicitHeight: s.unit * 28
-    radius: s.radiusLg
-    color: hover.hovered ? s.surfaceAlt : s.surface
-    border.width: s.borderWidth
-    border.color: hover.hovered || activeFocus ? pack.swatch : s.border
+    implicitWidth: theme.unit * 38
+    implicitHeight: theme.unit * 28
+    radius: theme.radiusLg
+    color: hover.hovered ? theme.surfaceAlt : theme.surface
+    border.width: theme.borderWidth
+    border.color: hover.hovered || activeFocus ? pack.swatch : theme.border
     activeFocusOnTab: true
 
     Behavior on color {
         ColorAnimation {
-            duration: card.s.durationFast
+            duration: card.theme.durationFast
         }
     }
     Behavior on border.color {
         ColorAnimation {
-            duration: card.s.durationFast
+            duration: card.theme.durationFast
         }
     }
 
@@ -48,16 +48,16 @@ Rectangle {
             right: parent.right
             top: parent.top
         }
-        anchors.margins: card.s.borderWidth
-        height: card.s.unit * 15
+        anchors.margins: card.theme.borderWidth
+        height: card.theme.unit * 15
         topLeftRadius: card.radius
         topRightRadius: card.radius
-        color: card.p.bg
+        color: card.p.background
         clip: true
 
         Column {
             anchors.centerIn: parent
-            spacing: card.s.unit
+            spacing: card.theme.unit
 
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -71,7 +71,7 @@ Rectangle {
 
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: card.s.unit * 0.75
+                spacing: card.theme.unit * 0.75
 
                 Repeater {
                     model: card.p.palette
@@ -81,8 +81,8 @@ Rectangle {
 
                         required property color modelData
 
-                        width: card.s.unit * 3
-                        height: card.s.unit
+                        width: card.theme.unit * 3
+                        height: card.theme.unit
                         radius: Math.min(height / 2, card.p.radiusSm)
                         color: swatch.modelData
                     }
@@ -97,8 +97,8 @@ Rectangle {
             right: parent.right
             top: preview.bottom
         }
-        anchors.margins: card.s.unit * 2
-        spacing: card.s.unit * 0.5
+        anchors.margins: card.theme.unit * 2
+        spacing: card.theme.unit * 0.5
 
         ShellText {
             role: "heading"

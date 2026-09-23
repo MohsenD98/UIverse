@@ -8,9 +8,9 @@ Rectangle {
 
     signal opened(string key)
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
 
-    color: s.bg
+    color: theme.background
 
     Column {
         id: header
@@ -19,8 +19,8 @@ Rectangle {
             right: parent.right
             top: parent.top
         }
-        anchors.margins: gallery.s.pagePadding
-        spacing: gallery.s.unit
+        anchors.margins: gallery.theme.pagePadding
+        spacing: gallery.theme.unit
 
         ShellText {
             role: "display"
@@ -28,7 +28,7 @@ Rectangle {
         }
 
         ShellText {
-            width: Math.min(gallery.s.unit * 70, parent.width)
+            width: Math.min(gallery.theme.unit * 70, parent.width)
             muted: true
             wrapMode: Text.WordWrap
             text: "Pick a style to see the same dashboard drawn in it."
@@ -38,17 +38,17 @@ Rectangle {
     GridView {
         id: grid
 
-        readonly property int columns: Math.max(1, Math.floor(width / (gallery.s.unit * 40)))
+        readonly property int columns: Math.max(1, Math.floor(width / (gallery.theme.unit * 40)))
 
         anchors {
             left: parent.left
             right: parent.right
             top: header.bottom
             bottom: parent.bottom
-            margins: gallery.s.pagePadding
+            margins: gallery.theme.pagePadding
         }
         cellWidth: width / columns
-        cellHeight: gallery.s.unit * 28 + gallery.s.gridGap
+        cellHeight: gallery.theme.unit * 28 + gallery.theme.gridGap
         model: StyleRegistry.packs
         clip: true
         keyNavigationWraps: true
@@ -63,8 +63,8 @@ Rectangle {
 
             StyleCard {
                 anchors.fill: parent
-                anchors.rightMargin: gallery.s.gridGap
-                anchors.bottomMargin: gallery.s.gridGap
+                anchors.rightMargin: gallery.theme.gridGap
+                anchors.bottomMargin: gallery.theme.gridGap
                 pack: cell.modelData
                 onActivated: gallery.opened(cell.modelData.key)
             }

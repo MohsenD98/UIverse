@@ -3,9 +3,9 @@ import QtQuick
 import UIverse.Core
 
 QtObject {
-    readonly property Tokens t: Tokens {
-        bg: "#0b0b0e"
-        bgAlt: "#131318"
+    readonly property Tokens tokens: Tokens {
+        background: "#0b0b0e"
+        backgroundAlt: "#131318"
         surface: "#16161c"
         surfaceAlt: "#1d1d25"
         text: "#f4f4f5"

@@ -5,7 +5,7 @@ Item {
     id: page
 
     property bool padded: true
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
 
     default property alias content: contentHost.data
 
@@ -16,17 +16,17 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: page.t.bg
+            color: page.tokens.background
             Behavior on color {
                 ColorAnimation {
-                    duration: page.t.durationBase
+                    duration: page.tokens.durationBase
                 }
             }
         }
 
         StyleSlot {
             anchors.fill: parent
-            ctl: page
+            control: page
             sourceComponent: Style.pack ? Style.pack.pageBackground : null
         }
     }
@@ -34,7 +34,7 @@ Item {
     Item {
         id: contentHost
         anchors.fill: parent
-        anchors.margins: page.padded ? page.t.pagePadding : 0
+        anchors.margins: page.padded ? page.tokens.pagePadding : 0
     }
 
     Component.onCompleted: Style.backdrop = backdropLayer

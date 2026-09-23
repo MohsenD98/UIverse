@@ -2,8 +2,8 @@ import QtQuick
 import UIverse.Core
 
 SlotRect {
-    radius: t.radiusSm
+    radius: tokens.radiusSm
     color: "transparent"
-    border.width: t.borderWidth
-    border.color: variant === "accent" ? t.accent : variant === "success" ? t.success : variant === "warning" ? t.warning : variant === "danger" ? t.danger : t.border
+    border.width: tokens.borderWidth
+    border.color: variant === "accent" ? tokens.accent : variant === "success" ? tokens.success : variant === "warning" ? tokens.warning : variant === "danger" ? tokens.danger : tokens.border
 }

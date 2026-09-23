@@ -5,32 +5,32 @@ Text {
     property string role: "body"
     property bool muted: false
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
     readonly property bool isDisplay: role === "display" || role === "title"
     readonly property bool isMinor: role === "label" || role === "caption"
 
-    color: muted ? s.textMuted : s.text
+    color: muted ? theme.textMuted : theme.text
     renderType: Text.NativeRendering
-    font.family: isDisplay ? s.displayFamily : s.fontFamily
+    font.family: isDisplay ? theme.displayFamily : theme.fontFamily
     font.pixelSize: {
         switch (role) {
         case "display":
-            return s.displaySize
+            return theme.displaySize
         case "title":
-            return s.fontSizeXl
+            return theme.fontSizeXl
         case "heading":
-            return s.fontSizeLg
+            return theme.fontSizeLg
         case "label":
-            return s.fontSizeXs
+            return theme.fontSizeXs
         case "caption":
-            return s.fontSizeXs
+            return theme.fontSizeXs
         case "small":
-            return s.fontSizeSm
+            return theme.fontSizeSm
         default:
-            return s.fontSizeMd
+            return theme.fontSizeMd
         }
     }
-    font.weight: isDisplay ? s.weightDisplay : role === "heading" || role === "label" ? s.weightMedium : s.weightBody
-    font.letterSpacing: isDisplay ? s.letterSpacingDisplay : role === "label" ? s.letterSpacingLabel : s.letterSpacingBody
-    font.capitalization: s.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
+    font.weight: isDisplay ? theme.weightDisplay : role === "heading" || role === "label" ? theme.weightMedium : theme.weightBody
+    font.letterSpacing: isDisplay ? theme.letterSpacingDisplay : role === "label" ? theme.letterSpacingLabel : theme.letterSpacingBody
+    font.capitalization: theme.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
 }

@@ -1,8 +1,8 @@
 import QtQuick
 
 HardBox {
-    implicitHeight: t.controlHeight
-    corner: t.radiusSm
-    faceColor: hasActiveFocus ? t.surfaceAlt : t.surface
-    lift: hasActiveFocus ? t.shadowOffsetX : t.shadowOffsetX / 2
+    implicitHeight: tokens.controlHeight
+    corner: tokens.radiusSm
+    faceColor: hasActiveFocus ? tokens.surfaceAlt : tokens.surface
+    lift: hasActiveFocus ? tokens.shadowOffsetX : tokens.shadowOffsetX / 2
 }

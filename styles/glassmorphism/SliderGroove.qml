@@ -6,7 +6,7 @@ SlotRect {
 
     implicitHeight: 6
     radius: height / 2
-    color: Qt.alpha(t.text, 0.14)
+    color: Qt.alpha(tokens.text, 0.14)
 
     Rectangle {
         width: groove.width * groove.position
@@ -16,11 +16,11 @@ SlotRect {
             orientation: Gradient.Horizontal
             GradientStop {
                 position: 0
-                color: groove.t.palette[0]
+                color: groove.tokens.palette[0]
             }
             GradientStop {
                 position: 1
-                color: groove.t.accent
+                color: groove.tokens.accent
             }
         }
     }

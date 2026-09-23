@@ -7,14 +7,14 @@ SlotRect {
     implicitWidth: 16
     implicitHeight: 16
     radius: width / 2
-    color: t.surface
+    color: tokens.surface
     border.width: 1
-    border.color: isPressed ? t.accent : t.textMuted
+    border.color: isPressed ? tokens.accent : tokens.textMuted
     scale: isPressed ? 1.15 : 1
 
     Behavior on scale {
         NumberAnimation {
-            duration: handle.t.durationFast
+            duration: handle.tokens.durationFast
         }
     }
 }

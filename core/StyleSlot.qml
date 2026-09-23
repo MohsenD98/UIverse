@@ -1,10 +1,9 @@
 import QtQuick
 
 Loader {
-    property Item ctl
+    property Item control
     property string variant: "default"
-    property var spec: ({})
+    property var hints: ({})
 
-    asynchronous: false
     visible: status === Loader.Ready
 }

@@ -6,25 +6,25 @@ T.Button {
     id: control
 
     property bool accent: false
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
     readonly property bool lit: accent || checked
 
-    implicitHeight: s.controlHeight
+    implicitHeight: theme.controlHeight
     implicitWidth: Math.max(implicitHeight, contentItem.implicitWidth + leftPadding + rightPadding)
-    leftPadding: s.unit * 1.5
-    rightPadding: s.unit * 1.5
+    leftPadding: theme.unit * 1.5
+    rightPadding: theme.unit * 1.5
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
 
     background: Rectangle {
-        radius: control.s.radiusMd
-        color: control.lit ? control.s.accent : control.hovered ? control.s.surfaceAlt : control.s.surface
-        border.width: control.s.borderWidth
-        border.color: control.visualFocus ? control.s.accent : control.lit ? control.s.accent : control.s.border
+        radius: control.theme.radiusMd
+        color: control.lit ? control.theme.accent : control.hovered ? control.theme.surfaceAlt : control.theme.surface
+        border.width: control.theme.borderWidth
+        border.color: control.visualFocus ? control.theme.accent : control.lit ? control.theme.accent : control.theme.border
 
         Behavior on color {
             ColorAnimation {
-                duration: control.s.durationFast
+                duration: control.theme.durationFast
             }
         }
     }
@@ -32,8 +32,8 @@ T.Button {
     contentItem: ShellText {
         role: "small"
         text: control.text
-        color: control.lit ? control.s.textOnAccent : control.s.text
-        font.weight: control.s.weightMedium
+        color: control.lit ? control.theme.textOnAccent : control.theme.text
+        font.weight: control.theme.weightMedium
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight

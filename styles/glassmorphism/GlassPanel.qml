@@ -5,19 +5,19 @@ import UIverse.Core
 SlotRect {
     id: panel
 
-    property real corner: t.radiusLg
-    property color tint: t.surface
-    property color rim: t.border
+    property real corner: tokens.radiusLg
+    property color tint: tokens.surface
+    property color rim: tokens.border
     property bool raised: true
 
     RectangularShadow {
         anchors.fill: parent
         visible: panel.raised
-        offset.y: panel.t.shadowOffsetY
+        offset.y: panel.tokens.shadowOffsetY
         radius: panel.corner
-        blur: panel.t.shadowBlur
-        spread: -panel.t.unit
-        color: Qt.alpha(panel.t.shadowColor, panel.t.shadowOpacity)
+        blur: panel.tokens.shadowBlur
+        spread: -panel.tokens.unit
+        color: Qt.alpha(panel.tokens.shadowColor, panel.tokens.shadowOpacity)
     }
 
     BackdropSample {
@@ -59,12 +59,12 @@ SlotRect {
     Rectangle {
         anchors.fill: parent
         radius: panel.corner
-        border.width: panel.t.borderWidth
+        border.width: panel.tokens.borderWidth
         border.color: panel.rim
         gradient: Gradient {
             GradientStop {
                 position: 0
-                color: Qt.tint(panel.tint, Qt.alpha(panel.t.text, 0.06))
+                color: Qt.tint(panel.tint, Qt.alpha(panel.tokens.text, 0.06))
             }
             GradientStop {
                 position: 1

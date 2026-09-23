@@ -12,7 +12,7 @@ Window {
     y: 0
     flags: Qt.Tool | Qt.FramelessWindowHint | Qt.WindowDoesNotAcceptFocus | Qt.WindowTransparentForInput
     visible: true
-    color: ShellTheme.t.bg
+    color: ShellTheme.tokens.background
 
     LabRoot {
         anchors.fill: parent

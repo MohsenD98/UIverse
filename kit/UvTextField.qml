@@ -3,46 +3,46 @@ import QtQuick.Templates as T
 import UIverse.Core
 
 T.TextField {
-    id: control
+    id: field
 
     property string variant: "default"
-    property var spec: ({})
+    property var hints: ({})
 
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
 
-    implicitHeight: t.controlHeight
-    implicitWidth: t.unit * 28
-    leftPadding: t.unit * 1.5
-    rightPadding: t.unit * 1.5
+    implicitHeight: tokens.controlHeight
+    implicitWidth: tokens.unit * 28
+    leftPadding: tokens.unit * 1.5
+    rightPadding: tokens.unit * 1.5
 
-    color: t.text
-    placeholderTextColor: t.textMuted
-    selectionColor: t.accent
-    selectedTextColor: t.textOnAccent
+    color: tokens.text
+    placeholderTextColor: tokens.textMuted
+    selectionColor: tokens.accent
+    selectedTextColor: tokens.textOnAccent
     verticalAlignment: TextInput.AlignVCenter
     hoverEnabled: true
 
-    font.family: t.fontFamily
-    font.pixelSize: t.fontSizeSm
+    font.family: tokens.fontFamily
+    font.pixelSize: tokens.fontSizeSm
 
     UvLabel {
-        x: control.leftPadding
-        width: control.width - control.leftPadding - control.rightPadding
-        height: control.height
+        x: field.leftPadding
+        width: field.width - field.leftPadding - field.rightPadding
+        height: field.height
         muted: true
-        text: control.placeholderText
-        font.pixelSize: control.font.pixelSize
-        font.weight: control.t.weightBody
+        text: field.placeholderText
+        font.pixelSize: field.font.pixelSize
+        font.weight: field.tokens.weightBody
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.NoWrap
         elide: Text.ElideRight
-        visible: !control.length && !control.preeditText
+        visible: !field.length && !field.preeditText
     }
 
     background: StyleSlot {
-        ctl: control
-        variant: control.variant
-        spec: control.spec
+        control: field
+        variant: field.variant
+        hints: field.hints
         sourceComponent: Style.pack ? Style.pack.fieldBackground : null
     }
 }

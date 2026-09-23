@@ -6,12 +6,12 @@ SlotRect {
 
     implicitHeight: 3
     radius: 1.5
-    color: t.border
+    color: tokens.border
 
     Rectangle {
         width: parent.width * groove.position
         height: parent.height
         radius: parent.radius
-        color: groove.t.accent
+        color: groove.tokens.accent
     }
 }

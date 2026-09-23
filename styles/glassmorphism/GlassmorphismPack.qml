@@ -9,8 +9,8 @@ StylePack {
     about: About.about
 
     tokens: Tokens {
-        bg: "#0d0f2b"
-        bgAlt: "#1a0f33"
+        background: "#0d0f2b"
+        backgroundAlt: "#1a0f33"
         surface: "#1affffff"
         surfaceAlt: "#29ffffff"
         text: "#f5f7ff"
@@ -88,7 +88,7 @@ StylePack {
     }
     divider: Component {
         SlotRect {
-            color: t.border
+            color: tokens.border
         }
     }
 }

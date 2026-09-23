@@ -5,51 +5,52 @@ Item {
     id: sample
 
     property Item source: Style.backdrop
-    property real blurRadius: Style.t.blurAmount
+    property real blurRadius: Style.tokens.blurAmount
 
-    readonly property real pad: Math.ceil(blurRadius)
+    readonly property real maxBlurRadius: 64
+    readonly property real margin: Math.ceil(blurRadius)
     property real originX: 0
     property real originY: 0
 
-    function resync(): void {
+    function updateOrigin(): void {
         if (!source)
             return
-        const p = sample.mapToItem(source, 0, 0)
-        if (p.x !== originX)
-            originX = p.x
-        if (p.y !== originY)
-            originY = p.y
+        const position = sample.mapToItem(source, 0, 0)
+        if (position.x !== originX)
+            originX = position.x
+        if (position.y !== originY)
+            originY = position.y
     }
 
     clip: true
 
-    Component.onCompleted: resync()
+    Component.onCompleted: updateOrigin()
 
     FrameAnimation {
         running: sample.source !== null && sample.width > 0
-        onTriggered: sample.resync()
+        onTriggered: sample.updateOrigin()
     }
 
     ShaderEffectSource {
-        id: grab
+        id: backdropSlice
+
         visible: false
-        x: -sample.pad
-        y: -sample.pad
-        width: Math.max(1, sample.width + sample.pad * 2)
-        height: Math.max(1, sample.height + sample.pad * 2)
+        x: -sample.margin
+        y: -sample.margin
+        width: Math.max(1, sample.width + sample.margin * 2)
+        height: Math.max(1, sample.height + sample.margin * 2)
         sourceItem: sample.source
-        sourceRect: Qt.rect(sample.originX - sample.pad, sample.originY - sample.pad, width, height)
-        live: true
+        sourceRect: Qt.rect(sample.originX - sample.margin, sample.originY - sample.margin, width, height)
         recursive: false
     }
 
     MultiEffect {
-        anchors.fill: grab
+        anchors.fill: backdropSlice
         visible: sample.source !== null
-        source: grab
+        source: backdropSlice
         autoPaddingEnabled: false
         blurEnabled: sample.blurRadius > 0
-        blurMax: 64
-        blur: Math.min(1.0, sample.blurRadius / 64)
+        blurMax: sample.maxBlurRadius
+        blur: Math.min(1, sample.blurRadius / sample.maxBlurRadius)
     }
 }

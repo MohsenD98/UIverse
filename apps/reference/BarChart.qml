@@ -12,11 +12,11 @@ UvSurface {
 
     readonly property real peak: values.length ? Math.max(...values) : 1
 
-    padding: t.unit * 2.5
+    padding: tokens.unit * 2.5
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: chart.t.unit * 2
+        spacing: chart.tokens.unit * 2
 
         RowLayout {
             Layout.fillWidth: true
@@ -35,7 +35,7 @@ UvSurface {
         RowLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            spacing: chart.t.unit
+            spacing: chart.tokens.unit
 
             Repeater {
                 model: chart.values
@@ -52,14 +52,14 @@ UvSurface {
                     UvSurface {
                         anchors.bottom: parent.bottom
                         width: parent.width
-                        height: Math.max(chart.t.unit, bar.height * bar.modelData / chart.peak)
+                        height: Math.max(chart.tokens.unit, bar.height * bar.modelData / chart.peak)
                         padding: 0
                         variant: bar.index === chart.values.length - 1 ? "accent" : "default"
 
                         Behavior on height {
                             NumberAnimation {
-                                duration: chart.t.durationBase
-                                easing.type: chart.t.easingType
+                                duration: chart.tokens.durationBase
+                                easing.type: chart.tokens.easingType
                             }
                         }
                     }

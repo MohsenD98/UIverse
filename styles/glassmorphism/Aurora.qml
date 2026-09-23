@@ -6,7 +6,7 @@ import UIverse.Core
 Item {
     id: aurora
 
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
     readonly property real downscale: 4
     readonly property var anchorsX: [0.12, 0.78, 0.42, 0.9]
     readonly property var anchorsY: [0.15, 0.2, 0.85, 0.7]
@@ -24,11 +24,11 @@ Item {
         gradient: Gradient {
             GradientStop {
                 position: 0
-                color: aurora.t.bg
+                color: aurora.tokens.background
             }
             GradientStop {
                 position: 1
-                color: aurora.t.bgAlt
+                color: aurora.tokens.backgroundAlt
             }
         }
     }
@@ -40,7 +40,7 @@ Item {
         height: aurora.height / aurora.downscale
 
         Repeater {
-            model: aurora.t.palette
+            model: aurora.tokens.palette
 
             Rectangle {
                 id: blob

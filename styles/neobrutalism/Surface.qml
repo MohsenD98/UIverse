@@ -1,9 +1,9 @@
 import QtQuick
 
 HardBox {
-    readonly property bool tinted: spec && spec.tint !== undefined
+    readonly property bool tinted: hints && hints.tint !== undefined
 
-    faceColor: variant === "accent" ? t.accent : variant === "quiet" ? t.surfaceAlt : tinted ? t.palette[spec.tint % t.palette.length] : t.surface
-    lift: variant === "quiet" ? 0 : t.shadowOffsetX
-    corner: t.radiusMd
+    faceColor: variant === "accent" ? tokens.accent : variant === "quiet" ? tokens.surfaceAlt : tinted ? tokens.palette[hints.tint % tokens.palette.length] : tokens.surface
+    lift: variant === "quiet" ? 0 : tokens.shadowOffsetX
+    corner: tokens.radiusMd
 }

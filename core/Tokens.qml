@@ -2,8 +2,8 @@ import QtQuick
 import UIverse.Fonts
 
 QtObject {
-    property color bg: "#ffffff"
-    property color bgAlt: "#f4f4f5"
+    property color background: "#ffffff"
+    property color backgroundAlt: "#f4f4f5"
     property color surface: "#ffffff"
     property color surfaceAlt: "#fafafa"
     property color text: "#111113"

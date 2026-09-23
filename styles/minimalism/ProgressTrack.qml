@@ -6,17 +6,17 @@ SlotRect {
 
     implicitHeight: 3
     radius: 1.5
-    color: t.border
+    color: tokens.border
 
     Rectangle {
         width: parent.width * track.position
         height: parent.height
         radius: parent.radius
-        color: track.t.accent
+        color: track.tokens.accent
 
         Behavior on width {
             NumberAnimation {
-                duration: track.t.durationBase
+                duration: track.tokens.durationBase
             }
         }
     }

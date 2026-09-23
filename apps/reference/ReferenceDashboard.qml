@@ -19,7 +19,7 @@ UvPage {
             id: column
 
             width: flick.width
-            spacing: page.t.gridGap * 1.5
+            spacing: page.tokens.gridGap * 1.5
 
             DashboardHeader {
                 Layout.fillWidth: true
@@ -34,11 +34,11 @@ UvPage {
                 DashboardLayout {
                     id: layout
 
-                    mode: page.t.layoutMode
+                    mode: page.tokens.layoutMode
                     availableWidth: column.width
-                    gap: page.t.gridGap
-                    rowHeight: page.t.unit * 23
-                    narrowBelow: page.t.unit * 90
+                    gap: page.tokens.gridGap
+                    rowHeight: page.tokens.unit * 23
+                    narrowBelow: page.tokens.unit * 90
                 }
 
                 Repeater {
@@ -55,7 +55,7 @@ UvPage {
 
                         StatTile {
                             anchors.fill: parent
-                            spec: ({
+                            hints: ({
                                     "tile": statCell.index + 1
                                 })
                             label: statCell.modelData.label
@@ -73,7 +73,7 @@ UvPage {
 
                     BarChart {
                         anchors.fill: parent
-                        spec: ({
+                        hints: ({
                                 "tile": 5
                             })
                         title: "Weekly engagement"
@@ -88,7 +88,7 @@ UvPage {
 
                     ActivityList {
                         anchors.fill: parent
-                        spec: ({
+                        hints: ({
                                 "tile": 6
                             })
                         title: "Recent activity"
@@ -102,7 +102,7 @@ UvPage {
 
                     ControlsPanel {
                         anchors.fill: parent
-                        spec: ({
+                        hints: ({
                                 "tile": 0
                             })
                     }

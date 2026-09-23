@@ -9,11 +9,11 @@ UvSurface {
     property string title
     property var entries: []
 
-    padding: t.unit * 2.5
+    padding: tokens.unit * 2.5
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: list.t.unit * 1.5
+        spacing: list.tokens.unit * 1.5
 
         UvLabel {
             Layout.fillWidth: true
@@ -31,7 +31,7 @@ UvSurface {
                 required property int index
 
                 Layout.fillWidth: true
-                spacing: list.t.unit * 1.5
+                spacing: list.tokens.unit * 1.5
 
                 UvDivider {
                     Layout.fillWidth: true
@@ -40,7 +40,7 @@ UvSurface {
 
                 RowLayout {
                     Layout.fillWidth: true
-                    spacing: list.t.unit * 2
+                    spacing: list.tokens.unit * 2
 
                     ColumnLayout {
                         Layout.fillWidth: true

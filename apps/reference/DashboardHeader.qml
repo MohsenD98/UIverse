@@ -4,9 +4,9 @@ import UIverse.Core
 import UIverse.Kit
 
 RowLayout {
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
 
-    spacing: t.unit * 2
+    spacing: tokens.unit * 2
 
     ColumnLayout {
         Layout.fillWidth: true
@@ -27,7 +27,7 @@ RowLayout {
     }
 
     UvTextField {
-        Layout.preferredWidth: t.unit * 28
+        Layout.preferredWidth: tokens.unit * 28
         placeholderText: "Search reports"
     }
 

@@ -9,9 +9,9 @@ Rectangle {
 
     signal back
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
 
-    color: s.bg
+    color: theme.background
     focus: true
 
     Keys.onLeftPressed: StyleRegistry.step(-1)
@@ -32,14 +32,14 @@ Rectangle {
             right: parent.right
             top: parent.top
         }
-        height: bench.s.controlHeight + bench.s.unit * 3
-        color: bench.s.bgAlt
+        height: bench.theme.controlHeight + bench.theme.unit * 3
+        color: bench.theme.backgroundAlt
 
         RowLayout {
             anchors.fill: parent
-            anchors.leftMargin: bench.s.unit * 2
-            anchors.rightMargin: bench.s.unit * 2
-            spacing: bench.s.unit * 2
+            anchors.leftMargin: bench.theme.unit * 2
+            anchors.rightMargin: bench.theme.unit * 2
+            spacing: bench.theme.unit * 2
 
             ShellButton {
                 text: "← Gallery"
@@ -69,8 +69,8 @@ Rectangle {
                 right: parent.right
                 bottom: parent.bottom
             }
-            height: bench.s.borderWidth
-            color: bench.s.border
+            height: bench.theme.borderWidth
+            color: bench.theme.border
         }
     }
 

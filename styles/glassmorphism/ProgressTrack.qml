@@ -6,7 +6,7 @@ SlotRect {
 
     implicitHeight: 6
     radius: height / 2
-    color: Qt.alpha(t.text, 0.12)
+    color: Qt.alpha(tokens.text, 0.12)
 
     Rectangle {
         width: track.width * track.position
@@ -16,17 +16,17 @@ SlotRect {
             orientation: Gradient.Horizontal
             GradientStop {
                 position: 0
-                color: track.t.palette[3]
+                color: track.tokens.palette[3]
             }
             GradientStop {
                 position: 1
-                color: track.t.accent
+                color: track.tokens.accent
             }
         }
 
         Behavior on width {
             NumberAnimation {
-                duration: track.t.durationBase
+                duration: track.tokens.durationBase
             }
         }
     }

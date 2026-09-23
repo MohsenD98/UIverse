@@ -8,9 +8,9 @@ Rectangle {
 
     property string route: "gallery"
 
-    readonly property Tokens s: ShellTheme.t
+    readonly property Tokens theme: ShellTheme.tokens
 
-    color: s.bg
+    color: theme.background
 
     Loader {
         id: view
@@ -30,8 +30,8 @@ Rectangle {
         property: "opacity"
         from: 0
         to: 1
-        duration: root.s.durationBase
-        easing.type: root.s.easingType
+        duration: root.theme.durationBase
+        easing.type: root.theme.easingType
     }
 
     Component {

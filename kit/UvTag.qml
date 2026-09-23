@@ -6,18 +6,18 @@ Item {
 
     property string text
     property string variant: "neutral"
-    property var spec: ({})
+    property var hints: ({})
 
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
 
-    implicitWidth: labelItem.implicitWidth + t.unit * 2.5
-    implicitHeight: labelItem.implicitHeight + t.unit
+    implicitWidth: labelItem.implicitWidth + tokens.unit * 2.5
+    implicitHeight: labelItem.implicitHeight + tokens.unit
 
     StyleSlot {
         anchors.fill: parent
-        ctl: tag
+        control: tag
         variant: tag.variant
-        spec: tag.spec
+        hints: tag.hints
         sourceComponent: Style.pack ? Style.pack.tagBackground : null
     }
 
@@ -29,15 +29,15 @@ Item {
         color: {
             switch (tag.variant) {
             case "accent":
-                return tag.t.textOnAccent
+                return tag.tokens.textOnAccent
             case "success":
-                return tag.t.success
+                return tag.tokens.success
             case "warning":
-                return tag.t.warning
+                return tag.tokens.warning
             case "danger":
-                return tag.t.danger
+                return tag.tokens.danger
             default:
-                return tag.t.textMuted
+                return tag.tokens.textMuted
             }
         }
     }

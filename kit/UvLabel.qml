@@ -7,43 +7,43 @@ Text {
     property string role: "body"
     property bool muted: false
 
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
     readonly property bool isDisplay: role === "display" || role === "title"
     readonly property bool isMinor: role === "label" || role === "caption"
 
-    color: muted ? t.textMuted : t.text
+    color: muted ? tokens.textMuted : tokens.text
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
     wrapMode: Text.WordWrap
 
-    font.family: role === "mono" ? t.monoFamily : isDisplay ? t.displayFamily : t.fontFamily
+    font.family: role === "mono" ? tokens.monoFamily : isDisplay ? tokens.displayFamily : tokens.fontFamily
     font.pixelSize: {
         switch (role) {
         case "display":
-            return t.displaySize
+            return tokens.displaySize
         case "title":
-            return t.fontSizeXl
+            return tokens.fontSizeXl
         case "heading":
-            return t.fontSizeLg
+            return tokens.fontSizeLg
         case "label":
-            return t.fontSizeSm
+            return tokens.fontSizeSm
         case "caption":
-            return t.fontSizeXs
+            return tokens.fontSizeXs
         case "mono":
-            return t.fontSizeSm
+            return tokens.fontSizeSm
         default:
-            return t.fontSizeMd
+            return tokens.fontSizeMd
         }
     }
-    font.weight: isDisplay ? t.weightDisplay : (role === "heading" || role === "label") ? t.weightMedium : t.weightBody
-    font.letterSpacing: isDisplay ? t.letterSpacingDisplay : isMinor ? t.letterSpacingLabel : t.letterSpacingBody
-    font.capitalization: t.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
-    lineHeight: t.lineHeight
+    font.weight: isDisplay ? tokens.weightDisplay : (role === "heading" || role === "label") ? tokens.weightMedium : tokens.weightBody
+    font.letterSpacing: isDisplay ? tokens.letterSpacingDisplay : isMinor ? tokens.letterSpacingLabel : tokens.letterSpacingBody
+    font.capitalization: tokens.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
+    lineHeight: tokens.lineHeight
     lineHeightMode: Text.ProportionalHeight
 
     Behavior on color {
         ColorAnimation {
-            duration: label.t.durationFast
+            duration: label.tokens.durationFast
         }
     }
 }

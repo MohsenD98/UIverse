@@ -5,10 +5,10 @@ Item {
     id: surface
 
     property string variant: "default"
-    property var spec: ({})
-    property real padding: Style.t.unit * 2
+    property var hints: ({})
+    property real padding: Style.tokens.unit * 2
 
-    readonly property Tokens t: Style.t
+    readonly property Tokens tokens: Style.tokens
 
     default property alias content: body.data
 
@@ -18,9 +18,9 @@ Item {
     StyleSlot {
         id: skin
         anchors.fill: parent
-        ctl: surface
+        control: surface
         variant: surface.variant
-        spec: surface.spec
+        hints: surface.hints
         sourceComponent: Style.pack ? Style.pack.surface : null
         z: -1
     }
@@ -28,10 +28,10 @@ Item {
     Rectangle {
         anchors.fill: parent
         visible: skin.status !== Loader.Ready
-        color: surface.t.surface
-        radius: surface.t.radiusMd
-        border.width: surface.t.borderWidth
-        border.color: surface.t.border
+        color: surface.tokens.surface
+        radius: surface.tokens.radiusMd
+        border.width: surface.tokens.borderWidth
+        border.color: surface.tokens.border
         z: -1
     }
 
