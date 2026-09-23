@@ -36,6 +36,9 @@ for file in "${files[@]}"; do
 
     if [[ "$file" =~ ^styles/([^/]+)/ && "${BASH_REMATCH[1]}" != registry ]]; then
         own="${BASH_REMATCH[1]}"
+        if [[ "$file" == *Pack.qml ]] && ! grep -qE "^\s*key: \"$own\"" "$file"; then
+            report "$file: key must be \"$own\", the name of its directory"
+        fi
         grep -nE '^\s*import\s+UIverse\.Styles(\.|\s|$)' "$file" | grep -viE "UIverse\.Styles\.$own(\s|$)" \
             | sed "s|^|$file:|;s|$| (rule 10: styles must not import each other)|" >&2 && status=1
     fi
