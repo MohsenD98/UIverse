@@ -7,6 +7,7 @@ qt_add_qml_module(UIverseStyleNeoBrutalism
         NeoBrutalismPack.qml
         about.mjs
         HardBox.qml
+        HardTrack.qml
         DotGrid.qml
         Surface.qml
         ButtonBackground.qml

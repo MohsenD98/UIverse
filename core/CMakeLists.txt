@@ -12,6 +12,7 @@ qt_add_qml_module(UIverseCore
         Style.qml
         SlotRect.qml
         SlotText.qml
+        FillTrack.qml
         BackdropSample.qml
 )
 

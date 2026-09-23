@@ -1,33 +1,23 @@
 import QtQuick
 import UIverse.Core
 
-SlotRect {
+FillTrack {
     id: track
 
     implicitHeight: 6
     radius: height / 2
+    animated: true
     color: Qt.alpha(tokens.text, 0.12)
+    fill.gradient: Gradient {
+        orientation: Gradient.Horizontal
 
-    Rectangle {
-        width: track.width * track.position
-        height: track.height
-        radius: track.radius
-        gradient: Gradient {
-            orientation: Gradient.Horizontal
-            GradientStop {
-                position: 0
-                color: track.tokens.palette[3]
-            }
-            GradientStop {
-                position: 1
-                color: track.tokens.accent
-            }
+        GradientStop {
+            position: 0
+            color: track.tokens.palette[3]
         }
-
-        Behavior on width {
-            NumberAnimation {
-                duration: track.tokens.durationBase
-            }
+        GradientStop {
+            position: 1
+            color: track.tokens.accent
         }
     }
 }
