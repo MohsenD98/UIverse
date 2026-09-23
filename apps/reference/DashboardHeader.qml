@@ -3,10 +3,16 @@ import QtQuick.Layouts
 import UIverse.Core
 import UIverse.Kit
 
-RowLayout {
+GridLayout {
+    id: header
+
+    property bool narrow: false
+
     readonly property Tokens tokens: Style.tokens
 
-    spacing: tokens.unit * 2
+    columns: narrow ? 1 : 2
+    columnSpacing: tokens.unit * 2
+    rowSpacing: tokens.unit * 2
 
     ColumnLayout {
         Layout.fillWidth: true
@@ -26,17 +32,22 @@ RowLayout {
         }
     }
 
-    UvTextField {
-        Layout.preferredWidth: tokens.unit * 28
-        placeholderText: "Search reports"
-    }
+    RowLayout {
+        spacing: header.tokens.unit * 2
 
-    UvButton {
-        text: "Export"
-        variant: "secondary"
-    }
+        UvTextField {
+            Layout.preferredWidth: header.tokens.controlWidth
+            Layout.fillWidth: header.narrow
+            placeholderText: "Search reports"
+        }
 
-    UvButton {
-        text: "New report"
+        UvButton {
+            text: "Export"
+            variant: "secondary"
+        }
+
+        UvButton {
+            text: "New report"
+        }
     }
 }

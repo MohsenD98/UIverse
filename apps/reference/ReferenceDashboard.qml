@@ -23,6 +23,7 @@ UvPage {
 
             DashboardHeader {
                 Layout.fillWidth: true
+                narrow: layout.narrow
             }
 
             GridLayout {
