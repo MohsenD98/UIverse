@@ -72,7 +72,7 @@ Rectangle {
                 title: "Do"
                 marker: "+"
                 markerColor: panel.s.success
-                items: panel.pack ? panel.pack.rules : []
+                items: panel.pack ? panel.pack.dos : []
             }
 
             RulesSection {
@@ -80,7 +80,7 @@ Rectangle {
                 title: "Avoid"
                 marker: "−"
                 markerColor: panel.s.danger
-                items: panel.pack ? panel.pack.antiRules : []
+                items: panel.pack ? panel.pack.donts : []
             }
 
             Column {

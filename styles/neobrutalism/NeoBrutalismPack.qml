@@ -1,30 +1,13 @@
 import QtQuick
 import UIverse.Core
+import "about.mjs" as About
 import UIverse.Fonts
 
 StylePack {
     key: "neobrutalism"
     name: "Neo-Brutalism"
-    tagline: "Show the structure, then make it loud."
-    era: "Web brutalism 2014 → Gumroad & indie tools 2021+"
     swatch: "#ff90e8"
-
-    summary: "Neo-brutalism keeps brutalism's refusal to hide structure and makes it " + "friendly: flat saturated colour, thick black outlines and hard offset " + "shadows that look cut from paper. Depth is a graphic device rather than " + "simulated light, so every shadow shares one angle and none of them blur."
-
-    rules: ["Every grouped or interactive element wears the same thick outline.", "Shadows are solid, offset, unblurred, and all point the same way.", "A few loud flat colours; black does the separating.", "Pressing pushes the element into its own shadow. The shadow is the affordance.", "Type is heavy and confident. Labels may shout in uppercase."]
-
-    antiRules: ["No gradients, blur or soft shadows. They belong to a different style.", "Never mix outline weights.", "Colour must not carry meaning alone; it has to survive greyscale.", "No thin or light type. It vanishes next to a 3px border."]
-
-    reading: [
-        {
-            "label": "NN/g — Neobrutalism: Definition and Best Practices",
-            "url": "https://www.nngroup.com/articles/neobrutalism/"
-        },
-        {
-            "label": "Brutalist Websites",
-            "url": "https://brutalistwebsites.com/"
-        }
-    ]
+    about: About.about
 
     tokens: Tokens {
         bg: "#fef6e4"

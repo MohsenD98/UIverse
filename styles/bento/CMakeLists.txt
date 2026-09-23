@@ -5,6 +5,7 @@ qt_add_qml_module(UIverseStyleBento
     VERSION 1.0
     QML_FILES
         BentoPack.qml
+        about.mjs
         Surface.qml
         ButtonBackground.qml
         ButtonContent.qml

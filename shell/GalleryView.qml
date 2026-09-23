@@ -31,7 +31,7 @@ Rectangle {
             width: Math.min(gallery.s.unit * 70, parent.width)
             muted: true
             wrapMode: Text.WordWrap
-            text: "One contract, many design languages. Each style is a complete " + "pack: tokens, components and the rules it plays by."
+            text: "Pick a style to see the same dashboard drawn in it."
         }
     }
 

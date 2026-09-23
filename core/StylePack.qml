@@ -3,14 +3,15 @@ import QtQuick
 QtObject {
     property string key
     property string name
-    property string tagline
-    property string era
     property color swatch: "#888888"
 
-    property string summary
-    property var rules: []
-    property var antiRules: []
-    property var reading: []
+    property var about: ({})
+    readonly property string tagline: about.tagline ?? ""
+    readonly property string era: about.era ?? ""
+    readonly property string summary: about.summary ?? ""
+    readonly property var dos: about.dos ?? []
+    readonly property var donts: about.donts ?? []
+    readonly property var reading: about.reading ?? []
 
     property Tokens tokens: Tokens {}
 

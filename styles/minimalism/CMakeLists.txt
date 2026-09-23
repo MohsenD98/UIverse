@@ -5,6 +5,7 @@ qt_add_qml_module(UIverseStyleMinimalism
     VERSION 1.0
     QML_FILES
         MinimalismPack.qml
+        about.mjs
         Surface.qml
         ButtonBackground.qml
         ButtonContent.qml

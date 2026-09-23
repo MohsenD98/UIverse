@@ -5,6 +5,7 @@ qt_add_qml_module(UIverseStyleGlassmorphism
     VERSION 1.0
     QML_FILES
         GlassmorphismPack.qml
+        about.mjs
         Aurora.qml
         GlassPanel.qml
         Surface.qml
