@@ -10,10 +10,7 @@ target_compile_definitions(tst_uiverse PRIVATE
 
 target_link_libraries(tst_uiverse PRIVATE
     Qt6::QuickTest
-    UIverseFontsplugin
-    UIverseCoreplugin
-    UIverseKitplugin
-    UIverseStylesplugin
+    UIverseModules
 )
 
 add_test(NAME uiverse COMMAND tst_uiverse)

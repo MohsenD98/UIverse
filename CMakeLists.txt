@@ -20,6 +20,16 @@ add_subdirectory(styles)
 add_subdirectory(apps)
 add_subdirectory(shell)
 
+add_library(UIverseModules INTERFACE)
+target_link_libraries(UIverseModules INTERFACE
+    UIverseFontsplugin
+    UIverseCoreplugin
+    UIverseKitplugin
+    UIverseStylesplugin
+    UIverseAppsplugin
+    UIverseShellplugin
+)
+
 if(UIVERSE_BUILD_TOOLS)
     add_subdirectory(tools/snapshot)
 endif()
@@ -49,12 +59,7 @@ set_target_properties(appUIverse PROPERTIES
 
 target_link_libraries(appUIverse PRIVATE
     Qt6::Quick
-    UIverseFontsplugin
-    UIverseCoreplugin
-    UIverseKitplugin
-    UIverseStylesplugin
-    UIverseAppsplugin
-    UIverseShellplugin
+    UIverseModules
 )
 
 install(TARGETS appUIverse

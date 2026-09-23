@@ -11,10 +11,5 @@ qt_add_qml_module(uiverse-snapshot
 
 target_link_libraries(uiverse-snapshot PRIVATE
     Qt6::Quick
-    UIverseFontsplugin
-    UIverseCoreplugin
-    UIverseKitplugin
-    UIverseStylesplugin
-    UIverseAppsplugin
-    UIverseShellplugin
+    UIverseModules
 )
