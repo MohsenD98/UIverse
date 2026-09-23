@@ -9,17 +9,18 @@ Item {
 
     readonly property var place: layout.place(area)
 
-    default property alias content: holder.data
+    default property alias content: contentArea.data
 
-    Layout.row: place[0]
-    Layout.column: place[1]
-    Layout.rowSpan: place[2]
-    Layout.columnSpan: place[3]
-    Layout.preferredWidth: layout.columnWidth * place[3] + layout.gap * (place[3] - 1)
-    Layout.preferredHeight: layout.rowHeight * place[2] + layout.gap * (place[2] - 1)
+    Layout.row: place.row
+    Layout.column: place.column
+    Layout.rowSpan: place.rowSpan
+    Layout.columnSpan: place.columnSpan
+    Layout.preferredWidth: layout.columnWidth * place.columnSpan + layout.gap * (place.columnSpan - 1)
+    Layout.preferredHeight: layout.rowHeight * place.rowSpan + layout.gap * (place.rowSpan - 1)
 
     Item {
-        id: holder
+        id: contentArea
+
         anchors.fill: parent
     }
 }
