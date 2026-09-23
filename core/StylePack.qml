@@ -1,6 +1,8 @@
 import QtQuick
 
 QtObject {
+    id: pack
+
     property string key
     property string name
     property color swatch: "#888888"
@@ -14,6 +16,9 @@ QtObject {
     readonly property var reading: about.reading ?? []
 
     property Tokens tokens: Tokens {}
+    readonly property ContrastAudit contrast: ContrastAudit {
+        tokens: pack.tokens
+    }
 
     property Component pageBackground
     property Component surface: Component {

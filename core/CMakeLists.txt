@@ -14,6 +14,8 @@ qt_add_qml_module(UIverseCore
         SlotText.qml
         FillTrack.qml
         BackdropSample.qml
+        ContrastAudit.qml
+        contrast.mjs
 )
 
 target_link_libraries(UIverseCore PRIVATE UIverseFontsplugin)
