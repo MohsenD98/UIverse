@@ -7,7 +7,7 @@ Text {
     property string role: "body"
     property bool muted: false
 
-    readonly property Tokens tokens: Style.tokens
+    property Tokens tokens: Style.tokens
     readonly property bool isDisplay: role === "display" || role === "title"
     readonly property bool isSmall: role === "label" || role === "caption"
 
@@ -29,6 +29,8 @@ Text {
             return tokens.fontSizeSm
         case "caption":
             return tokens.fontSizeXs
+        case "small":
+            return tokens.fontSizeSm
         case "mono":
             return tokens.fontSizeSm
         default:

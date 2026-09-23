@@ -20,6 +20,7 @@ qt_add_qml_module(UIverseShell
 
 target_link_libraries(UIverseShell PRIVATE
     UIverseCoreplugin
+    UIverseKitplugin
     UIverseStylesplugin
     UIverseAppsplugin
 )
