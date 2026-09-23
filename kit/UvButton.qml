@@ -10,8 +10,12 @@ T.Button {
 
     readonly property Tokens tokens: Style.tokens
 
+    readonly property real visualHeight: Math.max(tokens.controlHeight, background ? background.implicitHeight : 0)
+
     implicitWidth: Math.max(tokens.controlHeight * 2, contentItem.implicitWidth + leftPadding + rightPadding)
-    implicitHeight: Math.max(tokens.controlHeight, background ? background.implicitHeight : 0)
+    implicitHeight: Math.max(Style.minimumTargetSize, visualHeight)
+    topInset: (height - visualHeight) / 2
+    bottomInset: (height - visualHeight) / 2
     horizontalPadding: tokens.unit * 2
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus

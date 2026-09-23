@@ -11,7 +11,9 @@ T.TextField {
     readonly property Tokens tokens: Style.tokens
 
     implicitWidth: tokens.controlWidth
-    implicitHeight: tokens.controlHeight
+    implicitHeight: Math.max(Style.minimumTargetSize, tokens.controlHeight)
+    topInset: (height - tokens.controlHeight) / 2
+    bottomInset: (height - tokens.controlHeight) / 2
     leftPadding: tokens.unit * 1.5
     rightPadding: tokens.unit * 1.5
     verticalAlignment: TextInput.AlignVCenter

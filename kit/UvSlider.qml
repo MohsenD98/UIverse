@@ -10,7 +10,7 @@ T.Slider {
     readonly property Tokens tokens: Style.tokens
 
     implicitWidth: tokens.controlWidth
-    implicitHeight: Math.max(tokens.unit * 3, handle ? handle.implicitHeight : 0)
+    implicitHeight: Math.max(Style.minimumTargetSize, handle ? handle.implicitHeight : 0)
     padding: 0
     hoverEnabled: true
 
