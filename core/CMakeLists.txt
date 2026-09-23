@@ -1,6 +1,10 @@
 qt_add_library(UIverseCore STATIC)
 
+target_link_libraries(UIverseCore PRIVATE UIverseFontsplugin)
+
 set_source_files_properties(Style.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+
+target_link_libraries(UIverseCore PRIVATE UIverseFontsplugin)
 
 qt_add_qml_module(UIverseCore
     URI UIverse.Core
@@ -14,3 +18,5 @@ qt_add_qml_module(UIverseCore
         SlotText.qml
         BackdropSample.qml
 )
+
+target_link_libraries(UIverseCore PRIVATE UIverseFontsplugin)

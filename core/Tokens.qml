@@ -1,4 +1,5 @@
 import QtQuick
+import UIverse.Fonts
 
 QtObject {
     property color bg: "#ffffff"
@@ -25,9 +26,9 @@ QtObject {
     property real pagePadding: 32
     property real gridGap: 16
 
-    property string fontFamily: "Segoe UI"
-    property string monoFamily: "Consolas"
-    property string displayFamily: "Segoe UI"
+    property string fontFamily: Fonts.inter
+    property string monoFamily: Fonts.jetBrainsMono
+    property string displayFamily: Fonts.inter
     property real fontSizeXs: 11
     property real fontSizeSm: 13
     property real fontSizeMd: 15
