@@ -1,6 +1,7 @@
 #include <QCommandLineParser>
 #include <QGuiApplication>
 #include <QImage>
+#include <QKeyEvent>
 #include <QQmlApplicationEngine>
 #include <QQuickWindow>
 #include <QTimer>
@@ -17,6 +18,7 @@ int main(int argc, char *argv[])
         {"size", "Window size as WIDTHxHEIGHT.", "size", "1320x1600"},
         {"delay", "Milliseconds to settle before capture.", "ms", "1200"},
         {"out", "Output PNG path.", "file", "snapshot.png"},
+        {"rules", "Open the rules panel before capturing."},
     });
     parser.process(app);
 
@@ -41,6 +43,13 @@ int main(int argc, char *argv[])
     auto *window = qobject_cast<QQuickWindow *>(engine.rootObjects().constFirst());
     if (!window)
         return 1;
+
+    if (parser.isSet("rules")) {
+        QTimer::singleShot(parser.value("delay").toInt() / 2, window, [window]() {
+            QKeyEvent press(QEvent::KeyPress, Qt::Key_R, Qt::NoModifier, "r");
+            QCoreApplication::sendEvent(window, &press);
+        });
+    }
 
     const QString out = parser.value("out");
     QTimer::singleShot(parser.value("delay").toInt(), &app, [window, out]() {
