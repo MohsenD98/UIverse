@@ -125,23 +125,21 @@ works. Three layers:
   `durationBase` above 400 ms.
 - *Law of proximity* → all spacing derives from `unit`.
 
-**Layer 2 — data.** A laws module carries the twenty laws; each pack declares
-which laws it is **in tension** with. That tension is the teaching content:
+**Layer 2 — relations.** Done. `core/uxLaws.mjs` lists twenty laws (`UxLaws`
+singleton). Each pack's `about.mjs` names the laws it works with and against,
+with one sentence each, shown in the rules panel. The tests reject unknown law
+keys.
 
-| Style | Tension |
-|---|---|
-| Glassmorphism | Prägnanz, WCAG contrast |
-| Neo-Brutalism | Jakob's law — deliberately defies expectation |
-| Minimalism | Von Restorff, discoverability |
-| Bento UI | Serial position — every tile reads as equally important |
-| Maximalism | Hick's law, Miller's law |
-| Skeuomorphism | Occam's razor, but reinforces Jakob's law |
+**Layer 3 — contrast audit.** Done. `ContrastAudit` computes WCAG ratios from a
+pack's tokens: text and muted text on the page and on a card at 4.5:1, the
+button label at 4.5:1, and the accent (or, for outlined styles with borders of
+2 px or more, the outline) against the page at 3:1. Every pack must pass;
+`tests/tst_contrast.qml` enforces it. The audit uses the plain page colour, so
+the rules panel adds a warning for packs with a decorated page background.
 
-**Layer 3 — live contrast audit.** WCAG contrast ratios computed from each pack's
-tokens and shown pass/fail, so the project critiques itself.
-
-Note on the source list: items 16 and 17 were both "Postel's law" (duplicate),
-12 is *Prägnanz*, and 14 is *Law of Uniform Connectedness*.
+Changes from the original list of twenty: the duplicate "Postel's law" became
+the aesthetic-usability effect, and "minimize target distance", which is part
+of Fitts's law, became the law of common region.
 
 ---
 
@@ -167,8 +165,10 @@ through qualified imports, so names never collide across styles.
 ### Adding a style
 
 1. `styles/<key>/` with `<Name>Pack.qml` (`key: "<key>"`, checked by the
-   architecture hook), `about.mjs`, one file per slot it overrides, and a
-   `CMakeLists.txt` with URI `UIverse.Styles.<Name>`.
+   architecture hook), `about.mjs` (description, dos, don'ts, reading, and the
+   UX laws it works with and against), one file per slot it overrides, and a
+   `CMakeLists.txt` with URI `UIverse.Styles.<Name>`. Its tokens must pass the
+   contrast audit.
 2. `add_subdirectory(<key>)` in `styles/CMakeLists.txt`.
 3. Link its plugin and add it to `packs` in `styles/registry/`.
 
@@ -318,14 +318,13 @@ Qt-from-source WASM build, no dead commented-out steps.
 
 ## 9. Next steps, in order
 
-1. UX laws layers 2 and 3 (section 4).
-2. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
+1. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
    zip. v0.0.1 runs only where the Visual C++ Redistributable is installed.
-3. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
+2. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
    VirtualKeyboard pulled in transitively; about 120 MB).
-4. Per-style mini-apps (section 1), starting with the glassmorphism music player.
-5. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
-6. Backlog styles.
+3. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+4. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
+5. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken
@@ -372,6 +371,9 @@ General rules that came out of reviewing every file. They apply to all new code.
 
 ### Testing
 - Anything that can only fail at runtime has a test that creates it.
+- A quality bar that matters is enforced by a test, not left to review.
+  Accessibility is the example: contrast is computed and checked for every
+  pack.
 - Test behaviour through real input, not through the code path you expect to
   run.
 - Every registered pack is exercised by the tests automatically.
