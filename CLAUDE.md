@@ -259,6 +259,8 @@ Dashboard areas pass a neutral `hints.tile` index. Packs may colour tiles by it
 - `TextField` is a `TextInput`, not a `Control`: it has `leftPadding` and
   `rightPadding` but no `horizontalPadding`. Such mistakes only surface when the
   object is created, which is what `tests/tst_packs.qml` does for every pack.
+- Under Git Bash on Windows, `tst_uiverse` prints nothing to a redirected
+  stdout. Ask QtTest for a file instead: `tst_uiverse -o result.txt,txt`.
 
 ## 8. CI/CD
 
@@ -337,6 +339,12 @@ Learned while reviewing the code file by file. Follow them in new code.
 - One mapping, one place. A lookup written in several files (status → colour)
   becomes a function on the type that owns the data.
 - A property nobody sets, or a setting nobody reads, is deleted.
+- More than one level of `?:` becomes a block with `if` or `switch` and
+  `return`. One condition per line reads faster than one line of conditions.
+- A file is named after the role it plays. A slot file carries its slot's name
+  (`FieldBackground.qml` for `fieldBackground`); a helper is named after what it
+  draws (`DotGrid`, `HardBox`).
+- Imports go in three groups: Qt modules, project modules, local files.
 
 ### Testing
 - Anything that can only fail at runtime needs a test that creates it. Build,
@@ -348,6 +356,13 @@ Learned while reviewing the code file by file. Follow them in new code.
   addresses.
 - Every pack is instantiated by the tests, so a new pack is covered the day it
   is registered.
+
+### Committing
+- `git commit` takes the whole index. Stage one unit, look at
+  `git diff --cached --stat`, then commit.
+- Every commit builds and passes the tests on its own. When a change is split
+  into several commits, order them so each stands alone, and prove it with
+  `scripts/check-commits.sh <base>` before pushing.
 
 ### Refactoring safely
 - A refactor must not change a pixel. Before and after:
