@@ -58,7 +58,9 @@ Rectangle {
                 elide: Text.ElideRight
             }
 
-            StylePicker {}
+            StylePicker {
+                compact: toolbar.width < workbench.theme.unit * 110
+            }
 
             ShellButton {
                 text: "Rules"

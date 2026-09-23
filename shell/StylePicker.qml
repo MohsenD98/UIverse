@@ -1,9 +1,12 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import UIverse.Core
 import UIverse.Styles
 
 Row {
     id: picker
+
+    property bool compact: false
 
     readonly property Tokens theme: ShellTheme.tokens
 
@@ -19,9 +22,10 @@ Row {
         model: StyleRegistry.packs
 
         ShellButton {
-            required property var modelData
+            required property StylePack modelData
             required property int index
 
+            visible: !picker.compact
             text: modelData.name
             checkable: true
             checked: index === StyleRegistry.currentIndex
