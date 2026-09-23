@@ -18,4 +18,4 @@ qt_add_qml_module(UIverseStyleNeoBrutalism
         TagBackground.qml
 )
 
-target_link_libraries(UIverseStyleNeoBrutalism PRIVATE UIverseCoreplugin)
+target_link_libraries(UIverseStyleNeoBrutalism PRIVATE UIverseCoreplugin UIverseFontsplugin)

@@ -1,5 +1,6 @@
 import QtQuick
 import UIverse.Core
+import UIverse.Fonts
 
 StylePack {
     key: "neobrutalism"
@@ -49,8 +50,8 @@ StylePack {
         pagePadding: 32
         gridGap: 24
 
-        fontFamily: "Segoe UI"
-        displayFamily: "Arial Black"
+        fontFamily: Fonts.spaceGrotesk
+        displayFamily: Fonts.archivoBlack
         fontSizeXs: 11
         fontSizeSm: 13
         fontSizeMd: 15
@@ -59,7 +60,7 @@ StylePack {
         displaySize: 46
         weightBody: Font.Medium
         weightMedium: Font.Bold
-        weightDisplay: Font.Black
+        weightDisplay: Font.Normal
         letterSpacingDisplay: -1
         letterSpacingLabel: 0.8
         lineHeight: 1.35
