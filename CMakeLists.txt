@@ -12,6 +12,7 @@ set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
 
 option(UIVERSE_BUILD_TOOLS "Build developer tools such as uiverse-snapshot" ON)
 
+add_subdirectory(fonts)
 add_subdirectory(core)
 add_subdirectory(kit)
 add_subdirectory(styles)
@@ -42,6 +43,7 @@ set_target_properties(appUIverse PROPERTIES
 
 target_link_libraries(appUIverse PRIVATE
     Qt6::Quick
+    UIverseFontsplugin
     UIverseCoreplugin
     UIverseKitplugin
     UIverseStylesplugin
