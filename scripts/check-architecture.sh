@@ -4,6 +4,7 @@ set -uo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 max_lines=800
+max_response_ms=400
 status=0
 
 report() {
@@ -24,6 +25,8 @@ for file in "${files[@]}"; do
 
     grep -nE '^\s*/\*' "$file" | sed "s|^|$file:|;s|$| block comment (rule 5)|" >&2 && status=1
     awk -v f="$file" '/^[[:space:]]*\/\// { if (prev) { print f ":" NR ": consecutive comment lines (rule 5)"; bad=1 } prev=1; next } { prev=0 } END { exit bad }' "$file" >&2 || status=1
+
+    awk -v f="$file" -v max="$max_response_ms" '/^[[:space:]]*duration(Fast|Base):[[:space:]]*[0-9]+/ { if ($2 + 0 > max) { print f ":" NR ": " $2 " ms response, the limit is " max " (Doherty threshold)"; bad=1 } } END { exit bad }' "$file" >&2 || status=1
 
     grep -nE '^\s*import\s+QtQuick\.Controls' "$file" | sed "s|^|$file:|;s|$| (rule 9: use QtQuick.Templates)|" >&2 && status=1
 
