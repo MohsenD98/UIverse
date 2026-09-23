@@ -12,8 +12,6 @@ UvSurface {
 
     readonly property real peak: values.length ? Math.max(...values) : 1
 
-    padding: tokens.unit * 2.5
-
     ColumnLayout {
         anchors.fill: parent
         spacing: chart.tokens.unit * 2

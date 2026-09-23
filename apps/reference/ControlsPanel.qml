@@ -5,8 +5,6 @@ import UIverse.Kit
 UvSurface {
     id: panel
 
-    padding: tokens.unit * 2.5
-
     ColumnLayout {
         anchors.fill: parent
         spacing: panel.tokens.unit * 1.5

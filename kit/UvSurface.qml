@@ -6,7 +6,7 @@ Item {
 
     property string variant: "default"
     property var hints: ({})
-    property real padding: tokens.unit * 2
+    property real padding: tokens.unit * 2.5
 
     readonly property Tokens tokens: Style.tokens
 

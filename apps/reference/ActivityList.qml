@@ -9,8 +9,6 @@ UvSurface {
     property string title
     property var entries: []
 
-    padding: tokens.unit * 2.5
-
     ColumnLayout {
         anchors.fill: parent
         spacing: list.tokens.unit * 1.5
