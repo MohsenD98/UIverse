@@ -85,6 +85,26 @@ Rectangle {
                 items: panel.pack ? panel.pack.donts : []
             }
 
+            LawsSection {
+                width: parent.width
+                title: "Works with"
+                accentColor: panel.theme.success
+                relations: panel.pack ? panel.pack.worksWith : []
+            }
+
+            LawsSection {
+                width: parent.width
+                title: "Works against"
+                accentColor: panel.theme.danger
+                relations: panel.pack ? panel.pack.worksAgainst : []
+            }
+
+            ContrastSection {
+                width: parent.width
+                audit: panel.pack ? panel.pack.contrast : null
+                decoratedBackground: panel.pack !== null && panel.pack.pageBackground !== null
+            }
+
             Column {
                 width: parent.width
                 spacing: panel.theme.unit

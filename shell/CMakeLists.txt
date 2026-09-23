@@ -16,6 +16,8 @@ qt_add_qml_module(UIverseShell
         StylePicker.qml
         RulesPanel.qml
         RulesSection.qml
+        LawsSection.qml
+        ContrastSection.qml
 )
 
 target_link_libraries(UIverseShell PRIVATE
