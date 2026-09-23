@@ -148,17 +148,33 @@ Note on the source list: items 16 and 17 were both "Postel's law" (duplicate),
 ## 5. Layout
 
 ```
-core/                  UIverse.Core        contract, slots, singleton
-kit/                   UIverse.Kit         Uv* controls — behaviour only
-styles/<name>/         UIverse.Styles.<Name>   one module per design language
-styles/registry/       UIverse.Styles      list of packs, active selection
-apps/                  reference dashboard and the per-style mini-apps
-shell/                 gallery, workbench, rules panel, style picker
+fonts/                 UIverse.Fonts           bundled OFL typefaces
+core/                  UIverse.Core            contract, slots, Style singleton
+kit/                   UIverse.Kit             Uv* controls, behaviour only
+styles/<key>/          UIverse.Styles.<Name>   one module per design language
+styles/registry/       UIverse.Styles          list of packs, active selection
+apps/                  UIverse.Apps            reference dashboard, later mini-apps
+shell/                 UIverse.Shell           gallery, workbench, rules panel
+tests/                 tst_uiverse             QML tests, run by ctest and CI
+tools/snapshot/        uiverse-snapshot        renders any screen to PNG
+scripts/                                       hooks, lint, snapshots, commit checks
 ```
 
 Naming: Kit components are `Uv*`. A style module's entry type is `<Name>Pack`.
 Slot files use plain names (`Surface`, `ButtonBackground`) and are reached
 through qualified imports, so names never collide across styles.
+
+### Adding a style
+
+1. `styles/<key>/` with `<Name>Pack.qml` (`key: "<key>"`, checked by the
+   architecture hook), `about.mjs`, one file per slot it overrides, and a
+   `CMakeLists.txt` with URI `UIverse.Styles.<Name>`.
+2. `add_subdirectory(<key>)` in `styles/CMakeLists.txt`.
+3. Link its plugin and add it to `packs` in `styles/registry/`.
+
+The tests, snapshots and README images pick it up from there. Run
+`scripts/docs-images.sh build` and add a row to the README table.
+
 
 ---
 
@@ -215,16 +231,19 @@ repeats a path that is already green.
 
 Licensed MIT (`LICENSE`); bundled fonts stay under their own OFL.
 
-Phase 1 is complete and verified visually. Builds green on Qt 6.11.1 / MinGW /
-Ninja; the app runs with no QML warnings; `qmllint` and `qmlformat` are clean.
+Phase 1 is complete and every file has been reviewed against section 10.
+Builds green on Qt 6.11.1; the app runs with no QML warnings; `qmllint` and
+`qmlformat` are clean; `tests/` (`tst_uiverse`) runs in CI on all three
+desktop platforms.
 
 - Core contract, Kit (10 controls), shell (gallery, workbench, style picker,
   rules drawer with keyboard: ←/→ switch style, R rules, Esc back).
 - Reference dashboard in `apps/reference/`, laid out per `layoutMode`
   (`stack`, `bento`, and a two-column compact fallback).
 - Packs: Minimalism, Neo-Brutalism, Glassmorphism (real backdrop blur),
-  Bento UI.
-- `uiverse-snapshot` renders any pack to PNG without showing a window.
+  Bento.
+- `uiverse-snapshot` renders any pack to PNG without showing a window
+  (`--rules` opens the rules panel first).
 - Fonts are bundled in `UIverse.Fonts` (OFL: Inter, Archivo Black, Space
   Grotesk, JetBrains Mono), so every platform and the web render identically.
   Packs name fonts only through `Fonts.*`, never by family string. Licence
@@ -237,17 +256,6 @@ while browsing styles.
 
 Dashboard areas pass a neutral `hints.tile` index. Packs may colour tiles by it
 (Bento does) or ignore it. Apps never name a style.
-
-### Adding a style
-
-1. `styles/<key>/` with `<Name>Pack.qml` (`key: "<key>"`, checked by the
-   architecture hook), `about.mjs`, one file per slot it overrides, and a
-   `CMakeLists.txt` with URI `UIverse.Styles.<Name>`.
-2. `add_subdirectory(<key>)` in `styles/CMakeLists.txt`.
-3. Link its plugin and add it to `packs` in `styles/registry/`.
-
-The tests, snapshots and README images pick it up from there. Run
-`scripts/docs-images.sh build` and add a row to the README table.
 
 ### Hard-won notes
 - Token names must not start with `on` + capital (`onAccent`): QML parses them as
@@ -272,6 +280,11 @@ The tests, snapshots and README images pick it up from there. Run
   object is created, which is what `tests/tst_packs.qml` does for every pack.
 - Under Git Bash on Windows, `tst_uiverse` prints nothing to a redirected
   stdout. Ask QtTest for a file instead: `tst_uiverse -o result.txt,txt`.
+- `qmlformat` (6.11) squeezes every string array in a QML file onto one line,
+  and `XMLHttpRequest` refuses local files by default. That is why style
+  descriptions live in `about.mjs`, imported synchronously.
+- Rendering is deterministic except the glass backdrop, which dithers by up
+  to 1 colour level between runs.
 
 ## 8. CI/CD
 
@@ -281,9 +294,10 @@ GitHub Actions. Live demo: https://mohsend98.github.io/UIverse/
 
 - `.github/actions/setup-qt` — the only place Qt, CMake, Ninja and MSVC are set
   up. Qt version lives here once.
-- `ci.yml` — `format` and `lint` gate everything; then desktop matrix
-  (`build.yml`), WASM (`wasm.yml`), snapshots on Windows (real Segoe UI and
-  D3D11), and on `main` the WASM build is deployed to GitHub Pages.
+- `ci.yml` — `hooks` (pre-commit plus commit-message checks) and `lint` gate
+  everything; then the desktop matrix (`build.yml`: build, test, package),
+  WASM (`wasm.yml`), screenshots on Windows (D3D11), and on `main` the WASM
+  build is deployed to GitHub Pages.
 - `release.yml` — on `v*` tags: Windows zip, macOS dmg, Linux tar.gz, WASM zip.
   Linux ships as tar.gz, not AppImage, until someone needs AppImage.
 - The emsdk version is read from the installed Qt, never hardcoded.
@@ -304,7 +318,7 @@ Qt-from-source WASM build, no dead commented-out steps.
 
 ## 9. Next steps, in order
 
-1. UX laws layers 1–3 (section 4).
+1. UX laws layers 2 and 3 (section 4).
 2. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
    zip. v0.0.1 runs only where the Visual C++ Redistributable is installed.
 3. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
@@ -320,93 +334,60 @@ qmlformat, static-check jobs).
 
 ---
 
-## 10. Conventions (from code review)
+## 10. Conventions
 
-Learned while reviewing the code file by file. Follow them in new code.
+General rules that came out of reviewing every file. They apply to all new code.
 
 ### Naming
-- No single letters or abbreviations: `tokens` not `t`, `control` not `ctl`,
-  `background` not `bg`, `theme` not `s`. The size scale suffixes `Xs Sm Md Lg
-  Xl` are the one accepted shorthand, because every design system uses them.
-- A root `id` names what the thing is (`button`, `field`, `toggle`). Never
-  `control`: that is the property a `StyleSlot` receives, and
-  `control: control` inside a slot would bind to itself.
-- A name says what, not how: `hints` (what the app suggests to a pack), not
-  `spec`; `updateOrigin()`, not `resync()`.
+- Use whole words. No single letters, no abbreviations (`tokens`, `control`,
+  `background`). The only accepted shorthand is the size scale `Xs Sm Md Lg Xl`.
+- A name says what a thing is or does, not how it happens to be implemented.
+- A root `id` names the thing itself (`button`, `field`). Never reuse a
+  property name as an `id`: `control: control` binds to itself.
+- A file is named after the role it plays. Slot files carry their slot's name;
+  helpers are named after what they draw.
+- Imports come in three groups, in this order: Qt, project, local files.
 
 ### Structure
-- A value used twice gets a `readonly property` with a name
-  (`maxBlurRadius`), never two copies of the literal.
-- Don't restate Qt defaults (`asynchronous: false`, `live: true`).
-- A token no one reads is removed from `Tokens` and from every pack. Setting a
-  value that has no effect misleads the next reader.
-- Prose is data. Style descriptions live in `styles/<name>/about.mjs`, because
-  `qmlformat` squeezes string arrays in QML onto one unreadable line and
-  `XMLHttpRequest` can't read local files by default.
+- One fact, one place. A value, list, threshold or mapping that appears twice
+  gets one owner, and everything else reads it from there. This holds for QML,
+  CMake and scripts alike.
+- A default belongs in the contract, not in every consumer. If every caller
+  overrides a value, the default is wrong.
+- Two components that differ only in data share one implementation and take
+  the data as a property.
+- Delete what nothing reads: unused properties, tokens, settings and branches.
+- Don't restate framework defaults.
+- Positional data gets names. Prefer `place.rowSpan` to `place[2]`.
+- One condition per line. Nested `?:` becomes an `if` or `switch` block.
+- No side effects inside expressions.
+- Text that can grow gets a width and a wrap mode.
 
-- A default belongs in the contract, not in every consumer. When several
-  implementations write the same thing, the base type should provide it and
-  only the exceptions override it.
-- One mapping, one place. A lookup written in several files (status → colour)
-  becomes a function on the type that owns the data.
-- A property nobody sets, or a setting nobody reads, is deleted.
-- More than one level of `?:` becomes a block with `if` or `switch` and
-  `return`. One condition per line reads faster than one line of conditions.
-- A file is named after the role it plays. A slot file carries its slot's name
-  (`FieldBackground.qml` for `fieldBackground`); a helper is named after what it
-  draws (`DotGrid`, `HardBox`).
-- Imports go in three groups: Qt modules, project modules, local files.
-- Positional data gets names. A tuple like `[0, 0, 2, 2]` becomes
-  `cell(row, column, rowSpan, columnSpan)` and is read as `place.rowSpan`.
-- A value every caller overrides is the wrong default. Change the default and
-  delete the overrides.
-- A threshold used in two places is passed down from one owner, never written
-  twice.
-- Two components that differ only in their data share one implementation and
-  take the data as a property (`ShellText` is `UvLabel` with the shell's
-  tokens).
-- No side effects inside expressions. A ternary that assigns becomes an `if`.
-- Text that can grow gets a width and a wrap mode, or it will be cut off.
-- The same applies to build files and scripts: one list of QML modules
-  (`UIverseModules`), one place that knows how to find the pack keys and the
-  snapshot tool (`scripts/lib.sh`).
+### Data and prose
+- Prose shown to users is data, not code. Keep it in its own file next to the
+  code that uses it.
+- Write it for people: plain words, short sentences. No em dashes, no
+  "not X, but Y", no slogans, no bold-led bullet lists, no emoji in prose. Say
+  what the thing does.
 
 ### Testing
-- Anything that can only fail at runtime needs a test that creates it. Build,
-  lint and review all missed a property that did not exist.
-- Test behaviour through real input, not through the code path you expect.
-  A mouse click proved the first touch-target design did nothing, while a
-  direct call to `contains()` said it worked.
-- Data-driven test rows get readable tags (`button`, `minimalism`), not object
-  addresses.
-- Every pack is instantiated by the tests, so a new pack is covered the day it
-  is registered.
-- If a screen can't be captured by `uiverse-snapshot`, extend the tool before
-  reviewing that screen. The rules panel hid a clipped line until the tool
-  learned `--rules`.
-- Check layouts at more than one size. `scripts/snapshots.sh` renders every
-  pack wide and narrow, because a header that overlapped at narrow widths went
-  unnoticed while every check used a wide window.
+- Anything that can only fail at runtime has a test that creates it.
+- Test behaviour through real input, not through the code path you expect to
+  run.
+- Every registered pack is exercised by the tests automatically.
+- Data-driven test rows get readable tags.
+- Look at every screen at more than one size. If a screen can't be captured,
+  extend the capture tool first.
+
+### Changing code safely
+- A refactor changes no pixels. Capture with `scripts/snapshots.sh` before and
+  after, compare with `scripts/compare-snapshots.py`. Differences up to 2
+  colour levels are rendering noise.
+- A deliberate visual change is looked at, not just measured.
+- After any scripted edit, read the result before trusting it.
 
 ### Committing
-- `git commit` takes the whole index. Stage one unit, look at
-  `git diff --cached --stat`, then commit.
-- Every commit builds and passes the tests on its own. When a change is split
-  into several commits, order them so each stands alone, and prove it with
-  `scripts/check-commits.sh <base>` before pushing.
-
-### Refactoring safely
-- A refactor must not change a pixel. Before and after:
-  `scripts/snapshots.sh build /tmp/before`, change,
-  `scripts/snapshots.sh build /tmp/after`, then
-  `python scripts/compare-snapshots.py /tmp/before /tmp/after`. Differences of
-  up to 2 colour levels are rendering noise (the glass backdrop dithers);
-  anything larger is a real change.
-- After a scripted edit, read the result. A regex once wrote the same
-  `target_link_libraries` line three times into `core/CMakeLists.txt`.
-
-### Writing for people
-- README, in-app copy and release notes use plain words and short sentences.
-- No em dashes, no "not X, but Y" constructions, no slogans or aphorisms, no
-  bold-led bullet lists, no emoji in prose.
-- Say what the thing does. Leave out why it is clever.
+- One unit per commit. Stage it, check `git diff --cached --stat`, then
+  commit; `git commit` takes the whole index.
+- Every commit builds and passes the tests on its own. Order split changes so
+  each stands alone, and prove it with `scripts/check-commits.sh <base>`.
