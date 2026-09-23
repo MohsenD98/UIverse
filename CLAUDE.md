@@ -345,6 +345,12 @@ Learned while reviewing the code file by file. Follow them in new code.
   (`FieldBackground.qml` for `fieldBackground`); a helper is named after what it
   draws (`DotGrid`, `HardBox`).
 - Imports go in three groups: Qt modules, project modules, local files.
+- Positional data gets names. A tuple like `[0, 0, 2, 2]` becomes
+  `cell(row, column, rowSpan, columnSpan)` and is read as `place.rowSpan`.
+- A value every caller overrides is the wrong default. Change the default and
+  delete the overrides.
+- A threshold used in two places is passed down from one owner, never written
+  twice.
 
 ### Testing
 - Anything that can only fail at runtime needs a test that creates it. Build,
@@ -356,6 +362,9 @@ Learned while reviewing the code file by file. Follow them in new code.
   addresses.
 - Every pack is instantiated by the tests, so a new pack is covered the day it
   is registered.
+- Check layouts at more than one size. `scripts/snapshots.sh` renders every
+  pack wide and narrow, because a header that overlapped at narrow widths went
+  unnoticed while every check used a wide window.
 
 ### Committing
 - `git commit` takes the whole index. Stage one unit, look at
