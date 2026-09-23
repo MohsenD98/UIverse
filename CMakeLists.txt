@@ -11,6 +11,7 @@ qt_standard_project_setup(REQUIRES 6.8)
 set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
 
 option(UIVERSE_BUILD_TOOLS "Build developer tools such as uiverse-snapshot" ON)
+option(UIVERSE_BUILD_TESTS "Build the QML test suite" ON)
 
 add_subdirectory(fonts)
 add_subdirectory(core)
@@ -21,6 +22,11 @@ add_subdirectory(shell)
 
 if(UIVERSE_BUILD_TOOLS)
     add_subdirectory(tools/snapshot)
+endif()
+
+if(UIVERSE_BUILD_TESTS AND NOT EMSCRIPTEN)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
 
 qt_add_executable(appUIverse
