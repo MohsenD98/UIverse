@@ -11,7 +11,7 @@ qt_add_qml_module(UIverseStyleGlassmorphism
         Surface.qml
         ButtonBackground.qml
         ButtonContent.qml
-        Field.qml
+        FieldBackground.qml
         SwitchIndicator.qml
         SliderGroove.qml
         SliderHandle.qml

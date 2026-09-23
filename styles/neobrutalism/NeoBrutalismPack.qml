@@ -1,7 +1,7 @@
 import QtQuick
 import UIverse.Core
-import "about.mjs" as About
 import UIverse.Fonts
+import "about.mjs" as About
 
 StylePack {
     key: "neobrutalism"
@@ -72,7 +72,7 @@ StylePack {
         ButtonContent {}
     }
     fieldBackground: Component {
-        Field {}
+        FieldBackground {}
     }
     switchIndicator: Component {
         SwitchIndicator {}

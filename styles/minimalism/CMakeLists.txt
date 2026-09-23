@@ -9,7 +9,7 @@ qt_add_qml_module(UIverseStyleMinimalism
         Surface.qml
         ButtonBackground.qml
         ButtonContent.qml
-        Field.qml
+        FieldBackground.qml
         SwitchIndicator.qml
         SliderGroove.qml
         SliderHandle.qml

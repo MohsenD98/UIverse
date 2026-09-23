@@ -55,7 +55,6 @@ StylePack {
         layoutMode: "bento"
     }
 
-    pageBackground: null
     surface: Component {
         Surface {}
     }
@@ -66,7 +65,7 @@ StylePack {
         ButtonContent {}
     }
     fieldBackground: Component {
-        Field {}
+        FieldBackground {}
     }
     switchIndicator: Component {
         SwitchIndicator {}

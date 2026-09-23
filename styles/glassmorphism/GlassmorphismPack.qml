@@ -69,7 +69,7 @@ StylePack {
         ButtonContent {}
     }
     fieldBackground: Component {
-        Field {}
+        FieldBackground {}
     }
     switchIndicator: Component {
         SwitchIndicator {}
