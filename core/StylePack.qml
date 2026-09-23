@@ -16,7 +16,14 @@ QtObject {
     property Tokens tokens: Tokens {}
 
     property Component pageBackground
-    property Component surface
+    property Component surface: Component {
+        SlotRect {
+            color: tokens.surface
+            radius: tokens.radiusMd
+            border.width: tokens.borderWidth
+            border.color: tokens.border
+        }
+    }
     property Component buttonBackground
     property Component buttonContent
     property Component fieldBackground
@@ -25,5 +32,9 @@ QtObject {
     property Component sliderHandle
     property Component progressTrack
     property Component tagBackground
-    property Component divider
+    property Component divider: Component {
+        SlotRect {
+            color: tokens.border
+        }
+    }
 }

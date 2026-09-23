@@ -83,9 +83,4 @@ StylePack {
     tagBackground: Component {
         TagBackground {}
     }
-    divider: Component {
-        SlotRect {
-            color: tokens.border
-        }
-    }
 }
