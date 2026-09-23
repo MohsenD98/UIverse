@@ -211,6 +211,8 @@ repeats a path that is already green.
 
 ## 7. Current state
 
+Licensed MIT (`LICENSE`); bundled fonts stay under their own OFL.
+
 Phase 1 is complete and verified visually. Builds green on Qt 6.11.1 / MinGW /
 Ninja; the app runs with no QML warnings; `qmllint` and `qmlformat` are clean.
 
@@ -280,16 +282,14 @@ Qt-from-source WASM build, no dead commented-out steps.
 
 ## 9. Next steps, in order
 
-1. Choose and add a LICENSE (the repository has none, so no one may legally
-   reuse the code yet).
-2. UX laws layers 1–3 (section 4).
-3. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
+1. UX laws layers 1–3 (section 4).
+2. Ship the MSVC runtime (`vcruntime140.dll`, `msvcp140.dll`) in the Windows
    zip. v0.0.1 runs only where the Visual C++ Redistributable is installed.
-4. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
+3. Trim the deployed runtime (it currently ships Controls, Pdf, Lottie and
    VirtualKeyboard pulled in transitively; about 120 MB).
-5. Per-style mini-apps (section 1), starting with the glassmorphism music player.
-6. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
-7. Backlog styles.
+4. Per-style mini-apps (section 1), starting with the glassmorphism music player.
+5. Replace the default Qt WebAssembly HTML shell (title reads `appUIverse`).
+6. Backlog styles.
 
 Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken

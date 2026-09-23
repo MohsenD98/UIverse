@@ -7,6 +7,7 @@
 [![CI](https://github.com/MohsenD98/UIverse/actions/workflows/ci.yml/badge.svg)](https://github.com/MohsenD98/UIverse/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/MohsenD98/UIverse?sort=semver)](https://github.com/MohsenD98/UIverse/releases/latest)
 ![Qt](https://img.shields.io/badge/Qt-6.11-41cd52?logo=qt&logoColor=white)
+[![License](https://img.shields.io/github/license/MohsenD98/UIverse)](LICENSE)
 ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Web-555)
 
 [**Live demo**](https://mohsend98.github.io/UIverse/) ·
@@ -102,3 +103,7 @@ Bundled typefaces under the SIL Open Font License:
 [Archivo Black](https://github.com/Omnibus-Type/ArchivoBlack),
 [Space Grotesk](https://github.com/floriankarsten/space-grotesk) and
 [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono).
+
+## License
+
+[MIT](LICENSE). Bundled fonts keep their own OFL licences in [`fonts/`](fonts).
