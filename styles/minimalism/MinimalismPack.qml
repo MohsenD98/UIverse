@@ -14,7 +14,7 @@ StylePack {
         surface: "#ffffff"
         surfaceAlt: "#fafafa"
         text: "#18181b"
-        textMuted: "#a1a1aa"
+        textMuted: "#71717a"
         accent: "#18181b"
         textOnAccent: "#ffffff"
         border: "#ebebed"
