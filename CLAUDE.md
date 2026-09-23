@@ -51,7 +51,7 @@ These are not preferences. Code that breaks them gets fixed, not merged.
 ### Code
 5. **No comments.** At most a single line, only where the code genuinely cannot
    explain itself. Explanatory prose belongs in declarative data (see the
-   `StylePack` teaching fields) or in this file — not scattered through QML.
+   `about.mjs` of each pack) or in this file — not scattered through QML.
 6. **No file over ~150 lines.** Hard ceiling 800. If a style pack grows, split it
    into one file per slot.
 7. **No hardcoded colours or magic numbers outside `Tokens`.** A literal `#ff0000`
@@ -85,12 +85,12 @@ UIverse.Core  ←  UIverse.Kit
   typography, surface treatment, motion, **and layout personality**. Styles fill
   it in; they never invent tokens locally. A token a style needs belongs in this
   file so every other style has to answer for it too.
-- `StylePack.qml` — identity, teaching content, tokens, and one `Component` per
-  render slot.
+- `StylePack.qml` — identity, tokens, one `Component` per render slot, and the
+  pack's description loaded from its `about.mjs`.
 - `StyleSlot.qml` — a `Loader` that mounts a pack's component and passes the
-  control down as `ctl`, plus `variant` and `spec`.
-- `SlotRect.qml` / `SlotText.qml` — bases that expose `ctl`, `variant`, `spec`,
-  `t` (tokens) and the interaction flags, so slot files stay a few lines long.
+  control down as `control`, plus `variant` and `hints`.
+- `SlotRect.qml` / `SlotText.qml` — bases that expose `control`, `variant`,
+  `hints`, `tokens` and the interaction flags, so slot files stay a few lines long.
 - `Style.qml` — singleton holding the active pack. Swapping `Style.pack`
   re-renders the running app, because every slot is bound to it.
 - `BackdropSample.qml` — per-surface blurred sample of the page backdrop, for
@@ -106,7 +106,7 @@ A pack `Component` carries the scope of the file it was written in, so the
 control it styles is not visible by name. `SlotRect` / `SlotText` reach it via
 `parent as StyleSlot` and expose typed flags (`isDown`, `isPressed`,
 `isHovered`, `isFocused`, `hasActiveFocus`, `isChecked`, `isEnabled`,
-`position`). Slot files read those flags, never `ctl` directly, and qualify
+`position`). Slot files read those flags, never `control` directly, and qualify
 every reference from a child element with the root `id`.
 
 ---
@@ -233,7 +233,7 @@ Ninja; the app runs with no QML warnings; `qmllint` and `qmlformat` are clean.
 The shell keeps its own `ShellTheme` tokens, so the lab chrome does not change
 while browsing styles.
 
-Dashboard areas pass a neutral `spec.tile` index. Packs may colour tiles by it
+Dashboard areas pass a neutral `hints.tile` index. Packs may colour tiles by it
 (Bento does) or ignore it. Apps never name a style.
 
 ### Hard-won notes
@@ -295,3 +295,45 @@ Reference repos reviewed for CI: MMaterial-Tester (good matrix and Pages deploy,
 but duplicated Qt setup, leftovers from another project, a broken
 `${{matrix.BUILD_TYPE}}` reference, and no linting) and QField (pre-commit with
 qmlformat, static-check jobs).
+
+---
+
+## 10. Conventions (from code review)
+
+Learned while reviewing the code file by file. Follow them in new code.
+
+### Naming
+- No single letters or abbreviations: `tokens` not `t`, `control` not `ctl`,
+  `background` not `bg`, `theme` not `s`. The size scale suffixes `Xs Sm Md Lg
+  Xl` are the one accepted shorthand, because every design system uses them.
+- A root `id` names what the thing is (`button`, `field`, `toggle`). Never
+  `control`: that is the property a `StyleSlot` receives, and
+  `control: control` inside a slot would bind to itself.
+- A name says what, not how: `hints` (what the app suggests to a pack), not
+  `spec`; `updateOrigin()`, not `resync()`.
+
+### Structure
+- A value used twice gets a `readonly property` with a name
+  (`maxBlurRadius`), never two copies of the literal.
+- Don't restate Qt defaults (`asynchronous: false`, `live: true`).
+- A token no one reads is removed from `Tokens` and from every pack. Setting a
+  value that has no effect misleads the next reader.
+- Prose is data. Style descriptions live in `styles/<name>/about.mjs`, because
+  `qmlformat` squeezes string arrays in QML onto one unreadable line and
+  `XMLHttpRequest` can't read local files by default.
+
+### Refactoring safely
+- A refactor must not change a pixel. Before and after:
+  `scripts/snapshots.sh build /tmp/before`, change,
+  `scripts/snapshots.sh build /tmp/after`, then
+  `python scripts/compare-snapshots.py /tmp/before /tmp/after`. Differences of
+  up to 2 colour levels are rendering noise (the glass backdrop dithers);
+  anything larger is a real change.
+- After a scripted edit, read the result. A regex once wrote the same
+  `target_link_libraries` line three times into `core/CMakeLists.txt`.
+
+### Writing for people
+- README, in-app copy and release notes use plain words and short sentences.
+- No em dashes, no "not X, but Y" constructions, no slogans or aphorisms, no
+  bold-led bullet lists, no emoji in prose.
+- Say what the thing does. Leave out why it is clever.
