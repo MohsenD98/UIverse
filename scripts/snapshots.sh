@@ -16,4 +16,5 @@ for dir in styles/*/; do
     pack="$(basename "$dir")"
     [[ "$pack" == "registry" ]] && continue
     "$tool" --pack "$pack" --size 1320x1700 --out "$out_dir/$pack.png"
+    "$tool" --pack "$pack" --size 700x1400 --out "$out_dir/$pack-narrow.png"
 done
