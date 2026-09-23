@@ -4,19 +4,20 @@ import UIverse.Core
 Item {
     id: page
 
-    property bool padded: true
     readonly property Tokens tokens: Style.tokens
 
-    default property alias content: contentHost.data
+    default property alias content: contentArea.data
 
     Item {
-        id: backdropLayer
+        id: backdrop
+
         anchors.fill: parent
         layer.enabled: true
 
         Rectangle {
             anchors.fill: parent
             color: page.tokens.background
+
             Behavior on color {
                 ColorAnimation {
                     duration: page.tokens.durationBase
@@ -27,19 +28,20 @@ Item {
         StyleSlot {
             anchors.fill: parent
             control: page
-            sourceComponent: Style.pack ? Style.pack.pageBackground : null
+            part: "pageBackground"
         }
     }
 
     Item {
-        id: contentHost
+        id: contentArea
+
         anchors.fill: parent
-        anchors.margins: page.padded ? page.tokens.pagePadding : 0
+        anchors.margins: page.tokens.pagePadding
     }
 
-    Component.onCompleted: Style.backdrop = backdropLayer
+    Component.onCompleted: Style.backdrop = backdrop
     Component.onDestruction: {
-        if (Style.backdrop === backdropLayer)
+        if (Style.backdrop === backdrop)
             Style.backdrop = null
     }
 }

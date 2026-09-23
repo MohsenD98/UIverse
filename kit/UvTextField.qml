@@ -10,18 +10,17 @@ T.TextField {
 
     readonly property Tokens tokens: Style.tokens
 
+    implicitWidth: tokens.controlWidth
     implicitHeight: tokens.controlHeight
-    implicitWidth: tokens.unit * 28
     leftPadding: tokens.unit * 1.5
     rightPadding: tokens.unit * 1.5
+    verticalAlignment: TextInput.AlignVCenter
+    hoverEnabled: true
 
     color: tokens.text
     placeholderTextColor: tokens.textMuted
     selectionColor: tokens.accent
     selectedTextColor: tokens.textOnAccent
-    verticalAlignment: TextInput.AlignVCenter
-    hoverEnabled: true
-
     font.family: tokens.fontFamily
     font.pixelSize: tokens.fontSizeSm
 
@@ -29,6 +28,7 @@ T.TextField {
         x: field.leftPadding
         width: field.width - field.leftPadding - field.rightPadding
         height: field.height
+        visible: !field.length && !field.preeditText
         muted: true
         text: field.placeholderText
         font.pixelSize: field.font.pixelSize
@@ -36,13 +36,10 @@ T.TextField {
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.NoWrap
         elide: Text.ElideRight
-        visible: !field.length && !field.preeditText
     }
 
     background: StyleSlot {
         control: field
-        variant: field.variant
-        hints: field.hints
-        sourceComponent: Style.pack ? Style.pack.fieldBackground : null
+        part: "fieldBackground"
     }
 }

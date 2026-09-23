@@ -6,19 +6,12 @@ Item {
 
     readonly property Tokens tokens: Style.tokens
 
+    implicitWidth: tokens.controlWidth
     implicitHeight: tokens.borderWidth
-    implicitWidth: 100
 
     StyleSlot {
-        id: skin
         anchors.fill: parent
         control: divider
-        sourceComponent: Style.pack ? Style.pack.divider : null
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        visible: skin.status !== Loader.Ready
-        color: divider.tokens.border
+        part: "divider"
     }
 }

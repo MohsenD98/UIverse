@@ -10,35 +10,21 @@ Item {
 
     readonly property Tokens tokens: Style.tokens
 
-    implicitWidth: labelItem.implicitWidth + tokens.unit * 2.5
-    implicitHeight: labelItem.implicitHeight + tokens.unit
+    implicitWidth: caption.implicitWidth + tokens.unit * 2.5
+    implicitHeight: caption.implicitHeight + tokens.unit
 
     StyleSlot {
         anchors.fill: parent
         control: tag
-        variant: tag.variant
-        hints: tag.hints
-        sourceComponent: Style.pack ? Style.pack.tagBackground : null
+        part: "tagBackground"
     }
 
     UvLabel {
-        id: labelItem
+        id: caption
+
         anchors.centerIn: parent
         role: "caption"
         text: tag.text
-        color: {
-            switch (tag.variant) {
-            case "accent":
-                return tag.tokens.textOnAccent
-            case "success":
-                return tag.tokens.success
-            case "warning":
-                return tag.tokens.warning
-            case "danger":
-                return tag.tokens.danger
-            default:
-                return tag.tokens.textMuted
-            }
-        }
+        color: tag.variant === "accent" ? tag.tokens.textOnAccent : tag.tokens.statusColor(tag.variant, tag.tokens.textMuted)
     }
 }

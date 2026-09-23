@@ -9,7 +9,7 @@ Text {
 
     readonly property Tokens tokens: Style.tokens
     readonly property bool isDisplay: role === "display" || role === "title"
-    readonly property bool isMinor: role === "label" || role === "caption"
+    readonly property bool isSmall: role === "label" || role === "caption"
 
     color: muted ? tokens.textMuted : tokens.text
     renderType: Text.NativeRendering
@@ -36,7 +36,7 @@ Text {
         }
     }
     font.weight: isDisplay ? tokens.weightDisplay : (role === "heading" || role === "label") ? tokens.weightMedium : tokens.weightBody
-    font.letterSpacing: isDisplay ? tokens.letterSpacingDisplay : isMinor ? tokens.letterSpacingLabel : tokens.letterSpacingBody
+    font.letterSpacing: isDisplay ? tokens.letterSpacingDisplay : isSmall ? tokens.letterSpacingLabel : tokens.letterSpacingBody
     font.capitalization: tokens.uppercaseLabels && role === "label" ? Font.AllUppercase : Font.MixedCase
     lineHeight: tokens.lineHeight
     lineHeightMode: Text.ProportionalHeight
