@@ -238,6 +238,17 @@ while browsing styles.
 Dashboard areas pass a neutral `hints.tile` index. Packs may colour tiles by it
 (Bento does) or ignore it. Apps never name a style.
 
+### Adding a style
+
+1. `styles/<key>/` with `<Name>Pack.qml` (`key: "<key>"`, checked by the
+   architecture hook), `about.mjs`, one file per slot it overrides, and a
+   `CMakeLists.txt` with URI `UIverse.Styles.<Name>`.
+2. `add_subdirectory(<key>)` in `styles/CMakeLists.txt`.
+3. Link its plugin and add it to `packs` in `styles/registry/`.
+
+The tests, snapshots and README images pick it up from there. Run
+`scripts/docs-images.sh build` and add a row to the README table.
+
 ### Hard-won notes
 - Token names must not start with `on` + capital (`onAccent`): QML parses them as
   signal handlers. Use `textOnAccent`.
@@ -351,6 +362,14 @@ Learned while reviewing the code file by file. Follow them in new code.
   delete the overrides.
 - A threshold used in two places is passed down from one owner, never written
   twice.
+- Two components that differ only in their data share one implementation and
+  take the data as a property (`ShellText` is `UvLabel` with the shell's
+  tokens).
+- No side effects inside expressions. A ternary that assigns becomes an `if`.
+- Text that can grow gets a width and a wrap mode, or it will be cut off.
+- The same applies to build files and scripts: one list of QML modules
+  (`UIverseModules`), one place that knows how to find the pack keys and the
+  snapshot tool (`scripts/lib.sh`).
 
 ### Testing
 - Anything that can only fail at runtime needs a test that creates it. Build,
@@ -362,6 +381,9 @@ Learned while reviewing the code file by file. Follow them in new code.
   addresses.
 - Every pack is instantiated by the tests, so a new pack is covered the day it
   is registered.
+- If a screen can't be captured by `uiverse-snapshot`, extend the tool before
+  reviewing that screen. The rules panel hid a clipped line until the tool
+  learned `--rules`.
 - Check layouts at more than one size. `scripts/snapshots.sh` renders every
   pack wide and narrow, because a header that overlapped at narrow widths went
   unnoticed while every check used a wide window.
